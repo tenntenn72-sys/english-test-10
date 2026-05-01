@@ -1,0 +1,983 @@
+<!DOCTYPE html>
+<html lang="mn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Англи хэлний шалгалтын систем — 10-р анги</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#f4f3f0;--surface:#fff;--border:#e2e1da;--text:#181816;--muted:#6a6a66;--hint:#a0a09b;
+  --accent:#181816;--accent-light:#f0efec;
+  --green:#2d7a3a;--green-bg:#e8f5eb;--green-border:#6abf77;
+  --red:#a32d2d;--red-bg:#fceaea;--red-border:#e24b4a;
+  --blue:#0c447c;--blue-bg:#e6f1fb;--blue-border:#378add;
+  --amber:#633806;--amber-bg:#faeeda;--amber-border:#ef9f27;
+  --purple:#3c3489;--purple-bg:#eeedfe;--purple-border:#7f77dd;
+  --r:10px;--rs:7px
+}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;font-size:15px}
+.wrap{max-width:720px;margin:0 auto;padding:1.5rem 1rem 4rem}
+
+/* SCREENS */
+.scr{display:none}.scr.on{display:block}
+
+/* CARD */
+.card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:1.5rem;margin-bottom:1rem}
+.card-title{font-size:17px;font-weight:600;margin-bottom:1rem}
+
+/* FORM */
+.fg{margin-bottom:.9rem}
+label.lbl{display:block;font-size:12px;color:var(--muted);font-weight:600;text-transform:uppercase;letter-spacing:.05em;margin-bottom:5px}
+input[type=text],input[type=password],input[type=number],select,textarea{
+  width:100%;padding:10px 13px;border:1px solid var(--border);border-radius:var(--rs);
+  font-size:15px;background:var(--surface);color:var(--text);outline:none;font-family:inherit;
+  transition:border-color .15s}
+input:focus,select:focus,textarea:focus{border-color:#888}
+textarea{resize:vertical;min-height:80px}
+
+/* BUTTONS */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;padding:10px 18px;
+  border:none;border-radius:var(--rs);font-size:14px;font-weight:600;cursor:pointer;
+  transition:opacity .15s,transform .1s;white-space:nowrap}
+.btn:active{transform:scale(.97)}
+.btn-primary{background:var(--accent);color:#fff}.btn-primary:hover{opacity:.85}
+.btn-outline{background:transparent;color:var(--text);border:1px solid var(--border)}.btn-outline:hover{background:var(--bg)}
+.btn-danger{background:var(--red-bg);color:var(--red);border:1px solid var(--red-border)}.btn-danger:hover{opacity:.8}
+.btn-success{background:var(--green-bg);color:var(--green);border:1px solid var(--green-border)}
+.btn-sm{padding:6px 12px;font-size:13px}
+.btn-full{width:100%}
+.btn-icon{width:32px;height:32px;padding:0;border-radius:6px;font-size:16px}
+
+/* TABS */
+.tabs{display:flex;gap:6px;margin-bottom:1rem;flex-wrap:wrap}
+.tab{padding:6px 14px;border:1px solid var(--border);border-radius:20px;font-size:13px;cursor:pointer;background:var(--surface);color:var(--muted);transition:all .15s}
+.tab.on{background:var(--accent);color:#fff;border-color:var(--accent)}
+
+/* BADGE */
+.badge{display:inline-block;padding:2px 9px;border-radius:20px;font-size:11px;font-weight:600}
+.badge-green{background:var(--green-bg);color:var(--green)}
+.badge-blue{background:var(--blue-bg);color:var(--blue)}
+.badge-amber{background:var(--amber-bg);color:var(--amber)}
+.badge-red{background:var(--red-bg);color:var(--red)}
+.badge-purple{background:var(--purple-bg);color:var(--purple)}
+
+/* GRID */
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.g4{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+@media(max-width:500px){.g4{grid-template-columns:repeat(2,1fr)}.g3{grid-template-columns:repeat(3,1fr)}}
+
+/* STAT CARD */
+.sc{background:var(--surface);border:1px solid var(--border);border-radius:var(--rs);padding:.75rem 1rem}
+.sc-label{font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.05em;margin-bottom:4px}
+.sc-val{font-size:22px;font-weight:700}
+
+/* TOP NAV */
+.topnav{display:flex;align-items:center;justify-content:space-between;background:var(--surface);
+  border:1px solid var(--border);border-radius:var(--r);padding:.9rem 1.2rem;margin-bottom:1rem}
+.topnav-title{font-size:17px;font-weight:600}
+.topnav-sub{font-size:12px;color:var(--muted);margin-top:2px}
+
+/* EXAM LIST ITEM */
+.exam-item{display:flex;align-items:center;justify-content:space-between;padding:.9rem 1.1rem;
+  border-top:1px solid var(--border)}
+.exam-item:first-child{border-top:none}
+.exam-name{font-weight:500;font-size:14px}
+.exam-meta{font-size:12px;color:var(--muted);margin-top:2px}
+.exam-actions{display:flex;gap:6px}
+
+/* TIMER */
+.timer-wrap{display:flex;align-items:center;justify-content:space-between;
+  background:var(--surface);border:1px solid var(--border);border-radius:var(--rs);padding:10px 14px;margin-bottom:10px}
+.timer-track{flex:1;height:5px;background:var(--bg);border-radius:3px;margin:0 12px;overflow:hidden}
+.timer-fill{height:100%;background:var(--accent);border-radius:3px;transition:width 1s linear,background .3s}
+.timer-num{font-size:20px;font-weight:700;letter-spacing:.04em;font-variant-numeric:tabular-nums;transition:color .3s}
+.timer-num.warn{color:#ba7517}.timer-num.danger{color:var(--red)}
+
+/* QUESTION */
+.cat-tag{display:inline-block;padding:3px 10px;border-radius:20px;font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.05em;margin-bottom:8px}
+.cat-grammar{background:var(--blue-bg);color:var(--blue)}
+.cat-tense{background:var(--green-bg);color:var(--green)}
+.cat-error{background:var(--amber-bg);color:var(--amber)}
+.cat-vocab{background:var(--purple-bg);color:var(--purple)}
+.q-text{font-size:16px;font-weight:500;line-height:1.65;margin-bottom:1.1rem}
+.opts{display:flex;flex-direction:column;gap:8px}
+.opt{display:flex;align-items:center;gap:10px;padding:10px 13px;border:1px solid var(--border);
+  border-radius:var(--rs);background:var(--surface);cursor:pointer;font-size:14px;text-align:left;
+  transition:background .1s,border-color .1s;color:var(--text)}
+.opt:hover:not(.locked){background:var(--bg);border-color:#bbb}
+.opt.chosen{border-color:var(--blue-border);background:var(--blue-bg);color:var(--blue)}
+.opt.correct{border-color:var(--green-border);background:var(--green-bg);color:var(--green)}
+.opt.wrong{border-color:var(--red-border);background:var(--red-bg);color:var(--red)}
+.opt.locked{cursor:default}
+.opt-letter{width:26px;height:26px;border-radius:50%;border:1.5px solid currentColor;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:600;flex-shrink:0}
+.fb{margin-top:10px;padding:10px 13px;border-radius:var(--rs);font-size:13px;line-height:1.55;display:none}
+.fb.ok{background:var(--green-bg);color:var(--green);border:1px solid var(--green-border)}
+.fb.no{background:var(--red-bg);color:var(--red);border:1px solid var(--red-border)}
+
+/* PROGRESS */
+.prog-track{height:3px;background:var(--border);border-radius:2px;margin-bottom:10px}
+.prog-fill{height:100%;background:var(--accent);border-radius:2px;transition:width .4s}
+
+/* NAV ROW */
+.nav-row{display:flex;gap:8px;margin-top:10px}
+.nav-btn{flex:1;padding:11px;border-radius:var(--rs);font-size:14px;font-weight:500;cursor:pointer;
+  border:1px solid var(--border);background:var(--surface);color:var(--text)}
+.nav-btn:hover{background:var(--bg)}
+.nav-btn.primary{background:var(--accent);color:#fff;border-color:var(--accent)}.nav-btn.primary:hover{opacity:.85}
+
+/* RESULT */
+.score-ring{width:110px;height:110px;border-radius:50%;border:3px solid var(--border);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;margin:0 auto 1rem}
+.score-big{font-size:32px;font-weight:700}
+.score-sm{font-size:13px;color:var(--muted)}
+
+/* TABLE */
+.tbl{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);overflow:hidden;margin-bottom:1rem}
+.tbl-head{display:grid;padding:9px 14px;background:var(--bg);font-size:11px;color:var(--muted);font-weight:600;text-transform:uppercase;letter-spacing:.04em}
+.tbl-row{display:grid;padding:9px 14px;border-top:1px solid var(--border);font-size:13px;align-items:center}
+.tbl-row:hover{background:var(--bg)}
+
+/* BAR */
+.bar-row{display:flex;align-items:center;gap:10px;margin-bottom:10px}
+.bar-name{font-size:13px;color:var(--muted);width:140px;flex-shrink:0}
+.bar-track{flex:1;height:9px;background:var(--bg);border-radius:5px;overflow:hidden}
+.bar-fill{height:100%;border-radius:5px;transition:width .6s ease}
+.bar-pct{font-size:12px;font-weight:600;width:36px;text-align:right}
+
+/* ALERT */
+.alert{border-radius:var(--rs);padding:.75rem 1rem;font-size:13px;margin-top:.75rem}
+.alert-warn{background:var(--amber-bg);color:var(--amber);border:1px solid var(--amber-border)}
+.alert-ok{background:var(--green-bg);color:var(--green);border:1px solid var(--green-border)}
+.alert-info{background:var(--blue-bg);color:var(--blue);border:1px solid var(--blue-border)}
+
+/* REVIEW */
+.rv{padding:10px 13px;border-radius:var(--rs);margin-bottom:7px;font-size:13px;border:1px solid var(--border)}
+.rv.ok{border-left:3px solid var(--green-border)}
+.rv.no{border-left:3px solid var(--red-border)}
+.rv-q{font-weight:500;margin-bottom:3px}
+.rv-d{font-size:12px;color:var(--muted)}
+
+/* MODAL */
+.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.55);display:none;align-items:center;justify-content:center;z-index:999;padding:1rem}
+.modal-overlay.on{display:flex}
+.modal{background:var(--surface);border-radius:var(--r);padding:1.75rem;max-width:560px;width:100%;max-height:90vh;overflow-y:auto}
+.modal-title{font-size:18px;font-weight:600;margin-bottom:1.25rem}
+.modal-footer{display:flex;gap:8px;margin-top:1.25rem;justify-content:flex-end}
+
+/* QUESTION BUILDER */
+.qb-item{background:var(--bg);border:1px solid var(--border);border-radius:var(--rs);padding:1rem;margin-bottom:.75rem}
+.qb-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:.75rem}
+.qb-num{font-size:12px;font-weight:600;color:var(--muted)}
+.opt-inputs{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-bottom:.5rem}
+.opt-inp-wrap{display:flex;align-items:center;gap:6px}
+.opt-radio{width:16px;height:16px;flex-shrink:0}
+.correct-label{font-size:11px;color:var(--green);font-weight:600}
+
+/* EMPTY */
+.empty{text-align:center;padding:3rem 1rem;color:var(--muted);font-size:14px}
+
+/* CHART */
+canvas{max-width:100%}
+
+/* WELCOME HERO */
+.hero{text-align:center;padding:2rem 1rem}
+.hero-icon{font-size:52px;margin-bottom:.75rem}
+.hero-title{font-size:24px;font-weight:700;margin-bottom:.25rem}
+.hero-sub{font-size:15px;color:var(--muted);margin-bottom:1.5rem}
+
+/* Chips */
+.chips{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-bottom:1.5rem}
+.chip{background:var(--bg);border:1px solid var(--border);border-radius:20px;padding:4px 13px;font-size:12px;color:var(--muted)}
+
+/* Divider */
+.divider{border:none;border-top:1px solid var(--border);margin:1rem 0}
+
+/* Timeout */
+#timeout-overlay{position:fixed;inset:0;background:rgba(0,0,0,.6);display:none;align-items:center;justify-content:center;z-index:9999}
+#timeout-overlay.on{display:flex}
+.timeout-box{background:var(--surface);border-radius:var(--r);padding:2rem;text-align:center;max-width:320px;width:90%}
+</style>
+</head>
+<body>
+
+<!-- TIMEOUT -->
+<div id="timeout-overlay">
+  <div class="timeout-box">
+    <div style="font-size:44px;margin-bottom:.75rem">⏰</div>
+    <div style="font-size:18px;font-weight:600;margin-bottom:.5rem">Хугацаа дууслаа!</div>
+    <div style="font-size:14px;color:var(--muted);margin-bottom:1.25rem">Таны хариултууд автоматаар хадгалагдлаа.</div>
+    <button class="btn btn-primary btn-full" onclick="forceSubmit()">Дүн харах →</button>
+  </div>
+</div>
+
+<!-- EXAM DELETE CONFIRM -->
+<div class="modal-overlay" id="modal-delete">
+  <div class="modal" style="max-width:360px;text-align:center">
+    <div style="font-size:36px;margin-bottom:.75rem">🗑️</div>
+    <div class="modal-title" style="text-align:center">Шалгалт устгах уу?</div>
+    <div style="font-size:14px;color:var(--muted);margin-bottom:1.25rem">Энэ үйлдлийг буцааж болохгүй. Бүх дүн устана.</div>
+    <div class="modal-footer" style="justify-content:center">
+      <button class="btn btn-outline" onclick="closeModal('modal-delete')">Болих</button>
+      <button class="btn btn-danger" onclick="confirmDelete()">Устгах</button>
+    </div>
+  </div>
+</div>
+
+<!-- EXAM BUILDER MODAL -->
+<div class="modal-overlay" id="modal-builder">
+  <div class="modal">
+    <div class="modal-title" id="builder-title">Шинэ шалгалт үүсгэх</div>
+    <div class="fg">
+      <label class="lbl">Шалгалтын нэр</label>
+      <input type="text" id="b-name" placeholder="Жишээ: Unit 3 Grammar Test" />
+    </div>
+    <div class="g2">
+      <div class="fg">
+        <label class="lbl">Хугацаа (минут)</label>
+        <input type="number" id="b-time" value="30" min="5" max="120" />
+      </div>
+      <div class="fg">
+        <label class="lbl">Хичээл</label>
+        <select id="b-subject">
+          <option>Англи хэл</option>
+        </select>
+      </div>
+    </div>
+    <hr class="divider">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:.75rem">
+      <div style="font-size:14px;font-weight:600">Асуултууд</div>
+      <button class="btn btn-success btn-sm" onclick="addQuestion()">+ Асуулт нэмэх</button>
+    </div>
+    <div id="questions-builder"></div>
+    <div class="modal-footer">
+      <button class="btn btn-outline" onclick="closeModal('modal-builder')">Болих</button>
+      <button class="btn btn-primary" onclick="saveExam()">💾 Хадгалах</button>
+    </div>
+  </div>
+</div>
+
+<div class="wrap">
+
+<!-- ══════════════════════════════════════════════
+     SCREEN 0: LANDING
+══════════════════════════════════════════════ -->
+<div id="scr-land" class="scr on">
+  <div class="card hero">
+    <div class="hero-icon">🏫</div>
+    <div class="hero-title">Англи хэлний шалгалт</div>
+    <div class="hero-sub">10-р анги — онлайн шалгалтын систем</div>
+    <div class="chips">
+      <span class="chip">📝 Олон шалгалт</span>
+      <span class="chip">⏱ Таймертай</span>
+      <span class="chip">📊 Анализ</span>
+      <span class="chip">🏫 10А–10Ё</span>
+    </div>
+    <div class="g2" style="margin-bottom:.75rem">
+      <button class="btn btn-primary btn-full" onclick="showScr('scr-student-login')" style="font-size:15px;padding:13px">
+        🎓 Сурагч
+      </button>
+      <button class="btn btn-outline btn-full" onclick="showScr('scr-teacher-login')" style="font-size:15px;padding:13px">
+        👨‍🏫 Багш
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════
+     SCREEN 1: STUDENT LOGIN
+══════════════════════════════════════════════ -->
+<div id="scr-student-login" class="scr">
+  <div class="topnav">
+    <div><div class="topnav-title">Сурагчийн нэвтрэлт</div></div>
+    <button class="btn btn-outline btn-sm" onclick="showScr('scr-land')">← Буцах</button>
+  </div>
+  <div class="card">
+    <div class="fg">
+      <label class="lbl">Нэр, овог</label>
+      <input type="text" id="s-name" placeholder="Жишээ: Болд Баатар" />
+    </div>
+    <div class="fg">
+      <label class="lbl">Анги</label>
+      <select id="s-class">
+        <option value="">— Анги сонгох —</option>
+        <option>10А</option><option>10Б</option><option>10В</option>
+        <option>10Г</option><option>10Д</option><option>10Е</option><option>10Ё</option>
+      </select>
+    </div>
+    <button class="btn btn-primary btn-full" onclick="studentLogin()">Шалгалт сонгох →</button>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════
+     SCREEN 2: EXAM SELECT (student)
+══════════════════════════════════════════════ -->
+<div id="scr-exam-select" class="scr">
+  <div class="topnav">
+    <div>
+      <div class="topnav-title" id="es-greeting">Сайн байна уу!</div>
+      <div class="topnav-sub" id="es-sub"></div>
+    </div>
+    <button class="btn btn-outline btn-sm" onclick="showScr('scr-student-login')">← Буцах</button>
+  </div>
+  <div class="card">
+    <div class="card-title">Идэвхтэй шалгалтууд</div>
+    <div id="exam-list-student"></div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════
+     SCREEN 3: QUIZ
+══════════════════════════════════════════════ -->
+<div id="scr-quiz" class="scr">
+  <div class="timer-wrap">
+    <div style="font-size:12px;color:var(--muted)">Үлдсэн хугацаа</div>
+    <div class="timer-track"><div class="timer-fill" id="t-fill"></div></div>
+    <div class="timer-num" id="t-num">30:00</div>
+  </div>
+  <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px">
+    <div style="font-size:13px;color:var(--muted)">Асуулт <strong id="q-cur">1</strong>/</strong><strong id="q-total">20</strong></div>
+    <div style="font-size:13px;color:var(--muted)" id="q-cat-hdr"></div>
+    <div style="font-size:13px;color:var(--muted)">Оноо: <strong id="q-score">0</strong></div>
+  </div>
+  <div class="prog-track"><div class="prog-fill" id="q-prog"></div></div>
+  <div class="card" style="padding:1.5rem">
+    <div id="q-cat-tag"></div>
+    <div style="font-size:12px;color:var(--hint);margin-bottom:5px" id="q-num-lbl"></div>
+    <div class="q-text" id="q-text"></div>
+    <div class="opts" id="q-opts"></div>
+    <div class="fb" id="q-fb"></div>
+  </div>
+  <div class="nav-row">
+    <button class="nav-btn" id="btn-prev" onclick="qGo(-1)" style="display:none">← Өмнөх</button>
+    <button class="nav-btn primary" id="btn-next" onclick="qGo(1)">Дараах →</button>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════
+     SCREEN 4: RESULT
+══════════════════════════════════════════════ -->
+<div id="scr-result" class="scr">
+  <div class="card" style="text-align:center">
+    <div class="score-ring">
+      <div class="score-big" id="r-score">0</div>
+      <div class="score-sm" id="r-denom">/ 20</div>
+    </div>
+    <div style="font-size:20px;font-weight:600;margin-bottom:.25rem" id="r-grade"></div>
+    <div style="font-size:14px;color:var(--muted);margin-bottom:1.25rem" id="r-msg"></div>
+    <div id="r-cats" class="g3" style="margin-bottom:1.25rem"></div>
+    <div style="display:flex;gap:8px">
+      <button class="nav-btn" style="flex:1" onclick="showScr('scr-exam-select')">↺ Буцах</button>
+      <button class="nav-btn primary" style="flex:1" onclick="showScr('scr-land')">🏠 Нүүр</button>
+    </div>
+  </div>
+  <div id="r-review"></div>
+</div>
+
+<!-- ══════════════════════════════════════════════
+     SCREEN 5: TEACHER LOGIN
+══════════════════════════════════════════════ -->
+<div id="scr-teacher-login" class="scr">
+  <div class="topnav">
+    <div><div class="topnav-title">Багшийн нэвтрэлт</div></div>
+    <button class="btn btn-outline btn-sm" onclick="showScr('scr-land')">← Буцах</button>
+  </div>
+  <div class="card">
+    <div class="fg">
+      <label class="lbl">Нууц үг</label>
+      <input type="password" id="t-pwd" placeholder="Нууц үгээ оруулна уу" onkeydown="if(event.key==='Enter')teacherLogin()" />
+    </div>
+    <div style="font-size:12px;color:var(--muted);margin-bottom:1rem">Анхны нууц үг: <strong>teacher123</strong> — нэвтэрсний дараа өөрчилнө үү</div>
+    <button class="btn btn-primary btn-full" onclick="teacherLogin()">Нэвтрэх →</button>
+    <div id="t-err" style="color:var(--red);font-size:13px;margin-top:.5rem;display:none">Нууц үг буруу байна.</div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════
+     SCREEN 6: TEACHER DASHBOARD
+══════════════════════════════════════════════ -->
+<div id="scr-teacher" class="scr">
+  <div class="topnav">
+    <div>
+      <div class="topnav-title">Багшийн дашбоард</div>
+      <div class="topnav-sub">Англи хэлний шалгалт — 10-р анги</div>
+    </div>
+    <div style="display:flex;gap:6px">
+      <button class="btn btn-outline btn-sm" onclick="showChangePwd()">🔑</button>
+      <button class="btn btn-outline btn-sm" onclick="teacherLogout()">Гарах</button>
+    </div>
+  </div>
+
+  <!-- Нүүр хуудас -->
+  <div id="t-home">
+    <div class="g4" style="margin-bottom:1rem" id="t-summary"></div>
+    <div class="tabs" id="t-class-tabs"></div>
+
+    <div style="display:flex;gap:8px;margin-bottom:1rem">
+      <button class="btn btn-primary" onclick="openBuilder()">+ Шинэ шалгалт</button>
+      <button class="btn btn-outline" onclick="showTView('exams')">📋 Шалгалтууд</button>
+      <button class="btn btn-outline" onclick="showTView('results')">📊 Дүнгүүд</button>
+      <button class="btn btn-outline" onclick="showTView('analysis')">📈 Анализ</button>
+    </div>
+
+    <!-- EXAMS VIEW -->
+    <div id="tv-exams">
+      <div class="card" style="padding:0">
+        <div style="padding:.9rem 1.1rem;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between">
+          <div style="font-weight:600">Шалгалтын жагсаалт</div>
+        </div>
+        <div id="exam-list-teacher"></div>
+      </div>
+    </div>
+
+    <!-- RESULTS VIEW -->
+    <div id="tv-results" style="display:none">
+      <div class="tbl">
+        <div class="tbl-head" style="grid-template-columns:2fr 0.8fr 0.8fr 0.8fr 1fr">
+          <div>Сурагч</div><div>Оноо</div><div>%</div><div>Үнэлгээ</div><div>Шалгалт</div>
+        </div>
+        <div id="results-table-body"></div>
+      </div>
+    </div>
+
+    <!-- ANALYSIS VIEW -->
+    <div id="tv-analysis" style="display:none">
+      <div class="g4" id="an-summary" style="margin-bottom:1rem"></div>
+      <div class="card">
+        <div class="card-title">Ангилал тус бүрийн дундаж</div>
+        <div id="an-bars"></div>
+      </div>
+      <div class="card">
+        <div class="card-title">Үнэлгээний тархалт</div>
+        <div class="g4" id="an-grades"></div>
+      </div>
+      <div id="an-alert"></div>
+    </div>
+  </div>
+</div>
+
+<!-- Change pwd modal -->
+<div class="modal-overlay" id="modal-pwd">
+  <div class="modal" style="max-width:360px">
+    <div class="modal-title">Нууц үг өөрчлөх</div>
+    <div class="fg"><label class="lbl">Шинэ нууц үг</label><input type="password" id="new-pwd1" placeholder="Шинэ нууц үг" /></div>
+    <div class="fg"><label class="lbl">Дахин оруулах</label><input type="password" id="new-pwd2" placeholder="Баталгаажуулах" /></div>
+    <div id="pwd-err" style="color:var(--red);font-size:13px;display:none"></div>
+    <div class="modal-footer">
+      <button class="btn btn-outline" onclick="closeModal('modal-pwd')">Болих</button>
+      <button class="btn btn-primary" onclick="changePwd()">Хадгалах</button>
+    </div>
+  </div>
+</div>
+
+</div><!-- /wrap -->
+
+<script>
+// ═══════════════════════════════════════════
+// DATA
+// ═══════════════════════════════════════════
+const CLASSES = ['10А','10Б','10В','10Г','10Д','10Е','10Ё'];
+const LETTERS = ['A','B','C','D'];
+const CAT_LABELS = {grammar:'Grammar',tense:'Tenses',error:'Error ID',vocab:'Vocabulary'};
+const CAT_CSS = {grammar:'cat-grammar',tense:'cat-tense',error:'cat-error',vocab:'cat-vocab'};
+
+function getData(k,def){try{return JSON.parse(localStorage.getItem(k)||'null')||def}catch{return def}}
+function setData(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch{}}
+
+function getExams(){return getData('sq_exams',[])}
+function setExams(v){setData('sq_exams',v)}
+function getResults(){return getData('sq_results',[])}
+function setResults(v){setData('sq_results',v)}
+function getPwd(){return getData('sq_pwd','teacher123')}
+function setPwd(v){setData('sq_pwd',v)}
+
+// Default exam
+(function initDefault(){
+  if(getData('sq_inited',false)) return;
+  setData('sq_inited',true);
+  const exam = {
+    id:'exam_default',
+    name:'Англи хэл — B1/B2 Нэгж тест',
+    subject:'Англи хэл',
+    time:30,
+    created:new Date().toLocaleDateString('mn-MN'),
+    active:true,
+    questions:[
+      {text:'She ___ to school every day by bus.',opts:['go','goes','going','gone'],ans:1,cat:'grammar',exp:'Present Simple: 3rd person singular → verb+s'},
+      {text:'By the time we arrived, they ___ already ___ dinner.',opts:['have / eat','had / eaten','were / eating','will / eat'],ans:1,cat:'tense',exp:'Past Perfect: had + past participle'},
+      {text:'Find the error: "He don\'t know the answer."',opts:['He','don\'t','know','answer'],ans:1,cat:'error',exp:'"don\'t" → "doesn\'t" (3rd person singular)'},
+      {text:'If I ___ you, I would apologize immediately.',opts:['am','was','were','had been'],ans:2,cat:'grammar',exp:'2nd conditional: If I were you... (subjunctive)'},
+      {text:'They ___ for three hours when it started to rain.',opts:['walked','have been walking','had been walking','were walking'],ans:2,cat:'tense',exp:'Past Perfect Continuous: emphasizes duration before past event'},
+      {text:'Find the error: "She is more smarter than her sister."',opts:['She is','more smarter','than','her sister'],ans:1,cat:'error',exp:'"more smarter" → "smarter" (double comparative)'},
+      {text:'The report must ___ by Friday.',opts:['submit','be submitted','submitted','submitting'],ans:1,cat:'grammar',exp:'Modal passive: must + be + past participle'},
+      {text:'I ___ in this city since 2018.',opts:['live','lived','have lived','had lived'],ans:2,cat:'tense',exp:'Present Perfect with "since" for ongoing situations'},
+      {text:'Find the error: "Neither the students nor the teacher were happy."',opts:['Neither','the students','nor the teacher','were happy'],ans:3,cat:'error',exp:'"were" → "was" (verb agrees with nearest subject: teacher)'},
+      {text:'She suggested ___ the meeting until next week.',opts:['postpone','to postpone','postponing','postponed'],ans:2,cat:'grammar',exp:'"suggest" + gerund (-ing form)'},
+      {text:'The sun ___ when we left the party.',opts:['rises','was rising','has risen','had risen'],ans:1,cat:'tense',exp:'Past Continuous: ongoing background action at past moment'},
+      {text:'Find the error: "He has been working here since five years."',opts:['He has been','working here','since','five years'],ans:2,cat:'error',exp:'"since" → "for" (use "for" with a period of time)'},
+      {text:'Despite ___ hard, she failed the exam.',opts:['study','studied','studying','to study'],ans:2,cat:'grammar',exp:'"Despite" + gerund: despite studying'},
+      {text:'By next year, she ___ her degree.',opts:['finishes','will finish','will have finished','has finished'],ans:2,cat:'tense',exp:'Future Perfect: completed action before a future point'},
+      {text:'He asked me ___ the window.',opts:['close','to close','closing','closed'],ans:1,cat:'grammar',exp:'"ask" + object + to-infinitive'},
+      {text:'When I was young, I ___ swim for hours.',opts:['can','could','was able','would'],ans:1,cat:'tense',exp:'"could" = past general ability'},
+      {text:'Find the error: "The informations you gave me was very useful."',opts:['The','informations','was','very useful'],ans:1,cat:'error',exp:'"informations" → "information" (uncountable, no plural)'},
+      {text:"It's high time you ___ your driving test.",opts:['take','took','had taken','have taken'],ans:1,cat:'grammar',exp:'"It\'s high time" + past simple (subjunctive-like)'},
+      {text:'She ___ the email before the meeting started.',opts:['sent','had sent','has sent','was sending'],ans:1,cat:'tense',exp:'Past Perfect: completed before another past action'},
+      {text:'Find the error: "I look forward to hear from you soon."',opts:['I look','forward to','hear','from you'],ans:2,cat:'error',exp:'"hear" → "hearing" ("look forward to" + gerund)'}
+    ]
+  };
+  setExams([exam]);
+})();
+
+// ═══════════════════════════════════════════
+// NAVIGATION
+// ═══════════════════════════════════════════
+function showScr(id){
+  document.querySelectorAll('.scr').forEach(s=>s.classList.remove('on'));
+  document.getElementById(id).classList.add('on');
+}
+function openModal(id){document.getElementById(id).classList.add('on')}
+function closeModal(id){document.getElementById(id).classList.remove('on')}
+
+// ═══════════════════════════════════════════
+// STUDENT FLOW
+// ═══════════════════════════════════════════
+let student = {name:'',cls:''};
+
+function studentLogin(){
+  const name = document.getElementById('s-name').value.trim();
+  const cls = document.getElementById('s-class').value;
+  if(!name){alert('Нэрээ оруулна уу.');return}
+  if(!cls){alert('Анги сонгоно уу.');return}
+  student = {name,cls};
+  document.getElementById('es-greeting').textContent = 'Сайн байна уу, '+name+'!';
+  document.getElementById('es-sub').textContent = cls+' анги';
+  renderExamListStudent();
+  showScr('scr-exam-select');
+}
+
+function renderExamListStudent(){
+  const exams = getExams().filter(e=>e.active);
+  const el = document.getElementById('exam-list-student');
+  if(!exams.length){el.innerHTML='<div class="empty">Одоогоор идэвхтэй шалгалт байхгүй байна.</div>';return}
+  el.innerHTML = exams.map(e=>`
+    <div class="exam-item">
+      <div>
+        <div class="exam-name">${e.name}</div>
+        <div class="exam-meta">⏱ ${e.time} минут · ${e.questions.length} асуулт · ${e.subject}</div>
+      </div>
+      <button class="btn btn-primary btn-sm" onclick="startExam('${e.id}')">Эхлэх →</button>
+    </div>`).join('');
+}
+
+// ═══════════════════════════════════════════
+// QUIZ ENGINE
+// ═══════════════════════════════════════════
+let qState = {exam:null,idx:0,answers:[],done:[],score:0,submitted:false,timerSecs:0};
+let timerInt = null;
+
+function startExam(id){
+  const exam = getExams().find(e=>e.id===id);
+  if(!exam){alert('Шалгалт олдсонгүй.');return}
+  qState = {exam,idx:0,answers:new Array(exam.questions.length).fill(null),
+    done:new Array(exam.questions.length).fill(false),score:0,submitted:false,
+    timerSecs:exam.time*60};
+  showScr('scr-quiz');
+  renderQ();
+  startQTimer();
+}
+
+function startQTimer(){
+  clearInterval(timerInt);
+  const total = qState.timerSecs;
+  timerInt = setInterval(()=>{
+    qState.timerSecs--;
+    const m=Math.floor(qState.timerSecs/60),s=qState.timerSecs%60;
+    const num=document.getElementById('t-num');
+    const fill=document.getElementById('t-fill');
+    if(!num)return;
+    num.textContent=String(m).padStart(2,'0')+':'+String(s).padStart(2,'0');
+    const pct=qState.timerSecs/total*100;
+    fill.style.width=pct+'%';
+    num.className='timer-num';fill.style.background='var(--accent)';
+    if(qState.timerSecs<=300){num.classList.add('danger');fill.style.background='var(--red)'}
+    else if(qState.timerSecs<=600){num.classList.add('warn');fill.style.background='#ba7517'}
+    if(qState.timerSecs<=0){clearInterval(timerInt);document.getElementById('timeout-overlay').classList.add('on')}
+  },1000);
+  // init display
+  const total2=qState.exam.time*60;
+  document.getElementById('t-fill').style.width='100%';
+  document.getElementById('t-num').textContent=String(qState.exam.time).padStart(2,'0')+':00';
+}
+
+function forceSubmit(){
+  document.getElementById('timeout-overlay').classList.remove('on');
+  showResult();
+}
+
+function renderQ(){
+  const qs = qState.exam.questions;
+  const q = qs[qState.idx];
+  document.getElementById('q-cur').textContent=qState.idx+1;
+  document.getElementById('q-total').textContent=qs.length;
+  document.getElementById('q-score').textContent=qState.score;
+  document.getElementById('q-prog').style.width=((qState.idx+1)/qs.length*100)+'%';
+  document.getElementById('q-cat-hdr').textContent=CAT_LABELS[q.cat]||q.cat;
+  document.getElementById('q-cat-tag').innerHTML=q.cat?`<span class="cat-tag ${CAT_CSS[q.cat]||''}">${CAT_LABELS[q.cat]||q.cat}</span>`:'';
+  document.getElementById('q-num-lbl').textContent='Асуулт '+(qState.idx+1)+' / '+qs.length;
+  document.getElementById('q-text').textContent=q.text;
+  const done=qState.done[qState.idx];
+  document.getElementById('q-opts').innerHTML=q.opts.map((o,i)=>{
+    let cls='opt';
+    if(done){cls+=' locked';if(i===q.ans)cls+=' correct';else if(i===qState.answers[qState.idx])cls+=' wrong';}
+    else if(i===qState.answers[qState.idx])cls+=' chosen';
+    return`<button class="${cls}" onclick="pickOpt(${i})"><span class="opt-letter">${LETTERS[i]}</span>${o}</button>`;
+  }).join('');
+  const fb=document.getElementById('q-fb');
+  if(done){
+    const ok=qState.answers[qState.idx]===q.ans;
+    fb.className='fb '+(ok?'ok':'no');
+    fb.style.display='block';
+    fb.textContent=(ok?'✓ Зөв! ':'✗ Буруу. ')+(q.exp||'');
+  }else{fb.style.display='none'}
+  document.getElementById('btn-prev').style.display=qState.idx>0?'':'none';
+  document.getElementById('btn-next').textContent=qState.idx===qs.length-1?'Дүн харах →':'Дараах →';
+}
+
+function pickOpt(i){
+  if(qState.done[qState.idx])return;
+  qState.answers[qState.idx]=i;
+  qState.done[qState.idx]=true;
+  if(i===qState.exam.questions[qState.idx].ans)qState.score++;
+  renderQ();
+}
+
+function qGo(dir){
+  const qs=qState.exam.questions;
+  if(dir===1&&qState.idx===qs.length-1){showResult();return}
+  qState.idx=Math.max(0,Math.min(qs.length-1,qState.idx+dir));
+  renderQ();
+}
+
+function showResult(){
+  clearInterval(timerInt);
+  const qs=qState.exam.questions;
+  const n=qs.length;
+  // category scores
+  const cats={};
+  qs.forEach((q,i)=>{
+    if(!cats[q.cat])cats[q.cat]={correct:0,total:0};
+    cats[q.cat].total++;
+    if(qState.answers[i]===q.ans)cats[q.cat].correct++;
+  });
+  const pct=Math.round(qState.score/n*100);
+  let grade,msg;
+  if(pct>=90){grade='A — Excellent';msg='Гайхалтай! Та B2 түвшний мэдлэгтэй.'}
+  else if(pct>=75){grade='B — Good';msg='Сайн хийлээ! B1/B2 хооронд байна.'}
+  else if(pct>=60){grade='C — Satisfactory';msg='Дунд зэрэг. Дасгал хийхийг зөвлөнө.'}
+  else{grade='D — Needs Work';msg='Суурь дүрмүүдийг дахин давтах хэрэгтэй.'}
+  document.getElementById('r-score').textContent=qState.score;
+  document.getElementById('r-denom').textContent='/ '+n;
+  document.getElementById('r-grade').textContent=grade;
+  document.getElementById('r-msg').textContent=msg;
+  // cats display
+  document.getElementById('r-cats').innerHTML=Object.entries(cats).map(([c,v])=>
+    `<div class="sc"><div class="sc-label">${CAT_LABELS[c]||c}</div><div class="sc-val">${v.correct}/${v.total}</div></div>`).join('');
+  // review
+  document.getElementById('r-review').innerHTML=qs.map((q,i)=>{
+    const ok=qState.answers[i]===q.ans;
+    return`<div class="rv ${ok?'ok':'no'}">
+      <div class="rv-q">${i+1}. ${q.text.substring(0,70)}${q.text.length>70?'…':''}</div>
+      <div class="rv-d">${ok?'✓ Зөв':'✗ Буруу'+(q.exp?' — '+q.exp:'')}</div></div>`;
+  }).join('');
+  // save result
+  if(!qState.submitted){
+    const catScores={};
+    Object.entries(cats).forEach(([c,v])=>catScores[c]={correct:v.correct,total:v.total});
+    const res={
+      id:'r_'+Date.now(),
+      studentName:student.name,
+      studentClass:student.cls,
+      examId:qState.exam.id,
+      examName:qState.exam.name,
+      score:qState.score,
+      total:n,pct,
+      grade:grade.split(' ')[0],
+      catScores,
+      time:new Date().toLocaleString('mn-MN')
+    };
+    const all=getResults();all.push(res);setResults(all);
+    qState.submitted=true;
+  }
+  showScr('scr-result');
+}
+
+// ═══════════════════════════════════════════
+// TEACHER AUTH
+// ═══════════════════════════════════════════
+function teacherLogin(){
+  const pwd=document.getElementById('t-pwd').value;
+  if(pwd===getPwd()){
+    document.getElementById('t-pwd').value='';
+    document.getElementById('t-err').style.display='none';
+    showScr('scr-teacher');
+    renderTeacher();
+  }else{
+    document.getElementById('t-err').style.display='block';
+  }
+}
+function teacherLogout(){showScr('scr-land')}
+function showChangePwd(){openModal('modal-pwd')}
+function changePwd(){
+  const p1=document.getElementById('new-pwd1').value;
+  const p2=document.getElementById('new-pwd2').value;
+  const err=document.getElementById('pwd-err');
+  if(p1.length<4){err.textContent='Нууц үг хамгийн багадаа 4 тэмдэгт байна.';err.style.display='block';return}
+  if(p1!==p2){err.textContent='Нууц үг таарахгүй байна.';err.style.display='block';return}
+  setPwd(p1);err.style.display='none';
+  closeModal('modal-pwd');
+  document.getElementById('new-pwd1').value='';document.getElementById('new-pwd2').value='';
+  alert('Нууц үг амжилттай өөрчлөгдлөө!');
+}
+
+// ═══════════════════════════════════════════
+// TEACHER DASHBOARD
+// ═══════════════════════════════════════════
+let tClassFilter='all';
+let tView='exams';
+
+function renderTeacher(){
+  renderTSummary();
+  renderClassTabs();
+  showTView(tView);
+}
+
+function renderTSummary(){
+  const results=getFilteredResults();
+  const exams=getExams();
+  const n=results.length;
+  const avg=n?(results.reduce((a,r)=>a+r.score,0)/n).toFixed(1):'—';
+  const pass=results.filter(r=>r.pct>=60).length;
+  document.getElementById('t-summary').innerHTML=
+    `<div class="sc"><div class="sc-label">Нийт шалгалт</div><div class="sc-val">${exams.length}</div></div>`+
+    `<div class="sc"><div class="sc-label">Нийт дүн</div><div class="sc-val">${n}</div></div>`+
+    `<div class="sc"><div class="sc-label">Дундаж оноо</div><div class="sc-val">${avg}</div></div>`+
+    `<div class="sc"><div class="sc-label">Тэнцсэн</div><div class="sc-val">${pass}/${n}</div></div>`;
+}
+
+function renderClassTabs(){
+  const all=['all',...CLASSES];
+  document.getElementById('t-class-tabs').innerHTML=all.map(c=>
+    `<button class="tab${c===tClassFilter?' on':''}" onclick="setClassFilter('${c}')">${c==='all'?'Бүгд':c}</button>`).join('');
+}
+
+function setClassFilter(c){tClassFilter=c;renderTeacher()}
+
+function getFilteredResults(){
+  const all=getResults();
+  return tClassFilter==='all'?all:all.filter(r=>r.studentClass===tClassFilter);
+}
+
+function showTView(v){
+  tView=v;
+  ['exams','results','analysis'].forEach(id=>{
+    const el=document.getElementById('tv-'+id);
+    if(el)el.style.display=id===v?'':'none';
+  });
+  if(v==='exams')renderExamListTeacher();
+  else if(v==='results')renderResultsTable();
+  else if(v==='analysis')renderAnalysis();
+}
+
+function renderExamListTeacher(){
+  const exams=getExams();
+  const el=document.getElementById('exam-list-teacher');
+  if(!exams.length){el.innerHTML='<div class="empty">Шалгалт байхгүй байна. + товч дарж нэмнэ үү.</div>';return}
+  el.innerHTML=exams.map(e=>`
+    <div class="exam-item">
+      <div>
+        <div class="exam-name">${e.name} <span class="badge ${e.active?'badge-green':'badge-amber'}">${e.active?'Идэвхтэй':'Хаалттай'}</span></div>
+        <div class="exam-meta">${e.questions.length} асуулт · ⏱ ${e.time} мин · ${e.created}</div>
+      </div>
+      <div class="exam-actions">
+        <button class="btn btn-outline btn-sm" onclick="toggleExam('${e.id}')">${e.active?'Хаах':'Нээх'}</button>
+        <button class="btn btn-outline btn-sm" onclick="editExam('${e.id}')">✏️</button>
+        <button class="btn btn-danger btn-sm" onclick="deleteExam('${e.id}')">🗑</button>
+      </div>
+    </div>`).join('');
+}
+
+function toggleExam(id){
+  const exams=getExams();
+  const e=exams.find(x=>x.id===id);
+  if(e){e.active=!e.active;setExams(exams);renderExamListTeacher();}
+}
+
+let deleteTargetId=null;
+function deleteExam(id){deleteTargetId=id;openModal('modal-delete')}
+function confirmDelete(){
+  if(!deleteTargetId)return;
+  setExams(getExams().filter(e=>e.id!==deleteTargetId));
+  const res=getResults().filter(r=>r.examId!==deleteTargetId);setResults(res);
+  deleteTargetId=null;closeModal('modal-delete');renderTeacher();
+}
+
+function renderResultsTable(){
+  const results=getFilteredResults();
+  const el=document.getElementById('results-table-body');
+  if(!results.length){el.innerHTML='<div class="empty">Дүн алга байна.</div>';return}
+  const gradeClass={A:'badge-green',B:'badge-blue',C:'badge-amber',D:'badge-red'};
+  el.innerHTML=results.map(r=>`
+    <div class="tbl-row" style="grid-template-columns:2fr 0.8fr 0.8fr 0.8fr 1fr">
+      <div><div style="font-weight:500">${r.studentName}</div><div style="font-size:11px;color:var(--muted)">${r.studentClass} · ${r.time}</div></div>
+      <div style="font-weight:600">${r.score}/${r.total}</div>
+      <div>${r.pct}%</div>
+      <div><span class="badge ${gradeClass[r.grade]||'badge-amber'}">${r.grade}</span></div>
+      <div style="font-size:12px;color:var(--muted)">${r.examName.substring(0,20)}${r.examName.length>20?'…':''}</div>
+    </div>`).join('');
+}
+
+function renderAnalysis(){
+  const results=getFilteredResults();
+  const n=results.length;
+  if(!n){
+    document.getElementById('an-summary').innerHTML='';
+    document.getElementById('an-bars').innerHTML='<div class="empty">Дүн алга байна.</div>';
+    document.getElementById('an-grades').innerHTML='';
+    document.getElementById('an-alert').innerHTML='';
+    return;
+  }
+  const avg=(results.reduce((a,r)=>a+r.score,0)/n).toFixed(1);
+  const avgP=Math.round(results.reduce((a,r)=>a+r.pct,0)/n);
+  const pass=results.filter(r=>r.pct>=60).length;
+  const top=results.reduce((a,r)=>r.score>a?r.score:a,0);
+  document.getElementById('an-summary').innerHTML=
+    `<div class="sc"><div class="sc-label">Нийт дүн</div><div class="sc-val">${n}</div></div>`+
+    `<div class="sc"><div class="sc-label">Дундаж %</div><div class="sc-val">${avgP}%</div></div>`+
+    `<div class="sc"><div class="sc-label">Тэнцсэн</div><div class="sc-val">${pass}/${n}</div></div>`+
+    `<div class="sc"><div class="sc-label">Хамгийн өндөр</div><div class="sc-val">${top}</div></div>`;
+
+  // gather cat data
+  const catAgg={};
+  results.forEach(r=>{
+    if(!r.catScores)return;
+    Object.entries(r.catScores).forEach(([c,v])=>{
+      if(!catAgg[c])catAgg[c]={correct:0,total:0};
+      catAgg[c].correct+=v.correct;catAgg[c].total+=v.total;
+    });
+  });
+  const barColors={grammar:'#378add',tense:'#639922',error:'#ef9f27',vocab:'#7f77dd'};
+  const weak=[];
+  document.getElementById('an-bars').innerHTML=Object.entries(catAgg).map(([c,v])=>{
+    const p=Math.round(v.correct/v.total*100);
+    if(p<70)weak.push(CAT_LABELS[c]||c);
+    return`<div class="bar-row">
+      <div class="bar-name">${CAT_LABELS[c]||c} (${v.total} асуулт)</div>
+      <div class="bar-track"><div class="bar-fill" style="width:${p}%;background:${barColors[c]||'#888'}"></div></div>
+      <div class="bar-pct">${p}%</div></div>`;
+  }).join('')||'<div class="empty">Ангилал мэдээлэл алга.</div>';
+
+  // grade dist
+  const grades={A:0,B:0,C:0,D:0};
+  results.forEach(r=>{if(grades[r.grade]!==undefined)grades[r.grade]++});
+  const gc={A:'badge-green',B:'badge-blue',C:'badge-amber',D:'badge-red'};
+  document.getElementById('an-grades').innerHTML=Object.entries(grades).map(([g,cnt])=>
+    `<div class="sc" style="text-align:center"><div class="sc-label"><span class="badge ${gc[g]}">${g}</span></div><div class="sc-val">${cnt}</div></div>`).join('');
+
+  // alert
+  document.getElementById('an-alert').innerHTML=weak.length
+    ?`<div class="alert alert-warn"><strong>⚠ Сайжруулах шаардлагатай:</strong> ${weak.map(w=>`<span style="background:#fac775;color:#412402;padding:2px 8px;border-radius:20px;font-size:11px;margin:2px;display:inline-block;font-weight:600">${w}</span>`).join('')}</div>`
+    :`<div class="alert alert-ok">✓ Бүх ангилалд дундаж 70%+ — сайн үзүүлэлт!</div>`;
+}
+
+// ═══════════════════════════════════════════
+// EXAM BUILDER
+// ═══════════════════════════════════════════
+let builderExamId=null;
+let builderQuestions=[];
+
+function openBuilder(){
+  builderExamId=null;
+  builderQuestions=[{text:'',opts:['','','',''],ans:0,cat:'grammar',exp:''}];
+  document.getElementById('b-name').value='';
+  document.getElementById('b-time').value=30;
+  document.getElementById('builder-title').textContent='Шинэ шалгалт үүсгэх';
+  renderQBuilder();
+  openModal('modal-builder');
+}
+
+function editExam(id){
+  const exam=getExams().find(e=>e.id===id);
+  if(!exam)return;
+  builderExamId=id;
+  builderQuestions=exam.questions.map(q=>({...q,opts:[...q.opts]}));
+  document.getElementById('b-name').value=exam.name;
+  document.getElementById('b-time').value=exam.time;
+  document.getElementById('builder-title').textContent='Шалгалт засах';
+  renderQBuilder();
+  openModal('modal-builder');
+}
+
+function addQuestion(){
+  builderQuestions.push({text:'',opts:['','','',''],ans:0,cat:'grammar',exp:''});
+  renderQBuilder();
+}
+
+function removeQuestion(i){
+  if(builderQuestions.length<=1){alert('Хамгийн багадаа 1 асуулт байна.');return}
+  builderQuestions.splice(i,1);renderQBuilder();
+}
+
+function renderQBuilder(){
+  const cats={grammar:'Grammar',tense:'Tenses',error:'Error ID',vocab:'Vocabulary'};
+  document.getElementById('questions-builder').innerHTML=builderQuestions.map((q,i)=>`
+    <div class="qb-item" id="qbi-${i}">
+      <div class="qb-header">
+        <div class="qb-num">Асуулт ${i+1}</div>
+        <div style="display:flex;gap:6px;align-items:center">
+          <select style="width:130px;font-size:12px;padding:4px 8px" onchange="qbChange(${i},'cat',this.value)">
+            ${Object.entries(cats).map(([k,v])=>`<option value="${k}"${q.cat===k?' selected':''}>${v}</option>`).join('')}
+          </select>
+          <button class="btn btn-danger btn-icon btn-sm" onclick="removeQuestion(${i})">×</button>
+        </div>
+      </div>
+      <div class="fg" style="margin-bottom:.5rem">
+        <input type="text" placeholder="Асуултын текст..." value="${escHtml(q.text)}" oninput="qbChange(${i},'text',this.value)" />
+      </div>
+      <div class="opt-inputs">
+        ${q.opts.map((o,j)=>`
+          <div class="opt-inp-wrap">
+            <input type="radio" class="opt-radio" name="ans-${i}" value="${j}" ${q.ans===j?'checked':''} onchange="qbChange(${i},'ans',${j})" />
+            <input type="text" placeholder="${LETTERS[j]} хариулт" value="${escHtml(o)}" oninput="qbOptChange(${i},${j},this.value)" style="flex:1;font-size:13px;padding:7px 10px" />
+          </div>`).join('')}
+      </div>
+      <div style="font-size:11px;color:var(--green);margin-bottom:.4rem">● Радио товчийг дарж зөв хариултыг тэмдэглэнэ</div>
+      <input type="text" placeholder="Тайлбар (заавал биш)..." value="${escHtml(q.exp||'')}" oninput="qbChange(${i},'exp',this.value)" style="font-size:13px;padding:7px 10px" />
+    </div>`).join('');
+}
+
+function escHtml(s){return(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;')}
+
+function qbChange(i,field,val){builderQuestions[i][field]=field==='ans'?parseInt(val):val}
+function qbOptChange(i,j,val){builderQuestions[i].opts[j]=val}
+
+function saveExam(){
+  const name=document.getElementById('b-name').value.trim();
+  const time=parseInt(document.getElementById('b-time').value)||30;
+  if(!name){alert('Шалгалтын нэр оруулна уу.');return}
+  if(builderQuestions.some(q=>!q.text.trim())){alert('Бүх асуултын текст бөглөнө үү.');return}
+  if(builderQuestions.some(q=>q.opts.some(o=>!o.trim()))){alert('Бүх хариултын хувилбар бөглөнө үү.');return}
+  const exams=getExams();
+  if(builderExamId){
+    const idx=exams.findIndex(e=>e.id===builderExamId);
+    if(idx>=0){exams[idx]={...exams[idx],name,time,questions:builderQuestions.map(q=>({...q,opts:[...q.opts]}))};setExams(exams);}
+  }else{
+    exams.push({id:'exam_'+Date.now(),name,subject:'Англи хэл',time,active:true,created:new Date().toLocaleDateString('mn-MN'),questions:builderQuestions.map(q=>({...q,opts:[...q.opts]}))});
+    setExams(exams);
+  }
+  closeModal('modal-builder');
+  renderTeacher();
+}
+</script>
+</body>
+</html>
