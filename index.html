@@ -3,870 +3,853 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Англи хэлний шалгалтын систем — 10-р анги</title>
+<title>Англи хэлний шалгалт</title>
 <style>
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-:root{
-  --bg:#f4f3f0;--surface:#fff;--border:#e2e1da;--text:#181816;--muted:#6a6a66;--hint:#a0a09b;
-  --accent:#181816;--accent-light:#f0efec;
-  --green:#2d7a3a;--green-bg:#e8f5eb;--green-border:#6abf77;
-  --red:#a32d2d;--red-bg:#fceaea;--red-border:#e24b4a;
-  --blue:#0c447c;--blue-bg:#e6f1fb;--blue-border:#378add;
-  --amber:#633806;--amber-bg:#faeeda;--amber-border:#ef9f27;
-  --purple:#3c3489;--purple-bg:#eeedfe;--purple-border:#7f77dd;
-  --r:10px;--rs:7px
-}
-body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;font-size:15px}
-.wrap{max-width:720px;margin:0 auto;padding:1.5rem 1rem 4rem}
-
-/* SCREENS */
-.scr{display:none}.scr.on{display:block}
-
-/* CARD */
-.card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:1.5rem;margin-bottom:1rem}
-.card-title{font-size:17px;font-weight:600;margin-bottom:1rem}
-
-/* FORM */
-.fg{margin-bottom:.9rem}
-label.lbl{display:block;font-size:12px;color:var(--muted);font-weight:600;text-transform:uppercase;letter-spacing:.05em;margin-bottom:5px}
-input[type=text],input[type=password],input[type=number],select,textarea{
-  width:100%;padding:10px 13px;border:1px solid var(--border);border-radius:var(--rs);
-  font-size:15px;background:var(--surface);color:var(--text);outline:none;font-family:inherit;
-  transition:border-color .15s}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#f2f1ee;min-height:100vh;color:#1a1a18}
+.page{display:none;min-height:100vh;padding:1.5rem 1rem 3rem}
+.page.show{display:block}
+.wrap{max-width:680px;margin:0 auto}
+.card{background:#fff;border:1px solid #e0dfd8;border-radius:12px;padding:1.5rem;margin-bottom:1rem}
+h1{font-size:22px;font-weight:700;margin-bottom:.25rem}
+h2{font-size:18px;font-weight:600;margin-bottom:1rem}
+.sub{font-size:14px;color:#6a6a66;margin-bottom:1rem}
+.chips{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-bottom:1.5rem}
+.chip{background:#f2f1ee;border:1px solid #e0dfd8;border-radius:20px;padding:4px 13px;font-size:12px;color:#6a6a66}
+label{display:block;font-size:12px;color:#6a6a66;font-weight:600;text-transform:uppercase;letter-spacing:.05em;margin-bottom:5px}
+input[type=text],input[type=password],input[type=number],select,textarea{width:100%;padding:10px 13px;border:1px solid #e0dfd8;border-radius:8px;font-size:15px;background:#fff;color:#1a1a18;outline:none;font-family:inherit;transition:border .15s;margin-bottom:.9rem}
 input:focus,select:focus,textarea:focus{border-color:#888}
-textarea{resize:vertical;min-height:80px}
-
-/* BUTTONS */
-.btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;padding:10px 18px;
-  border:none;border-radius:var(--rs);font-size:14px;font-weight:600;cursor:pointer;
-  transition:opacity .15s,transform .1s;white-space:nowrap}
-.btn:active{transform:scale(.97)}
-.btn-primary{background:var(--accent);color:#fff}.btn-primary:hover{opacity:.85}
-.btn-outline{background:transparent;color:var(--text);border:1px solid var(--border)}.btn-outline:hover{background:var(--bg)}
-.btn-danger{background:var(--red-bg);color:var(--red);border:1px solid var(--red-border)}.btn-danger:hover{opacity:.8}
-.btn-success{background:var(--green-bg);color:var(--green);border:1px solid var(--green-border)}
-.btn-sm{padding:6px 12px;font-size:13px}
-.btn-full{width:100%}
-.btn-icon{width:32px;height:32px;padding:0;border-radius:6px;font-size:16px}
-
-/* TABS */
-.tabs{display:flex;gap:6px;margin-bottom:1rem;flex-wrap:wrap}
-.tab{padding:6px 14px;border:1px solid var(--border);border-radius:20px;font-size:13px;cursor:pointer;background:var(--surface);color:var(--muted);transition:all .15s}
-.tab.on{background:var(--accent);color:#fff;border-color:var(--accent)}
-
-/* BADGE */
-.badge{display:inline-block;padding:2px 9px;border-radius:20px;font-size:11px;font-weight:600}
-.badge-green{background:var(--green-bg);color:var(--green)}
-.badge-blue{background:var(--blue-bg);color:var(--blue)}
-.badge-amber{background:var(--amber-bg);color:var(--amber)}
-.badge-red{background:var(--red-bg);color:var(--red)}
-.badge-purple{background:var(--purple-bg);color:var(--purple)}
-
-/* GRID */
+textarea{resize:vertical;min-height:70px}
+.btn{display:block;width:100%;padding:12px;border:none;border-radius:8px;font-size:15px;font-weight:600;cursor:pointer;text-align:center;transition:opacity .15s}
+.btn:hover{opacity:.85}
+.btn-dark{background:#1a1a18;color:#fff}
+.btn-outline{background:#fff;color:#1a1a18;border:1px solid #e0dfd8;margin-top:8px}
+.btn-outline:hover{background:#f2f1ee}
+.btn-sm{width:auto;padding:6px 14px;font-size:13px;display:inline-block}
+.btn-green{background:#e8f5eb;color:#2d7a3a;border:1px solid #6abf77}
+.btn-red{background:#fceaea;color:#a32d2d;border:1px solid #e24b4a}
 .g2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
 .g4{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
-@media(max-width:500px){.g4{grid-template-columns:repeat(2,1fr)}.g3{grid-template-columns:repeat(3,1fr)}}
-
-/* STAT CARD */
-.sc{background:var(--surface);border:1px solid var(--border);border-radius:var(--rs);padding:.75rem 1rem}
-.sc-label{font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.05em;margin-bottom:4px}
+@media(max-width:480px){.g4{grid-template-columns:repeat(2,1fr)}}
+.sc{background:#fff;border:1px solid #e0dfd8;border-radius:8px;padding:.75rem 1rem}
+.sc-label{font-size:10px;color:#6a6a66;text-transform:uppercase;letter-spacing:.05em;margin-bottom:4px}
 .sc-val{font-size:22px;font-weight:700}
-
-/* TOP NAV */
-.topnav{display:flex;align-items:center;justify-content:space-between;background:var(--surface);
-  border:1px solid var(--border);border-radius:var(--r);padding:.9rem 1.2rem;margin-bottom:1rem}
+.topnav{display:flex;align-items:center;justify-content:space-between;background:#fff;border:1px solid #e0dfd8;border-radius:12px;padding:.9rem 1.2rem;margin-bottom:1rem}
 .topnav-title{font-size:17px;font-weight:600}
-.topnav-sub{font-size:12px;color:var(--muted);margin-top:2px}
-
-/* EXAM LIST ITEM */
-.exam-item{display:flex;align-items:center;justify-content:space-between;padding:.9rem 1.1rem;
-  border-top:1px solid var(--border)}
-.exam-item:first-child{border-top:none}
-.exam-name{font-weight:500;font-size:14px}
-.exam-meta{font-size:12px;color:var(--muted);margin-top:2px}
-.exam-actions{display:flex;gap:6px}
-
+.topnav-sub{font-size:12px;color:#6a6a66;margin-top:2px}
+.tabs{display:flex;gap:6px;margin-bottom:1rem;flex-wrap:wrap}
+.tab{padding:6px 14px;border:1px solid #e0dfd8;border-radius:20px;font-size:13px;cursor:pointer;background:#fff;color:#6a6a66;transition:all .15s}
+.tab.on{background:#1a1a18;color:#fff;border-color:#1a1a18}
+.badge{display:inline-block;padding:2px 9px;border-radius:20px;font-size:11px;font-weight:600}
+.bg{background:#e8f5eb;color:#2d7a3a}
+.bb{background:#e6f1fb;color:#0c447c}
+.ba{background:#faeeda;color:#633806}
+.br{background:#fceaea;color:#a32d2d}
+.bp{background:#eeedfe;color:#3c3489}
 /* TIMER */
-.timer-wrap{display:flex;align-items:center;justify-content:space-between;
-  background:var(--surface);border:1px solid var(--border);border-radius:var(--rs);padding:10px 14px;margin-bottom:10px}
-.timer-track{flex:1;height:5px;background:var(--bg);border-radius:3px;margin:0 12px;overflow:hidden}
-.timer-fill{height:100%;background:var(--accent);border-radius:3px;transition:width 1s linear,background .3s}
-.timer-num{font-size:20px;font-weight:700;letter-spacing:.04em;font-variant-numeric:tabular-nums;transition:color .3s}
-.timer-num.warn{color:#ba7517}.timer-num.danger{color:var(--red)}
-
-/* QUESTION */
+.timer-wrap{display:flex;align-items:center;background:#fff;border:1px solid #e0dfd8;border-radius:8px;padding:10px 14px;margin-bottom:10px;gap:12px}
+.timer-track{flex:1;height:5px;background:#f2f1ee;border-radius:3px;overflow:hidden}
+.timer-fill{height:100%;background:#1a1a18;border-radius:3px;transition:width 1s linear,background .3s}
+.timer-num{font-size:20px;font-weight:700;letter-spacing:.04em;font-variant-numeric:tabular-nums}
+.timer-num.warn{color:#ba7517}
+.timer-num.danger{color:#a32d2d}
+/* PROGRESS */
+.prog-track{height:3px;background:#e0dfd8;border-radius:2px;margin-bottom:10px}
+.prog-fill{height:100%;background:#1a1a18;border-radius:2px;transition:width .4s}
+/* CAT TAGS */
 .cat-tag{display:inline-block;padding:3px 10px;border-radius:20px;font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.05em;margin-bottom:8px}
-.cat-grammar{background:var(--blue-bg);color:var(--blue)}
-.cat-tense{background:var(--green-bg);color:var(--green)}
-.cat-error{background:var(--amber-bg);color:var(--amber)}
-.cat-vocab{background:var(--purple-bg);color:var(--purple)}
+.c-grammar{background:#e6f1fb;color:#0c447c}
+.c-tense{background:#e8f5eb;color:#2d7a3a}
+.c-error{background:#faeeda;color:#633806}
+.c-vocab{background:#eeedfe;color:#3c3489}
+/* OPTIONS */
 .q-text{font-size:16px;font-weight:500;line-height:1.65;margin-bottom:1.1rem}
 .opts{display:flex;flex-direction:column;gap:8px}
-.opt{display:flex;align-items:center;gap:10px;padding:10px 13px;border:1px solid var(--border);
-  border-radius:var(--rs);background:var(--surface);cursor:pointer;font-size:14px;text-align:left;
-  transition:background .1s,border-color .1s;color:var(--text)}
-.opt:hover:not(.locked){background:var(--bg);border-color:#bbb}
-.opt.chosen{border-color:var(--blue-border);background:var(--blue-bg);color:var(--blue)}
-.opt.correct{border-color:var(--green-border);background:var(--green-bg);color:var(--green)}
-.opt.wrong{border-color:var(--red-border);background:var(--red-bg);color:var(--red)}
+.opt{display:flex;align-items:center;gap:10px;padding:11px 13px;border:1px solid #e0dfd8;border-radius:8px;background:#fff;cursor:pointer;font-size:14px;text-align:left;transition:all .12s;color:#1a1a18}
+.opt:hover{background:#f2f1ee;border-color:#bbb}
+.opt.chosen{border-color:#378add;background:#e6f1fb;color:#0c447c}
+.opt.correct{border-color:#6abf77;background:#e8f5eb;color:#2d7a3a}
+.opt.wrong{border-color:#e24b4a;background:#fceaea;color:#a32d2d}
 .opt.locked{cursor:default}
 .opt-letter{width:26px;height:26px;border-radius:50%;border:1.5px solid currentColor;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:600;flex-shrink:0}
-.fb{margin-top:10px;padding:10px 13px;border-radius:var(--rs);font-size:13px;line-height:1.55;display:none}
-.fb.ok{background:var(--green-bg);color:var(--green);border:1px solid var(--green-border)}
-.fb.no{background:var(--red-bg);color:var(--red);border:1px solid var(--red-border)}
-
-/* PROGRESS */
-.prog-track{height:3px;background:var(--border);border-radius:2px;margin-bottom:10px}
-.prog-fill{height:100%;background:var(--accent);border-radius:2px;transition:width .4s}
-
-/* NAV ROW */
+.fb{margin-top:10px;padding:10px 13px;border-radius:8px;font-size:13px;line-height:1.55;display:none}
+.fb.ok{background:#e8f5eb;color:#2d7a3a;border:1px solid #6abf77}
+.fb.no{background:#fceaea;color:#a32d2d;border:1px solid #e24b4a}
+/* NAV */
 .nav-row{display:flex;gap:8px;margin-top:10px}
-.nav-btn{flex:1;padding:11px;border-radius:var(--rs);font-size:14px;font-weight:500;cursor:pointer;
-  border:1px solid var(--border);background:var(--surface);color:var(--text)}
-.nav-btn:hover{background:var(--bg)}
-.nav-btn.primary{background:var(--accent);color:#fff;border-color:var(--accent)}.nav-btn.primary:hover{opacity:.85}
-
+.nav-btn{flex:1;padding:11px;border-radius:8px;font-size:14px;font-weight:500;cursor:pointer;border:1px solid #e0dfd8;background:#fff;color:#1a1a18;transition:opacity .12s}
+.nav-btn:hover{background:#f2f1ee}
+.nav-btn.primary{background:#1a1a18;color:#fff;border-color:#1a1a18}
+.nav-btn.primary:hover{opacity:.85}
 /* RESULT */
-.score-ring{width:110px;height:110px;border-radius:50%;border:3px solid var(--border);
-  display:flex;flex-direction:column;align-items:center;justify-content:center;margin:0 auto 1rem}
+.score-ring{width:110px;height:110px;border-radius:50%;border:3px solid #e0dfd8;display:flex;flex-direction:column;align-items:center;justify-content:center;margin:0 auto 1rem}
 .score-big{font-size:32px;font-weight:700}
-.score-sm{font-size:13px;color:var(--muted)}
-
+.score-sm{font-size:13px;color:#6a6a66}
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:9px}
 /* TABLE */
-.tbl{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);overflow:hidden;margin-bottom:1rem}
-.tbl-head{display:grid;padding:9px 14px;background:var(--bg);font-size:11px;color:var(--muted);font-weight:600;text-transform:uppercase;letter-spacing:.04em}
-.tbl-row{display:grid;padding:9px 14px;border-top:1px solid var(--border);font-size:13px;align-items:center}
-.tbl-row:hover{background:var(--bg)}
-
+.tbl{background:#fff;border:1px solid #e0dfd8;border-radius:12px;overflow:hidden;margin-bottom:1rem}
+.tbl-head{display:grid;padding:9px 14px;background:#f2f1ee;font-size:11px;color:#6a6a66;font-weight:600;text-transform:uppercase;letter-spacing:.04em}
+.tbl-row{display:grid;padding:9px 14px;border-top:1px solid #e0dfd8;font-size:13px;align-items:center}
+.tbl-row:hover{background:#f2f1ee}
+/* REVIEW */
+.rv{padding:10px 13px;border-radius:8px;margin-bottom:7px;font-size:13px;border:1px solid #e0dfd8}
+.rv.ok{border-left:3px solid #6abf77}
+.rv.no{border-left:3px solid #e24b4a}
+.rv-q{font-weight:500;margin-bottom:3px}
+.rv-d{font-size:12px;color:#6a6a66}
 /* BAR */
 .bar-row{display:flex;align-items:center;gap:10px;margin-bottom:10px}
-.bar-name{font-size:13px;color:var(--muted);width:140px;flex-shrink:0}
-.bar-track{flex:1;height:9px;background:var(--bg);border-radius:5px;overflow:hidden}
-.bar-fill{height:100%;border-radius:5px;transition:width .6s ease}
+.bar-name{font-size:13px;color:#6a6a66;width:140px;flex-shrink:0}
+.bar-track{flex:1;height:9px;background:#f2f1ee;border-radius:5px;overflow:hidden}
+.bar-fill{height:100%;border-radius:5px;transition:width .6s}
 .bar-pct{font-size:12px;font-weight:600;width:36px;text-align:right}
-
 /* ALERT */
-.alert{border-radius:var(--rs);padding:.75rem 1rem;font-size:13px;margin-top:.75rem}
-.alert-warn{background:var(--amber-bg);color:var(--amber);border:1px solid var(--amber-border)}
-.alert-ok{background:var(--green-bg);color:var(--green);border:1px solid var(--green-border)}
-.alert-info{background:var(--blue-bg);color:var(--blue);border:1px solid var(--blue-border)}
-
-/* REVIEW */
-.rv{padding:10px 13px;border-radius:var(--rs);margin-bottom:7px;font-size:13px;border:1px solid var(--border)}
-.rv.ok{border-left:3px solid var(--green-border)}
-.rv.no{border-left:3px solid var(--red-border)}
-.rv-q{font-weight:500;margin-bottom:3px}
-.rv-d{font-size:12px;color:var(--muted)}
-
-/* MODAL */
-.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.55);display:none;align-items:center;justify-content:center;z-index:999;padding:1rem}
-.modal-overlay.on{display:flex}
-.modal{background:var(--surface);border-radius:var(--r);padding:1.75rem;max-width:560px;width:100%;max-height:90vh;overflow-y:auto}
-.modal-title{font-size:18px;font-weight:600;margin-bottom:1.25rem}
-.modal-footer{display:flex;gap:8px;margin-top:1.25rem;justify-content:flex-end}
-
-/* QUESTION BUILDER */
-.qb-item{background:var(--bg);border:1px solid var(--border);border-radius:var(--rs);padding:1rem;margin-bottom:.75rem}
-.qb-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:.75rem}
-.qb-num{font-size:12px;font-weight:600;color:var(--muted)}
-.opt-inputs{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-bottom:.5rem}
-.opt-inp-wrap{display:flex;align-items:center;gap:6px}
-.opt-radio{width:16px;height:16px;flex-shrink:0}
-.correct-label{font-size:11px;color:var(--green);font-weight:600}
-
-/* EMPTY */
-.empty{text-align:center;padding:3rem 1rem;color:var(--muted);font-size:14px}
-
-/* CHART */
-canvas{max-width:100%}
-
-/* WELCOME HERO */
-.hero{text-align:center;padding:2rem 1rem}
+.alert{border-radius:8px;padding:.75rem 1rem;font-size:13px;margin-top:.75rem}
+.alert-ok{background:#e8f5eb;color:#2d7a3a;border:1px solid #6abf77}
+.alert-warn{background:#faeeda;color:#633806;border:1px solid #ef9f27}
+/* EXAM ITEM */
+.exam-item{display:flex;align-items:center;justify-content:space-between;padding:.9rem 1.1rem;border-top:1px solid #e0dfd8}
+.exam-item:first-child{border-top:none}
+.exam-name{font-weight:500;font-size:14px}
+.exam-meta{font-size:12px;color:#6a6a66;margin-top:2px}
+/* BUILDER */
+.qb{background:#f2f1ee;border:1px solid #e0dfd8;border-radius:8px;padding:1rem;margin-bottom:.75rem}
+.qb-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:.75rem}
+.opt-grid{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-bottom:.5rem}
+.opt-wrap{display:flex;align-items:center;gap:6px}
+/* OVERLAY */
+.overlay{position:fixed;inset:0;background:rgba(0,0,0,.55);display:none;align-items:center;justify-content:center;z-index:999;padding:1rem}
+.overlay.show{display:flex}
+.modal{background:#fff;border-radius:12px;padding:1.75rem;max-width:560px;width:100%;max-height:90vh;overflow-y:auto}
+.modal h2{margin-bottom:1rem}
+.modal-footer{display:flex;gap:8px;justify-content:flex-end;margin-top:1.25rem}
+.divider{border:none;border-top:1px solid #e0dfd8;margin:1rem 0}
+.empty{text-align:center;padding:3rem 1rem;color:#6a6a66;font-size:14px}
+/* HERO */
+.hero{text-align:center;padding:1rem 0 .5rem}
 .hero-icon{font-size:52px;margin-bottom:.75rem}
-.hero-title{font-size:24px;font-weight:700;margin-bottom:.25rem}
-.hero-sub{font-size:15px;color:var(--muted);margin-bottom:1.5rem}
-
-/* Chips */
-.chips{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-bottom:1.5rem}
-.chip{background:var(--bg);border:1px solid var(--border);border-radius:20px;padding:4px 13px;font-size:12px;color:var(--muted)}
-
-/* Divider */
-.divider{border:none;border-top:1px solid var(--border);margin:1rem 0}
-
-/* Timeout */
-#timeout-overlay{position:fixed;inset:0;background:rgba(0,0,0,.6);display:none;align-items:center;justify-content:center;z-index:9999}
-#timeout-overlay.on{display:flex}
-.timeout-box{background:var(--surface);border-radius:var(--r);padding:2rem;text-align:center;max-width:320px;width:90%}
 </style>
 </head>
 <body>
 
 <!-- TIMEOUT -->
-<div id="timeout-overlay">
-  <div class="timeout-box">
+<div class="overlay" id="ov-timeout">
+  <div class="modal" style="max-width:320px;text-align:center">
     <div style="font-size:44px;margin-bottom:.75rem">⏰</div>
-    <div style="font-size:18px;font-weight:600;margin-bottom:.5rem">Хугацаа дууслаа!</div>
-    <div style="font-size:14px;color:var(--muted);margin-bottom:1.25rem">Таны хариултууд автоматаар хадгалагдлаа.</div>
-    <button class="btn btn-primary btn-full" onclick="forceSubmit()">Дүн харах →</button>
+    <h2>Хугацаа дууслаа!</h2>
+    <div class="sub">Таны хариултууд автоматаар хадгалагдлаа.</div>
+    <button class="btn btn-dark" onclick="forceSubmit()">Дүн харах →</button>
   </div>
 </div>
 
-<!-- EXAM DELETE CONFIRM -->
-<div class="modal-overlay" id="modal-delete">
-  <div class="modal" style="max-width:360px;text-align:center">
+<!-- DELETE CONFIRM -->
+<div class="overlay" id="ov-delete">
+  <div class="modal" style="max-width:340px;text-align:center">
     <div style="font-size:36px;margin-bottom:.75rem">🗑️</div>
-    <div class="modal-title" style="text-align:center">Шалгалт устгах уу?</div>
-    <div style="font-size:14px;color:var(--muted);margin-bottom:1.25rem">Энэ үйлдлийг буцааж болохгүй. Бүх дүн устана.</div>
-    <div class="modal-footer" style="justify-content:center">
-      <button class="btn btn-outline" onclick="closeModal('modal-delete')">Болих</button>
-      <button class="btn btn-danger" onclick="confirmDelete()">Устгах</button>
+    <h2>Шалгалт устгах уу?</h2>
+    <div class="sub">Энэ үйлдлийг буцааж болохгүй.</div>
+    <div style="display:flex;gap:8px;justify-content:center">
+      <button class="btn btn-outline btn-sm" onclick="closeOv('ov-delete')">Болих</button>
+      <button class="btn btn-red btn-sm" onclick="confirmDelete()">Устгах</button>
     </div>
   </div>
 </div>
 
-<!-- EXAM BUILDER MODAL -->
-<div class="modal-overlay" id="modal-builder">
-  <div class="modal">
-    <div class="modal-title" id="builder-title">Шинэ шалгалт үүсгэх</div>
-    <div class="fg">
-      <label class="lbl">Шалгалтын нэр</label>
-      <input type="text" id="b-name" placeholder="Жишээ: Unit 3 Grammar Test" />
+<!-- CHANGE PWD -->
+<div class="overlay" id="ov-pwd">
+  <div class="modal" style="max-width:360px">
+    <h2>Нууц үг өөрчлөх</h2>
+    <label>Шинэ нууц үг</label>
+    <input type="password" id="np1" placeholder="Шинэ нууц үг" />
+    <label>Дахин оруулах</label>
+    <input type="password" id="np2" placeholder="Баталгаажуулах" />
+    <div id="pwd-err" style="color:#a32d2d;font-size:13px;display:none;margin-top:-8px;margin-bottom:8px"></div>
+    <div class="modal-footer">
+      <button class="btn btn-outline btn-sm" onclick="closeOv('ov-pwd')">Болих</button>
+      <button class="btn btn-dark btn-sm" onclick="changePwd()">Хадгалах</button>
     </div>
+  </div>
+</div>
+
+<!-- EXAM BUILDER -->
+<div class="overlay" id="ov-builder">
+  <div class="modal">
+    <h2 id="builder-title">Шинэ шалгалт үүсгэх</h2>
+    <label>Шалгалтын нэр</label>
+    <input type="text" id="b-name" placeholder="Жишээ: Unit 3 Grammar Test" />
     <div class="g2">
-      <div class="fg">
-        <label class="lbl">Хугацаа (минут)</label>
+      <div>
+        <label>Хугацаа (минут)</label>
         <input type="number" id="b-time" value="30" min="5" max="120" />
       </div>
-      <div class="fg">
-        <label class="lbl">Хичээл</label>
-        <select id="b-subject">
-          <option>Англи хэл</option>
-        </select>
+      <div>
+        <label>Хичээл</label>
+        <select id="b-subj"><option>Англи хэл</option></select>
       </div>
     </div>
     <hr class="divider">
     <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:.75rem">
       <div style="font-size:14px;font-weight:600">Асуултууд</div>
-      <button class="btn btn-success btn-sm" onclick="addQuestion()">+ Асуулт нэмэх</button>
+      <button class="btn btn-green btn-sm" onclick="addQ()">+ Нэмэх</button>
     </div>
-    <div id="questions-builder"></div>
+    <div id="qbuilder"></div>
     <div class="modal-footer">
-      <button class="btn btn-outline" onclick="closeModal('modal-builder')">Болих</button>
-      <button class="btn btn-primary" onclick="saveExam()">💾 Хадгалах</button>
+      <button class="btn btn-outline btn-sm" onclick="closeOv('ov-builder')">Болих</button>
+      <button class="btn btn-dark btn-sm" onclick="saveExam()">💾 Хадгалах</button>
     </div>
   </div>
 </div>
 
-<div class="wrap">
-
-<!-- ══════════════════════════════════════════════
-     SCREEN 0: LANDING
-══════════════════════════════════════════════ -->
-<div id="scr-land" class="scr on">
-  <div class="card hero">
-    <div class="hero-icon">🏫</div>
-    <div class="hero-title">Англи хэлний шалгалт</div>
-    <div class="hero-sub">10-р анги — онлайн шалгалтын систем</div>
-    <div class="chips">
-      <span class="chip">📝 Олон шалгалт</span>
-      <span class="chip">⏱ Таймертай</span>
-      <span class="chip">📊 Анализ</span>
-      <span class="chip">🏫 8В, 10А–10Ё</span>
-    </div>
-    <div class="g2" style="margin-bottom:.75rem">
-      <button class="btn btn-primary btn-full" onclick="showScr('scr-student-login')" style="font-size:15px;padding:13px">
-        🎓 Сурагч
-      </button>
-      <button class="btn btn-outline btn-full" onclick="showScr('scr-teacher-login')" style="font-size:15px;padding:13px">
-        👨‍🏫 Багш
-      </button>
+<!-- PAGE: НҮҮР -->
+<div class="page show" id="pg-home">
+  <div class="wrap">
+    <div class="card">
+      <div class="hero">
+        <div class="hero-icon">🏫</div>
+        <h1 style="text-align:center">Англи хэлний шалгалт</h1>
+        <div class="sub" style="text-align:center">8В, 10А–10Ё анги — онлайн шалгалтын систем</div>
+        <div class="chips">
+          <span class="chip">📝 Олон шалгалт</span>
+          <span class="chip">⏱ Таймертай</span>
+          <span class="chip">📊 Анализ</span>
+          <span class="chip">🔗 Google Sheets</span>
+        </div>
+      </div>
+      <div class="g2">
+        <button class="btn btn-dark" onclick="goPage('pg-student')">🎓 Сурагч</button>
+        <button class="btn btn-outline" onclick="goPage('pg-teacher-login')">👨‍🏫 Багш</button>
+      </div>
     </div>
   </div>
 </div>
 
-<!-- ══════════════════════════════════════════════
-     SCREEN 1: STUDENT LOGIN
-══════════════════════════════════════════════ -->
-<div id="scr-student-login" class="scr">
-  <div class="topnav">
-    <div><div class="topnav-title">Сурагчийн нэвтрэлт</div></div>
-    <button class="btn btn-outline btn-sm" onclick="showScr('scr-land')">← Буцах</button>
-  </div>
-  <div class="card">
-    <div class="fg">
-      <label class="lbl">Нэр, овог</label>
+<!-- PAGE: СУРАГЧ НЭВТРЭЛТ -->
+<div class="page" id="pg-student">
+  <div class="wrap">
+    <div class="topnav">
+      <div><div class="topnav-title">Сурагчийн нэвтрэлт</div></div>
+      <button class="btn btn-outline btn-sm" onclick="goPage('pg-home')">← Буцах</button>
+    </div>
+    <div class="card">
+      <label>Нэр, овог</label>
       <input type="text" id="s-name" placeholder="Жишээ: Болд Баатар" />
-    </div>
-    <div class="fg">
-      <label class="lbl">Анги</label>
+      <label>Анги</label>
       <select id="s-class">
         <option value="">— Анги сонгох —</option>
         <option>8В</option>
         <option>10А</option><option>10Б</option><option>10В</option>
         <option>10Г</option><option>10Д</option><option>10Е</option><option>10Ё</option>
       </select>
+      <button class="btn btn-dark" onclick="studentLogin()">Шалгалт сонгох →</button>
     </div>
-    <button class="btn btn-primary btn-full" onclick="studentLogin()">Шалгалт сонгох →</button>
   </div>
 </div>
 
-<!-- ══════════════════════════════════════════════
-     SCREEN 2: EXAM SELECT (student)
-══════════════════════════════════════════════ -->
-<div id="scr-exam-select" class="scr">
-  <div class="topnav">
-    <div>
-      <div class="topnav-title" id="es-greeting">Сайн байна уу!</div>
-      <div class="topnav-sub" id="es-sub"></div>
+<!-- PAGE: ШАЛГАЛТ СОНГОХ -->
+<div class="page" id="pg-exams">
+  <div class="wrap">
+    <div class="topnav">
+      <div>
+        <div class="topnav-title" id="es-name">Сайн байна уу!</div>
+        <div class="topnav-sub" id="es-class"></div>
+      </div>
+      <button class="btn btn-outline btn-sm" onclick="goPage('pg-student')">← Буцах</button>
     </div>
-    <button class="btn btn-outline btn-sm" onclick="showScr('scr-student-login')">← Буцах</button>
-  </div>
-  <div class="card">
-    <div class="card-title">Идэвхтэй шалгалтууд</div>
-    <div id="exam-list-student"></div>
+    <div class="card" style="padding:0">
+      <div style="padding:.9rem 1.1rem;border-bottom:1px solid #e0dfd8">
+        <div style="font-weight:600">Идэвхтэй шалгалтууд</div>
+      </div>
+      <div id="exam-list"></div>
+    </div>
   </div>
 </div>
 
-<!-- ══════════════════════════════════════════════
-     SCREEN 3: QUIZ
-══════════════════════════════════════════════ -->
-<div id="scr-quiz" class="scr">
-  <div class="timer-wrap">
-    <div style="font-size:12px;color:var(--muted)">Үлдсэн хугацаа</div>
-    <div class="timer-track"><div class="timer-fill" id="t-fill"></div></div>
-    <div class="timer-num" id="t-num">30:00</div>
-  </div>
-  <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px">
-    <div style="font-size:13px;color:var(--muted)">Асуулт <strong id="q-cur">1</strong>/</strong><strong id="q-total">20</strong></div>
-    <div style="font-size:13px;color:var(--muted)" id="q-cat-hdr"></div>
-    <div style="font-size:13px;color:var(--muted)">Оноо: <strong id="q-score">0</strong></div>
-  </div>
-  <div class="prog-track"><div class="prog-fill" id="q-prog"></div></div>
-  <div class="card" style="padding:1.5rem">
-    <div id="q-cat-tag"></div>
-    <div style="font-size:12px;color:var(--hint);margin-bottom:5px" id="q-num-lbl"></div>
-    <div class="q-text" id="q-text"></div>
-    <div class="opts" id="q-opts"></div>
-    <div class="fb" id="q-fb"></div>
-  </div>
-  <div class="nav-row">
-    <button class="nav-btn" id="btn-prev" onclick="qGo(-1)" style="display:none">← Өмнөх</button>
-    <button class="nav-btn primary" id="btn-next" onclick="qGo(1)">Дараах →</button>
+<!-- PAGE: ШАЛГАЛТ -->
+<div class="page" id="pg-quiz">
+  <div class="wrap">
+    <div class="timer-wrap">
+      <div style="font-size:12px;color:#6a6a66">Үлдсэн</div>
+      <div class="timer-track"><div class="timer-fill" id="t-fill" style="width:100%"></div></div>
+      <div class="timer-num" id="t-num">30:00</div>
+    </div>
+    <div style="display:flex;justify-content:space-between;margin-bottom:6px;font-size:13px;color:#6a6a66">
+      <span>Асуулт <strong id="q-cur">1</strong>/<strong id="q-tot">20</strong></span>
+      <span id="q-cat-hdr"></span>
+      <span>Оноо: <strong id="q-score">0</strong></span>
+    </div>
+    <div class="prog-track"><div class="prog-fill" id="q-prog" style="width:5%"></div></div>
+    <div class="card" style="padding:1.5rem">
+      <div id="q-cat-tag"></div>
+      <div style="font-size:12px;color:#a0a09b;margin-bottom:5px" id="q-num-lbl"></div>
+      <div class="q-text" id="q-text"></div>
+      <div class="opts" id="q-opts"></div>
+      <div class="fb" id="q-fb"></div>
+    </div>
+    <div class="nav-row">
+      <button class="nav-btn" id="btn-prev" onclick="qGo(-1)" style="display:none">← Өмнөх</button>
+      <button class="nav-btn primary" id="btn-next" onclick="qGo(1)">Дараах →</button>
+    </div>
   </div>
 </div>
 
-<!-- ══════════════════════════════════════════════
-     SCREEN 4: RESULT
-══════════════════════════════════════════════ -->
-<div id="scr-result" class="scr">
-  <div class="card" style="text-align:center">
-    <div class="score-ring">
-      <div class="score-big" id="r-score">0</div>
-      <div class="score-sm" id="r-denom">/ 20</div>
+<!-- PAGE: ДҮН -->
+<div class="page" id="pg-result">
+  <div class="wrap">
+    <div class="card" style="text-align:center">
+      <div class="score-ring">
+        <div class="score-big" id="r-score">0</div>
+        <div class="score-sm" id="r-denom">/ 20</div>
+      </div>
+      <div style="font-size:20px;font-weight:600;margin-bottom:.25rem" id="r-grade"></div>
+      <div style="font-size:14px;color:#6a6a66;margin-bottom:1.25rem" id="r-msg"></div>
+      <div id="r-cats" class="g3" style="margin-bottom:1.25rem"></div>
+      <div style="display:flex;gap:8px">
+        <button class="nav-btn" style="flex:1" onclick="goPage('pg-exams')">↺ Буцах</button>
+        <button class="nav-btn primary" style="flex:1" onclick="goPage('pg-home')">🏠 Нүүр</button>
+      </div>
     </div>
-    <div style="font-size:20px;font-weight:600;margin-bottom:.25rem" id="r-grade"></div>
-    <div style="font-size:14px;color:var(--muted);margin-bottom:1.25rem" id="r-msg"></div>
-    <div id="r-cats" class="g3" style="margin-bottom:1.25rem"></div>
-    <div style="display:flex;gap:8px">
-      <button class="nav-btn" style="flex:1" onclick="showScr('scr-exam-select')">↺ Буцах</button>
-      <button class="nav-btn primary" style="flex:1" onclick="showScr('scr-land')">🏠 Нүүр</button>
-    </div>
+    <div id="r-review"></div>
   </div>
-  <div id="r-review"></div>
 </div>
 
-<!-- ══════════════════════════════════════════════
-     SCREEN 5: TEACHER LOGIN
-══════════════════════════════════════════════ -->
-<div id="scr-teacher-login" class="scr">
-  <div class="topnav">
-    <div><div class="topnav-title">Багшийн нэвтрэлт</div></div>
-    <button class="btn btn-outline btn-sm" onclick="showScr('scr-land')">← Буцах</button>
-  </div>
-  <div class="card">
-    <div class="fg">
-      <label class="lbl">Нууц үг</label>
+<!-- PAGE: БАГШ НЭВТРЭЛТ -->
+<div class="page" id="pg-teacher-login">
+  <div class="wrap">
+    <div class="topnav">
+      <div><div class="topnav-title">Багшийн нэвтрэлт</div></div>
+      <button class="btn btn-outline btn-sm" onclick="goPage('pg-home')">← Буцах</button>
+    </div>
+    <div class="card">
+      <label>Нууц үг</label>
       <input type="password" id="t-pwd" placeholder="Нууц үгээ оруулна уу" onkeydown="if(event.key==='Enter')teacherLogin()" />
+      <div style="font-size:12px;color:#6a6a66;margin-bottom:1rem">Анхны нууц үг: <strong>teacher123</strong></div>
+      <button class="btn btn-dark" onclick="teacherLogin()">Нэвтрэх →</button>
+      <div id="t-err" style="color:#a32d2d;font-size:13px;margin-top:.5rem;display:none">Нууц үг буруу байна.</div>
     </div>
-    <div style="font-size:12px;color:var(--muted);margin-bottom:1rem">Анхны нууц үг: <strong>teacher123</strong> — нэвтэрсний дараа өөрчилнө үү</div>
-    <button class="btn btn-primary btn-full" onclick="teacherLogin()">Нэвтрэх →</button>
-    <div id="t-err" style="color:var(--red);font-size:13px;margin-top:.5rem;display:none">Нууц үг буруу байна.</div>
   </div>
 </div>
 
-<!-- ══════════════════════════════════════════════
-     SCREEN 6: TEACHER DASHBOARD
-══════════════════════════════════════════════ -->
-<div id="scr-teacher" class="scr">
-  <div class="topnav">
-    <div>
-      <div class="topnav-title">Багшийн дашбоард</div>
-      <div class="topnav-sub">Англи хэлний шалгалт — 10-р анги</div>
+<!-- PAGE: БАГШИЙН ДАШБОАРД -->
+<div class="page" id="pg-teacher">
+  <div class="wrap">
+    <div class="topnav">
+      <div>
+        <div class="topnav-title">Багшийн дашбоард</div>
+        <div class="topnav-sub">Англи хэлний шалгалт</div>
+      </div>
+      <div style="display:flex;gap:6px">
+        <button class="btn btn-outline btn-sm" onclick="openOv('ov-pwd')">🔑</button>
+        <button class="btn btn-outline btn-sm" onclick="goPage('pg-home')">Гарах</button>
+      </div>
     </div>
-    <div style="display:flex;gap:6px">
-      <button class="btn btn-outline btn-sm" onclick="showChangePwd()">🔑</button>
-      <button class="btn btn-outline btn-sm" onclick="teacherLogout()">Гарах</button>
-    </div>
-  </div>
-
-  <!-- Нүүр хуудас -->
-  <div id="t-home">
-    <div class="g4" style="margin-bottom:1rem" id="t-summary"></div>
+    <div class="g4" id="t-summary" style="margin-bottom:1rem"></div>
     <div class="tabs" id="t-class-tabs"></div>
-
-    <div style="display:flex;gap:8px;margin-bottom:1rem">
-      <button class="btn btn-primary" onclick="openBuilder()">+ Шинэ шалгалт</button>
-      <button class="btn btn-outline" onclick="showTView('exams')">📋 Шалгалтууд</button>
-      <button class="btn btn-outline" onclick="showTView('results')">📊 Дүнгүүд</button>
-      <button class="btn btn-outline" onclick="showTView('analysis')">📈 Анализ</button>
+    <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:1rem">
+      <button class="btn btn-dark btn-sm" onclick="openBuilder()">+ Шинэ шалгалт</button>
+      <button class="btn btn-outline btn-sm" onclick="showTV('exams')">📋 Шалгалтууд</button>
+      <button class="btn btn-outline btn-sm" onclick="showTV('results')">📊 Дүнгүүд</button>
+      <button class="btn btn-outline btn-sm" onclick="showTV('analysis')">📈 Анализ</button>
     </div>
-
-    <!-- EXAMS VIEW -->
-    <div id="tv-exams">
-      <div class="card" style="padding:0">
-        <div style="padding:.9rem 1.1rem;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between">
-          <div style="font-weight:600">Шалгалтын жагсаалт</div>
-        </div>
-        <div id="exam-list-teacher"></div>
-      </div>
-    </div>
-
-    <!-- RESULTS VIEW -->
-    <div id="tv-results" style="display:none">
-      <div class="tbl">
-        <div class="tbl-head" style="grid-template-columns:2fr 0.8fr 0.8fr 0.8fr 1fr">
-          <div>Сурагч</div><div>Оноо</div><div>%</div><div>Үнэлгээ</div><div>Шалгалт</div>
-        </div>
-        <div id="results-table-body"></div>
-      </div>
-    </div>
-
-    <!-- ANALYSIS VIEW -->
-    <div id="tv-analysis" style="display:none">
-      <div class="g4" id="an-summary" style="margin-bottom:1rem"></div>
-      <div class="card">
-        <div class="card-title">Ангилал тус бүрийн дундаж</div>
-        <div id="an-bars"></div>
-      </div>
-      <div class="card">
-        <div class="card-title">Үнэлгээний тархалт</div>
-        <div class="g4" id="an-grades"></div>
-      </div>
-      <div id="an-alert"></div>
-    </div>
+    <div id="tv-exams"></div>
+    <div id="tv-results" style="display:none"></div>
+    <div id="tv-analysis" style="display:none"></div>
   </div>
 </div>
-
-<!-- Change pwd modal -->
-<div class="modal-overlay" id="modal-pwd">
-  <div class="modal" style="max-width:360px">
-    <div class="modal-title">Нууц үг өөрчлөх</div>
-    <div class="fg"><label class="lbl">Шинэ нууц үг</label><input type="password" id="new-pwd1" placeholder="Шинэ нууц үг" /></div>
-    <div class="fg"><label class="lbl">Дахин оруулах</label><input type="password" id="new-pwd2" placeholder="Баталгаажуулах" /></div>
-    <div id="pwd-err" style="color:var(--red);font-size:13px;display:none"></div>
-    <div class="modal-footer">
-      <button class="btn btn-outline" onclick="closeModal('modal-pwd')">Болих</button>
-      <button class="btn btn-primary" onclick="changePwd()">Хадгалах</button>
-    </div>
-  </div>
-</div>
-
-</div><!-- /wrap -->
 
 <script>
-// ═══════════════════════════════════════════
-// DATA
-// ═══════════════════════════════════════════
-const CLASSES = ['8В','10А','10Б','10В','10Г','10Д','10Е','10Ё'];
-const LETTERS = ['A','B','C','D'];
-const CAT_LABELS = {grammar:'Grammar',tense:'Tenses',error:'Error ID',vocab:'Vocabulary'};
-const CAT_CSS = {grammar:'cat-grammar',tense:'cat-tense',error:'cat-error',vocab:'cat-vocab'};
+// ══════════════════════════════════════════
+// CONFIG
+// ══════════════════════════════════════════
+var SHEETS_URL='https://script.google.com/macros/s/AKfycbzAPtLVPCuBmQl0rCIloP6V0sjUEHB8vAm_Dg3A2yEpt0x8vJGyVZVIh4uHpXWtmeST/exec';
+var CLASSES=['8В','10А','10Б','10В','10Г','10Д','10Е','10Ё'];
+var LETTERS=['A','B','C','D'];
+var CATS={grammar:'Grammar',tense:'Tenses',error:'Error ID',vocab:'Vocabulary'};
+var CAT_CSS={grammar:'c-grammar',tense:'c-tense',error:'c-error',vocab:'c-vocab'};
 
-function getData(k,def){try{return JSON.parse(localStorage.getItem(k)||'null')||def}catch{return def}}
-function setData(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch{}}
+// ══════════════════════════════════════════
+// STORAGE
+// ══════════════════════════════════════════
+function gd(k,d){try{return JSON.parse(localStorage.getItem(k)||'null')||d}catch(e){return d}}
+function sd(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}
+function getExams(){return gd('sq_exams',[])}
+function setExams(v){sd('sq_exams',v)}
+function getResults(){return gd('sq_results',[])}
+function setResults(v){sd('sq_results',v)}
+function getPwd(){return gd('sq_pwd','teacher123')}
+function setPwd(v){sd('sq_pwd',v)}
 
-function getExams(){return getData('sq_exams',[])}
-function setExams(v){setData('sq_exams',v)}
-function getResults(){return getData('sq_results',[])}
-function setResults(v){setData('sq_results',v)}
-function getPwd(){return getData('sq_pwd','teacher123')}
-function setPwd(v){setData('sq_pwd',v)}
-
-// Default exam
-(function initDefault(){
-  var inited = getData('sq_inited2',false); if(inited) return;
-  setData('sq_inited2',true);
-  const exam = {
-    id:'exam_default',
-    name:'Англи хэл — B1/B2 Нэгж тест',
-    subject:'Англи хэл',
-    time:30,
-    created:new Date().toLocaleDateString('mn-MN'),
-    active:true,
+// ══════════════════════════════════════════
+// DEFAULT DATA
+// ══════════════════════════════════════════
+(function init(){
+  if(gd('sq_v3',false))return;
+  sd('sq_v3',true);
+  var e1={
+    id:'exam_b1b2',name:'Англи хэл — B1/B2 Нэгж тест',subject:'Англи хэл',time:30,
+    created:new Date().toLocaleDateString('mn-MN'),active:true,
     questions:[
-      {text:'She ___ to school every day by bus.',opts:['go','goes','going','gone'],ans:1,cat:'grammar',exp:'Present Simple: 3rd person singular → verb+s'},
-      {text:'By the time we arrived, they ___ already ___ dinner.',opts:['have / eat','had / eaten','were / eating','will / eat'],ans:1,cat:'tense',exp:'Past Perfect: had + past participle'},
-      {text:'Find the error: "He don\'t know the answer."',opts:['He','don\'t','know','answer'],ans:1,cat:'error',exp:'"don\'t" → "doesn\'t" (3rd person singular)'},
-      {text:'If I ___ you, I would apologize immediately.',opts:['am','was','were','had been'],ans:2,cat:'grammar',exp:'2nd conditional: If I were you... (subjunctive)'},
-      {text:'They ___ for three hours when it started to rain.',opts:['walked','have been walking','had been walking','were walking'],ans:2,cat:'tense',exp:'Past Perfect Continuous: emphasizes duration before past event'},
-      {text:'Find the error: "She is more smarter than her sister."',opts:['She is','more smarter','than','her sister'],ans:1,cat:'error',exp:'"more smarter" → "smarter" (double comparative)'},
-      {text:'The report must ___ by Friday.',opts:['submit','be submitted','submitted','submitting'],ans:1,cat:'grammar',exp:'Modal passive: must + be + past participle'},
-      {text:'I ___ in this city since 2018.',opts:['live','lived','have lived','had lived'],ans:2,cat:'tense',exp:'Present Perfect with "since" for ongoing situations'},
-      {text:'Find the error: "Neither the students nor the teacher were happy."',opts:['Neither','the students','nor the teacher','were happy'],ans:3,cat:'error',exp:'"were" → "was" (verb agrees with nearest subject: teacher)'},
-      {text:'She suggested ___ the meeting until next week.',opts:['postpone','to postpone','postponing','postponed'],ans:2,cat:'grammar',exp:'"suggest" + gerund (-ing form)'},
-      {text:'The sun ___ when we left the party.',opts:['rises','was rising','has risen','had risen'],ans:1,cat:'tense',exp:'Past Continuous: ongoing background action at past moment'},
-      {text:'Find the error: "He has been working here since five years."',opts:['He has been','working here','since','five years'],ans:2,cat:'error',exp:'"since" → "for" (use "for" with a period of time)'},
-      {text:'Despite ___ hard, she failed the exam.',opts:['study','studied','studying','to study'],ans:2,cat:'grammar',exp:'"Despite" + gerund: despite studying'},
-      {text:'By next year, she ___ her degree.',opts:['finishes','will finish','will have finished','has finished'],ans:2,cat:'tense',exp:'Future Perfect: completed action before a future point'},
-      {text:'He asked me ___ the window.',opts:['close','to close','closing','closed'],ans:1,cat:'grammar',exp:'"ask" + object + to-infinitive'},
-      {text:'When I was young, I ___ swim for hours.',opts:['can','could','was able','would'],ans:1,cat:'tense',exp:'"could" = past general ability'},
-      {text:'Find the error: "The informations you gave me was very useful."',opts:['The','informations','was','very useful'],ans:1,cat:'error',exp:'"informations" → "information" (uncountable, no plural)'},
-      {text:"It's high time you ___ your driving test.",opts:['take','took','had taken','have taken'],ans:1,cat:'grammar',exp:'"It\'s high time" + past simple (subjunctive-like)'},
-      {text:'She ___ the email before the meeting started.',opts:['sent','had sent','has sent','was sending'],ans:1,cat:'tense',exp:'Past Perfect: completed before another past action'},
-      {text:'Find the error: "I look forward to hear from you soon."',opts:['I look','forward to','hear','from you'],ans:2,cat:'error',exp:'"hear" → "hearing" ("look forward to" + gerund)'}
+      {cat:'grammar',text:'She ___ to school every day by bus.',opts:['go','goes','going','gone'],ans:1,exp:'Present Simple: 3rd person singular → verb+s'},
+      {cat:'tense',text:'By the time we arrived, they ___ already ___ dinner.',opts:['have / eat','had / eaten','were / eating','will / eat'],ans:1,exp:'Past Perfect: had + past participle'},
+      {cat:'error',text:'Find the error: "He don\'t know the answer."',opts:['He','don\'t','know','answer'],ans:1,exp:'"don\'t" → "doesn\'t" (3rd person singular)'},
+      {cat:'grammar',text:'If I ___ you, I would apologize immediately.',opts:['am','was','were','had been'],ans:2,exp:'2nd conditional: If I were you... (subjunctive)'},
+      {cat:'tense',text:'They ___ for three hours when it started to rain.',opts:['walked','have been walking','had been walking','were walking'],ans:2,exp:'Past Perfect Continuous: duration before past event'},
+      {cat:'error',text:'Find the error: "She is more smarter than her sister."',opts:['She is','more smarter','than','her sister'],ans:1,exp:'"more smarter" → "smarter" (double comparative)'},
+      {cat:'grammar',text:'The report must ___ by Friday.',opts:['submit','be submitted','submitted','submitting'],ans:1,exp:'Modal passive: must + be + past participle'},
+      {cat:'tense',text:'I ___ in this city since 2018.',opts:['live','lived','have lived','had lived'],ans:2,exp:'Present Perfect with "since"'},
+      {cat:'error',text:'Find the error: "Neither the students nor the teacher were happy."',opts:['Neither','the students','nor the teacher','were happy'],ans:3,exp:'"were" → "was" (verb agrees with nearest subject)'},
+      {cat:'grammar',text:'She suggested ___ the meeting until next week.',opts:['postpone','to postpone','postponing','postponed'],ans:2,exp:'"suggest" + gerund (-ing form)'},
+      {cat:'tense',text:'The sun ___ when we left the party.',opts:['rises','was rising','has risen','had risen'],ans:1,exp:'Past Continuous: ongoing action at past moment'},
+      {cat:'error',text:'Find the error: "He has been working here since five years."',opts:['He has been','working here','since','five years'],ans:2,exp:'"since" → "for" (period of time)'},
+      {cat:'grammar',text:'Despite ___ hard, she failed the exam.',opts:['study','studied','studying','to study'],ans:2,exp:'"Despite" + gerund'},
+      {cat:'tense',text:'By next year, she ___ her degree.',opts:['finishes','will finish','will have finished','has finished'],ans:2,exp:'Future Perfect: completed before future point'},
+      {cat:'grammar',text:'He asked me ___ the window.',opts:['close','to close','closing','closed'],ans:1,exp:'"ask" + object + to-infinitive'},
+      {cat:'tense',text:'When I was young, I ___ swim for hours.',opts:['can','could','was able','would'],ans:1,exp:'"could" = past general ability'},
+      {cat:'error',text:'Find the error: "The informations you gave me was very useful."',opts:['The','informations','was','very useful'],ans:1,exp:'"informations" → "information" (uncountable)'},
+      {cat:'grammar',text:"It's high time you ___ your driving test.",opts:['take','took','had taken','have taken'],ans:1,exp:'"It\'s high time" + past simple'},
+      {cat:'tense',text:'She ___ the email before the meeting started.',opts:['sent','had sent','has sent','was sending'],ans:1,exp:'Past Perfect: completed before another past action'},
+      {cat:'error',text:'Find the error: "I look forward to hear from you soon."',opts:['I look','forward to','hear','from you'],ans:2,exp:'"hear" → "hearing" ("look forward to" + gerund)'}
     ]
   };
-
-  const exam2 = {
-    id:'exam_unit2',
-    name:'Өдөр тутмын амьдрал — B1/B2 Test',
-    subject:'Англи хэл',
-    time:30,
-    created:new Date().toLocaleDateString('mn-MN'),
-    active:true,
+  var e2={
+    id:'exam_a2b1',name:'Англи хэл — A2/B1 Нэгж тест (8В)',subject:'Англи хэл',time:30,
+    created:new Date().toLocaleDateString('mn-MN'),active:true,
     questions:[
-      {cat:'tense',text:'By the time Sarah ___ to the airport, her flight had already departed.',opts:['arrived','had arrived','was arriving','arrives'],ans:0,exp:'Past Simple + Past Perfect: "by the time" clause uses Past Simple.'},
-      {cat:'tense',text:'I ___ for this company for ten years next June.',opts:['will work','will be working','will have been working','have worked'],ans:2,exp:'Future Perfect Continuous: duration up to a future point.'},
-      {cat:'tense',text:'She ___ her phone when she realized she had left it at home.',opts:['was reaching for','reached for','has reached for','reaches for'],ans:0,exp:'Past Continuous: ongoing action interrupted by Past Simple event.'},
-      {cat:'tense',text:'The scientists announced that they ___ a cure for the disease.',opts:['discovered','have discovered','had discovered','discover'],ans:2,exp:'Reported speech: Past Perfect is used when reporting a past discovery.'},
-      {cat:'tense',text:'These days, more and more people ___ to work from home.',opts:['choose','are choosing','have chosen','chose'],ans:1,exp:'Present Continuous: changing trends with "these days / more and more".'},
-      {cat:'tense',text:'I ___ her since we were at school together.',opts:['know','knew','have known','had known'],ans:2,exp:'Present Perfect: ongoing state from past to now, used with "since".'},
-      {cat:'tense',text:'He ___ his homework before dinner every day when he was a child.',opts:['does','did','would do','has done'],ans:2,exp:'"Would + infinitive" = habitual past action or routine.'},
-      {cat:'grammar',text:'Not only ___ late, but she also forgot to bring the report.',opts:['she arrived','did she arrive','she did arrive','arrived she'],ans:1,exp:'Inversion after "Not only": Not only + auxiliary + subject + verb.'},
-      {cat:'grammar',text:'The manager ___ us that we would receive our bonuses by Friday.',opts:['told','said','spoke','talked'],ans:0,exp:'"Tell" takes an indirect object (told us). "Say" does not take one directly.'},
-      {cat:'grammar',text:"I'd rather you ___ smoke inside the restaurant.",opts:["don't","didn't","won't","not"],ans:1,exp:'"I'd rather + subject + past simple" expresses preference about others' actions.'},
-      {cat:'grammar',text:"It's no use ___ about the past. Focus on what you can change.",opts:['worry','to worry','worrying','worried'],ans:2,exp:'"It's no use" is always followed by a gerund (-ing form).'},
-      {cat:'grammar',text:'The new bridge, ___ was completed last year, has reduced traffic significantly.',opts:['that','which','who','what'],ans:1,exp:'Non-defining relative clause: use "which" (not "that") with commas.'},
-      {cat:'grammar',text:'She is used to ___ early, so mornings are never a problem for her.',opts:['wake up','waking up','wake','having woken'],ans:1,exp:'"Be used to" + gerund (-ing). Compare: "used to + infinitive" for past habits.'},
-      {cat:'error',text:'Find the error: "Despite of the heavy rain, the match continued as planned."',opts:['Despite of','the heavy rain','the match continued','as planned'],ans:0,exp:'"Despite of" → "Despite". Use "in spite of" if you need "of".'},
-      {cat:'error',text:'Find the error: "The number of students who use social media are increasing every year."',opts:['The number of','students who','use social media','are increasing'],ans:3,exp:'"are" → "is". "The number of" takes a singular verb.'},
-      {cat:'error',text:'Find the error: "I wish I would have more time to spend with my family."',opts:['I wish','I would have','more time','to spend with my family'],ans:1,exp:'"would have" → "had". "I wish" + past simple for present unreal wishes.'},
-      {cat:'error',text:'Find the error: "She explained me the situation very clearly and patiently."',opts:['She explained','me the situation','very clearly','and patiently'],ans:1,exp:'"explained me" → "explained to me". "Explain" needs "to" before the indirect object.'},
-      {cat:'error',text:'Find the error: "The police has arrested three suspects in connection with the robbery."',opts:['The police','has arrested','three suspects','in connection with'],ans:1,exp:'"has" → "have". "Police" is always treated as plural.'},
-      {cat:'error',text:'Find the error: "He suggested to go to the new Italian restaurant near the park."',opts:['He suggested','to go','to the new Italian restaurant','near the park'],ans:1,exp:'"to go" → "going". "Suggest" is always followed by a gerund, never a to-infinitive.'},
-      {cat:'error',text:'Find the error: "If I would have known about the meeting, I would have attended it."',opts:['If I would have known','about the meeting','I would have attended','it'],ans:0,exp:'"would have known" → "had known". 3rd conditional: If + Past Perfect, would have + past participle.'}
+      {cat:'grammar',text:'She ___ TV when her phone rang.',opts:['watched','was watching','has watched','watches'],ans:1,exp:'Past Continuous: ongoing action interrupted by Past Simple'},
+      {cat:'grammar',text:'You ___ smoke here. It is not allowed.',opts:['must','mustn\'t','don\'t have to','should'],ans:1,exp:'"mustn\'t" = prohibition'},
+      {cat:'grammar',text:'___ you ever ___ sushi before?',opts:['Did / eat','Have / eaten','Do / eat','Are / eating'],ans:1,exp:'Present Perfect: experience up to now'},
+      {cat:'grammar',text:'This is the best film ___ I have ever seen.',opts:['who','where','that','what'],ans:2,exp:'Defining relative clause: use "that" for things'},
+      {cat:'grammar',text:'If it ___ tomorrow, we will cancel the picnic.',opts:['rains','will rain','rained','is raining'],ans:0,exp:'1st conditional: If + Present Simple, will + infinitive'},
+      {cat:'tense',text:'I ___ my homework yet. Can I do it after dinner?',opts:['didn\'t finish','haven\'t finished','don\'t finish','wasn\'t finishing'],ans:1,exp:'Present Perfect with "yet"'},
+      {cat:'tense',text:'She ___ in London for two years before she moved to Paris.',opts:['lived','has lived','had lived','was living'],ans:2,exp:'Past Perfect: completed before another past action'},
+      {cat:'tense',text:'We ___ dinner at 7 pm tonight. Would you like to join us?',opts:['have','are having','will have','had'],ans:1,exp:'Present Continuous for future arrangements'},
+      {cat:'tense',text:'By the time you arrive, I ___ cooking.',opts:['finish','will finish','will have finished','finished'],ans:2,exp:'Future Perfect: completed before a future moment'},
+      {cat:'tense',text:'He ___ to school by bus every morning when he was young.',opts:['goes','went','has gone','was going'],ans:1,exp:'Past Simple: regular past habit'},
+      {cat:'vocab',text:'Choose the correct word: "The weather was ___, so we stayed inside all day."',opts:['windy','window','wind','winding'],ans:0,exp:'"Windy" = adjective describing weather'},
+      {cat:'vocab',text:'What does "exhausted" mean?',opts:['very hungry','very tired','very happy','very cold'],ans:1,exp:'"Exhausted" = extremely tired'},
+      {cat:'vocab',text:'Choose the correct word: "Can you ___ me how to get to the station?"',opts:['say','tell','speak','talk'],ans:1,exp:'"Tell" + person + information'},
+      {cat:'vocab',text:'"She made a ___ and bought the wrong ticket." Choose the correct word.',opts:['fault','mistake','error','problem'],ans:1,exp:'"Make a mistake" is the correct collocation'},
+      {cat:'vocab',text:'Choose the correct word: "I need to ___ some money from the bank."',opts:['withdraw','deposit','lend','borrow'],ans:0,exp:'"Withdraw" = take money out'},
+      {cat:'error',text:'Find the error: "She don\'t like coffee in the morning."',opts:['She','don\'t like','coffee','in the morning'],ans:1,exp:'"don\'t" → "doesn\'t". 3rd person singular'},
+      {cat:'error',text:'Find the error: "I am agree with your idea completely."',opts:['I am','agree with','your idea','completely'],ans:0,exp:'"I am agree" → "I agree"'},
+      {cat:'error',text:'Find the error: "He has went to the market an hour ago."',opts:['He has','went','to the market','an hour ago'],ans:0,exp:'"has went" → "went". With "ago" use Past Simple'},
+      {cat:'error',text:'Find the error: "My brother is more taller than me."',opts:['My brother','is more taller','than','me'],ans:1,exp:'"more taller" → "taller". Never use "more" with -er'},
+      {cat:'error',text:'Find the error: "She asked me where do I live."',opts:['She asked me','where do I live','(no error)','asked'],ans:1,exp:'"where do I live" → "where I live". Indirect question word order'}
     ]
   };
-
-  const exam3 = {
-    id:'exam_a2b1',
-    name:'Англи хэл — A2/B1 Нэгж тест (8В)',
-    subject:'Англи хэл',
-    time:30,
-    created:new Date().toLocaleDateString('mn-MN'),
-    active:true,
-    questions:[
-      {cat:'grammar',text:'She ___ TV when her phone rang.',opts:['watched','was watching','has watched','watches'],ans:1,exp:'Past Continuous: ongoing action interrupted by Past Simple.'},
-      {cat:'grammar',text:'You ___ smoke here. It is not allowed.',opts:['must','mustn\'t','don\'t have to','should'],ans:1,exp:'"mustn\'t" = prohibition (not allowed). "Don\'t have to" = no obligation.'},
-      {cat:'grammar',text:'___ you ever ___ sushi before?',opts:['Did / eat','Have / eaten','Do / eat','Are / eating'],ans:1,exp:'Present Perfect: experience up to now. Have + subject + past participle.'},
-      {cat:'grammar',text:'This is the best film ___ I have ever seen.',opts:['who','where','that','what'],ans:2,exp:'Defining relative clause: use "that" or "which" for things.'},
-      {cat:'grammar',text:'If it ___ tomorrow, we will cancel the picnic.',opts:['rains','will rain','rained','is raining'],ans:0,exp:'1st conditional: If + Present Simple, will + infinitive.'},
-      {cat:'tense',text:'I ___ my homework yet. Can I do it after dinner?',opts:['didn\'t finish','haven\'t finished','don\'t finish','wasn\'t finishing'],ans:1,exp:'Present Perfect with "yet": unfinished action up to now.'},
-      {cat:'tense',text:'She ___ in London for two years before she moved to Paris.',opts:['lived','has lived','had lived','was living'],ans:2,exp:'Past Perfect: action completed before another past action.'},
-      {cat:'tense',text:'We ___ dinner at 7 pm tonight. Would you like to join us?',opts:['have','are having','will have','had'],ans:1,exp:'Present Continuous for future arrangements already planned.'},
-      {cat:'tense',text:'By the time you arrive, I ___ cooking.',opts:['finish','will finish','will have finished','finished'],ans:2,exp:'Future Perfect: action completed before a future moment.'},
-      {cat:'tense',text:'He ___ to school by bus every morning when he was young.',opts:['goes','went','has gone','was going'],ans:1,exp:'Past Simple: regular past habit or routine.'},
-      {cat:'vocab',text:'Choose the correct word: "The weather was ___, so we stayed inside all day."',opts:['windy','window','wind','winding'],ans:0,exp:'"Windy" = adjective describing weather. "Wind" is a noun.'},
-      {cat:'vocab',text:'What does "exhausted" mean?',opts:['very hungry','very tired','very happy','very cold'],ans:1,exp:'"Exhausted" = extremely tired. E.g. After the marathon, she was exhausted.'},
-      {cat:'vocab',text:'Choose the correct word: "Can you ___ me how to get to the station?"',opts:['say','tell','speak','talk'],ans:1,exp:'"Tell" + person + information. "Say" does not take a person as direct object.'},
-      {cat:'vocab',text:'"She made a ___ and bought the wrong ticket." Choose the correct word.',opts:['fault','mistake','error','problem'],ans:1,exp:'"Make a mistake" is the correct collocation. "Do/make an error" is less natural.'},
-      {cat:'vocab',text:'Choose the correct word: "I need to ___ some money from the bank before the trip."',opts:['withdraw','deposit','lend','borrow'],ans:0,exp:'"Withdraw" = take money out. "Deposit" = put money in.'},
-      {cat:'error',text:'Find the error: "She don\'t like coffee in the morning."',opts:['She','don\'t like','coffee','in the morning'],ans:1,exp:'"don\'t" → "doesn\'t". 3rd person singular: She/He/It + doesn\'t.'},
-      {cat:'error',text:'Find the error: "I am agree with your idea completely."',opts:['I am','agree with','your idea','completely'],ans:0,exp:'"I am agree" → "I agree". "Agree" is not used with "be" as a linking verb.'},
-      {cat:'error',text:'Find the error: "He has went to the market an hour ago."',opts:['He has','went','to the market','an hour ago'],ans:0,exp:'"has went" → "went". With "ago" use Past Simple, not Present Perfect.'},
-      {cat:'error',text:'Find the error: "My brother is more taller than me."',opts:['My brother','is more taller','than','me'],ans:1,exp:'"more taller" → "taller". Never use "more" with -er comparative adjectives.'},
-      {cat:'error',text:'Find the error: "She asked me where do I live."',opts:['She asked me','where do I live','(no error)','asked'],ans:1,exp:'"where do I live" → "where I lived/live". Indirect questions use statement word order.'}
-    ]
-  };
-  setExams([exam, exam2, exam3]);
+  setExams([e1,e2]);
 })();
 
-// ═══════════════════════════════════════════
+// ══════════════════════════════════════════
 // NAVIGATION
-// ═══════════════════════════════════════════
-function showScr(id){
-  document.querySelectorAll('.scr').forEach(s=>s.classList.remove('on'));
-  document.getElementById(id).classList.add('on');
+// ══════════════════════════════════════════
+function goPage(id){
+  document.querySelectorAll('.page').forEach(function(p){p.classList.remove('show')});
+  document.getElementById(id).classList.add('show');
+  window.scrollTo(0,0);
 }
-function openModal(id){document.getElementById(id).classList.add('on')}
-function closeModal(id){document.getElementById(id).classList.remove('on')}
+function openOv(id){document.getElementById(id).classList.add('show')}
+function closeOv(id){document.getElementById(id).classList.remove('show')}
 
-// ═══════════════════════════════════════════
-// STUDENT FLOW
-// ═══════════════════════════════════════════
-let student = {name:'',cls:''};
+// ══════════════════════════════════════════
+// STUDENT
+// ══════════════════════════════════════════
+var student={name:'',cls:''};
 
 function studentLogin(){
-  const name = document.getElementById('s-name').value.trim();
-  const cls = document.getElementById('s-class').value;
+  var name=document.getElementById('s-name').value.trim();
+  var cls=document.getElementById('s-class').value;
   if(!name){alert('Нэрээ оруулна уу.');return}
   if(!cls){alert('Анги сонгоно уу.');return}
-  student = {name,cls};
-  document.getElementById('es-greeting').textContent = 'Сайн байна уу, '+name+'!';
-  document.getElementById('es-sub').textContent = cls+' анги';
-  renderExamListStudent();
-  showScr('scr-exam-select');
+  student={name:name,cls:cls};
+  document.getElementById('es-name').textContent='Сайн байна уу, '+name+'!';
+  document.getElementById('es-class').textContent=cls+' анги';
+  renderExamList();
+  goPage('pg-exams');
 }
 
-function renderExamListStudent(){
-  const exams = getExams().filter(e=>e.active);
-  const el = document.getElementById('exam-list-student');
+function renderExamList(){
+  var exams=getExams().filter(function(e){return e.active});
+  var el=document.getElementById('exam-list');
   if(!exams.length){el.innerHTML='<div class="empty">Одоогоор идэвхтэй шалгалт байхгүй байна.</div>';return}
-  el.innerHTML = exams.map(e=>`
-    <div class="exam-item">
-      <div>
-        <div class="exam-name">${e.name}</div>
-        <div class="exam-meta">⏱ ${e.time} минут · ${e.questions.length} асуулт · ${e.subject}</div>
-      </div>
-      <button class="btn btn-primary btn-sm" onclick="startExam('${e.id}')">Эхлэх →</button>
-    </div>`).join('');
+  el.innerHTML=exams.map(function(e){
+    return '<div class="exam-item"><div><div class="exam-name">'+e.name+'</div><div class="exam-meta">⏱ '+e.time+' минут · '+e.questions.length+' асуулт</div></div><button class="btn btn-dark btn-sm" onclick="startExam(\''+e.id+'\')">Эхлэх →</button></div>';
+  }).join('');
 }
 
-// ═══════════════════════════════════════════
+// ══════════════════════════════════════════
 // QUIZ ENGINE
-// ═══════════════════════════════════════════
-let qState = {exam:null,idx:0,answers:[],done:[],score:0,submitted:false,timerSecs:0};
-let timerInt = null;
+// ══════════════════════════════════════════
+var qst={exam:null,idx:0,ans:[],done:[],score:0,submitted:false,secs:0};
+var timerInt=null;
 
 function startExam(id){
-  const exam = getExams().find(e=>e.id===id);
+  var exam=getExams().find(function(e){return e.id===id});
   if(!exam){alert('Шалгалт олдсонгүй.');return}
-  qState = {exam,idx:0,answers:new Array(exam.questions.length).fill(null),
-    done:new Array(exam.questions.length).fill(false),score:0,submitted:false,
-    timerSecs:exam.time*60};
-  showScr('scr-quiz');
+  qst={exam:exam,idx:0,ans:new Array(exam.questions.length).fill(null),
+    done:new Array(exam.questions.length).fill(false),score:0,submitted:false,secs:exam.time*60};
+  goPage('pg-quiz');
   renderQ();
-  startQTimer();
+  startTimer();
 }
 
-function startQTimer(){
+function startTimer(){
   clearInterval(timerInt);
-  const total = qState.timerSecs;
-  timerInt = setInterval(()=>{
-    qState.timerSecs--;
-    const m=Math.floor(qState.timerSecs/60),s=qState.timerSecs%60;
-    const num=document.getElementById('t-num');
-    const fill=document.getElementById('t-fill');
-    if(!num)return;
-    num.textContent=String(m).padStart(2,'0')+':'+String(s).padStart(2,'0');
-    const pct=qState.timerSecs/total*100;
-    fill.style.width=pct+'%';
-    num.className='timer-num';fill.style.background='var(--accent)';
-    if(qState.timerSecs<=300){num.classList.add('danger');fill.style.background='var(--red)'}
-    else if(qState.timerSecs<=600){num.classList.add('warn');fill.style.background='#ba7517'}
-    if(qState.timerSecs<=0){clearInterval(timerInt);document.getElementById('timeout-overlay').classList.add('on')}
+  var total=qst.secs;
+  updateTimerUI(total);
+  timerInt=setInterval(function(){
+    qst.secs--;
+    updateTimerUI(total);
+    if(qst.secs<=0){clearInterval(timerInt);openOv('ov-timeout')}
   },1000);
-  // init display
-  const total2=qState.exam.time*60;
-  document.getElementById('t-fill').style.width='100%';
-  document.getElementById('t-num').textContent=String(qState.exam.time).padStart(2,'0')+':00';
+}
+
+function updateTimerUI(total){
+  var m=Math.floor(qst.secs/60),s=qst.secs%60;
+  var num=document.getElementById('t-num');
+  var fill=document.getElementById('t-fill');
+  if(!num)return;
+  num.textContent=(m<10?'0':'')+m+':'+(s<10?'0':'')+s;
+  fill.style.width=(qst.secs/total*100)+'%';
+  num.className='timer-num';
+  fill.style.background='#1a1a18';
+  if(qst.secs<=300){num.classList.add('danger');fill.style.background='#a32d2d'}
+  else if(qst.secs<=600){num.classList.add('warn');fill.style.background='#ba7517'}
 }
 
 function forceSubmit(){
-  document.getElementById('timeout-overlay').classList.remove('on');
+  closeOv('ov-timeout');
   showResult();
 }
 
 function renderQ(){
-  const qs = qState.exam.questions;
-  const q = qs[qState.idx];
-  document.getElementById('q-cur').textContent=qState.idx+1;
-  document.getElementById('q-total').textContent=qs.length;
-  document.getElementById('q-score').textContent=qState.score;
-  document.getElementById('q-prog').style.width=((qState.idx+1)/qs.length*100)+'%';
-  document.getElementById('q-cat-hdr').textContent=CAT_LABELS[q.cat]||q.cat;
-  document.getElementById('q-cat-tag').innerHTML=q.cat?`<span class="cat-tag ${CAT_CSS[q.cat]||''}">${CAT_LABELS[q.cat]||q.cat}</span>`:'';
-  document.getElementById('q-num-lbl').textContent='Асуулт '+(qState.idx+1)+' / '+qs.length;
+  var qs=qst.exam.questions;
+  var q=qs[qst.idx];
+  document.getElementById('q-cur').textContent=qst.idx+1;
+  document.getElementById('q-tot').textContent=qs.length;
+  document.getElementById('q-score').textContent=qst.score;
+  document.getElementById('q-prog').style.width=((qst.idx+1)/qs.length*100)+'%';
+  document.getElementById('q-cat-hdr').textContent=CATS[q.cat]||q.cat;
+  document.getElementById('q-cat-tag').innerHTML=q.cat?('<span class="cat-tag '+(CAT_CSS[q.cat]||'')+'">'+( CATS[q.cat]||q.cat)+'</span>'):'';
+  document.getElementById('q-num-lbl').textContent='Асуулт '+(qst.idx+1)+' / '+qs.length;
   document.getElementById('q-text').textContent=q.text;
-  const done=qState.done[qState.idx];
-  document.getElementById('q-opts').innerHTML=q.opts.map((o,i)=>{
-    let cls='opt';
-    if(done){cls+=' locked';if(i===q.ans)cls+=' correct';else if(i===qState.answers[qState.idx])cls+=' wrong';}
-    else if(i===qState.answers[qState.idx])cls+=' chosen';
-    return`<button class="${cls}" onclick="pickOpt(${i})"><span class="opt-letter">${LETTERS[i]}</span>${o}</button>`;
+  var done=qst.done[qst.idx];
+  document.getElementById('q-opts').innerHTML=q.opts.map(function(o,i){
+    var cls='opt';
+    if(done){cls+=' locked';if(i===q.ans)cls+=' correct';else if(i===qst.ans[qst.idx])cls+=' wrong';}
+    else if(i===qst.ans[qst.idx])cls+=' chosen';
+    return '<button class="'+cls+'" onclick="pickOpt('+i+')"><span class="opt-letter">'+LETTERS[i]+'</span>'+o+'</button>';
   }).join('');
-  const fb=document.getElementById('q-fb');
+  var fb=document.getElementById('q-fb');
   if(done){
-    const ok=qState.answers[qState.idx]===q.ans;
+    var ok=qst.ans[qst.idx]===q.ans;
     fb.className='fb '+(ok?'ok':'no');
     fb.style.display='block';
     fb.textContent=(ok?'✓ Зөв! ':'✗ Буруу. ')+(q.exp||'');
   }else{fb.style.display='none'}
-  document.getElementById('btn-prev').style.display=qState.idx>0?'':'none';
-  document.getElementById('btn-next').textContent=qState.idx===qs.length-1?'Дүн харах →':'Дараах →';
+  document.getElementById('btn-prev').style.display=qst.idx>0?'':'none';
+  document.getElementById('btn-next').textContent=qst.idx===qs.length-1?'Дүн харах →':'Дараах →';
 }
 
 function pickOpt(i){
-  if(qState.done[qState.idx])return;
-  qState.answers[qState.idx]=i;
-  qState.done[qState.idx]=true;
-  if(i===qState.exam.questions[qState.idx].ans)qState.score++;
+  if(qst.done[qst.idx])return;
+  qst.ans[qst.idx]=i;
+  qst.done[qst.idx]=true;
+  if(i===qst.exam.questions[qst.idx].ans)qst.score++;
   renderQ();
 }
 
 function qGo(dir){
-  const qs=qState.exam.questions;
-  if(dir===1&&qState.idx===qs.length-1){showResult();return}
-  qState.idx=Math.max(0,Math.min(qs.length-1,qState.idx+dir));
+  if(dir===1&&qst.idx===qst.exam.questions.length-1){showResult();return}
+  qst.idx=Math.max(0,Math.min(qst.exam.questions.length-1,qst.idx+dir));
   renderQ();
 }
 
 function showResult(){
   clearInterval(timerInt);
-  const qs=qState.exam.questions;
-  const n=qs.length;
-  // category scores
-  const cats={};
-  qs.forEach((q,i)=>{
+  var qs=qst.exam.questions;
+  var n=qs.length;
+  var cats={};
+  qs.forEach(function(q,i){
     if(!cats[q.cat])cats[q.cat]={correct:0,total:0};
     cats[q.cat].total++;
-    if(qState.answers[i]===q.ans)cats[q.cat].correct++;
+    if(qst.ans[i]===q.ans)cats[q.cat].correct++;
   });
-  const pct=Math.round(qState.score/n*100);
-  let grade,msg;
-  if(pct>=90){grade='A — Excellent';msg='Гайхалтай! Та B2 түвшний мэдлэгтэй.'}
-  else if(pct>=75){grade='B — Good';msg='Сайн хийлээ! B1/B2 хооронд байна.'}
+  var pct=Math.round(qst.score/n*100);
+  var grade,msg;
+  if(pct>=90){grade='A — Excellent';msg='Гайхалтай! Маш өндөр түвшин.'}
+  else if(pct>=75){grade='B — Good';msg='Сайн хийлээ!'}
   else if(pct>=60){grade='C — Satisfactory';msg='Дунд зэрэг. Дасгал хийхийг зөвлөнө.'}
-  else{grade='D — Needs Work';msg='Суурь дүрмүүдийг дахин давтах хэрэгтэй.'}
-  document.getElementById('r-score').textContent=qState.score;
+  else{grade='D — Needs Work';msg='Дахин давтах хэрэгтэй.'}
+  document.getElementById('r-score').textContent=qst.score;
   document.getElementById('r-denom').textContent='/ '+n;
   document.getElementById('r-grade').textContent=grade;
   document.getElementById('r-msg').textContent=msg;
-  // cats display
-  document.getElementById('r-cats').innerHTML=Object.entries(cats).map(([c,v])=>
-    `<div class="sc"><div class="sc-label">${CAT_LABELS[c]||c}</div><div class="sc-val">${v.correct}/${v.total}</div></div>`).join('');
-  // review
-  document.getElementById('r-review').innerHTML=qs.map((q,i)=>{
-    const ok=qState.answers[i]===q.ans;
-    return`<div class="rv ${ok?'ok':'no'}">
-      <div class="rv-q">${i+1}. ${q.text.substring(0,70)}${q.text.length>70?'…':''}</div>
-      <div class="rv-d">${ok?'✓ Зөв':'✗ Буруу'+(q.exp?' — '+q.exp:'')}</div></div>`;
+  document.getElementById('r-cats').innerHTML=Object.entries(cats).map(function(e){
+    return '<div class="sc"><div class="sc-label">'+( CATS[e[0]]||e[0])+'</div><div class="sc-val">'+e[1].correct+'/'+e[1].total+'</div></div>';
   }).join('');
-  // save result
-  if(!qState.submitted){
-    const catScores={};
-    Object.entries(cats).forEach(([c,v])=>catScores[c]={correct:v.correct,total:v.total});
-    const res={
-      id:'r_'+Date.now(),
-      studentName:student.name,
-      studentClass:student.cls,
-      examId:qState.exam.id,
-      examName:qState.exam.name,
-      score:qState.score,
-      total:n,pct,
-      grade:grade.split(' ')[0],
-      catScores,
-      time:new Date().toLocaleString('mn-MN')
-    };
-    const all=getResults();all.push(res);setResults(all);
-    qState.submitted=true;
-    // Google Sheets руу илгээх
+  document.getElementById('r-review').innerHTML=qs.map(function(q,i){
+    var ok=qst.ans[i]===q.ans;
+    return '<div class="rv '+(ok?'ok':'no')+'"><div class="rv-q">'+(i+1)+'. '+q.text.substring(0,70)+(q.text.length>70?'…':'')+'</div><div class="rv-d">'+(ok?'✓ Зөв':'✗ Буруу'+(q.exp?' — '+q.exp:''))+'</div></div>';
+  }).join('');
+  if(!qst.submitted){
+    var catScores={};
+    Object.entries(cats).forEach(function(e){catScores[e[0]]={correct:e[1].correct,total:e[1].total}});
+    var res={id:'r_'+Date.now(),studentName:student.name,studentClass:student.cls,
+      examId:qst.exam.id,examName:qst.exam.name,score:qst.score,total:n,pct:pct,
+      grade:grade.split(' ')[0],catScores:catScores,time:new Date().toLocaleString('mn-MN')};
+    var all=getResults();all.push(res);setResults(all);
     sendToSheets(res,catScores);
+    qst.submitted=true;
   }
-  showScr('scr-result');
+  goPage('pg-result');
 }
 
-// ═══════════════════════════════════════════
-// TEACHER AUTH
-// ═══════════════════════════════════════════
-// ═══════════════════════════════════════════
-// GOOGLE SHEETS ХОЛБОЛТ
-// ═══════════════════════════════════════════
-const SHEETS_URL='https://script.google.com/macros/s/AKfycbzAPtLVPCuBmQl0rCIloP6V0sjUEHB8vAm_Dg3A2yEpt0x8vJGyVZVIh4uHpXWtmeST/exec';
-
 function sendToSheets(res,catScores){
-  const payload={
-    studentName:res.studentName,
-    studentClass:res.studentClass,
-    examName:res.examName,
-    score:res.score,
-    total:res.total,
-    pct:res.pct,
-    grade:res.grade,
+  var payload={
+    studentName:res.studentName,studentClass:res.studentClass,examName:res.examName,
+    score:res.score,total:res.total,pct:res.pct,grade:res.grade,
     catGrammar:catScores.grammar?catScores.grammar.correct+'/'+catScores.grammar.total:'',
     catTense:catScores.tense?catScores.tense.correct+'/'+catScores.tense.total:'',
     catError:catScores.error?catScores.error.correct+'/'+catScores.error.total:'',
     catVocab:catScores.vocab?catScores.vocab.correct+'/'+catScores.vocab.total:''
   };
-  const encoded=encodeURIComponent(JSON.stringify(payload));
-  const img=new Image();
-  img.src=SHEETS_URL+'?data='+encoded;
+  var img=new Image();
+  img.src=SHEETS_URL+'?data='+encodeURIComponent(JSON.stringify(payload));
 }
 
+// ══════════════════════════════════════════
+// TEACHER AUTH
+// ══════════════════════════════════════════
 function teacherLogin(){
-  const pwd=document.getElementById('t-pwd').value;
+  var pwd=document.getElementById('t-pwd').value;
   if(pwd===getPwd()){
     document.getElementById('t-pwd').value='';
     document.getElementById('t-err').style.display='none';
-    showScr('scr-teacher');
+    goPage('pg-teacher');
     renderTeacher();
   }else{
     document.getElementById('t-err').style.display='block';
   }
 }
-function teacherLogout(){showScr('scr-land')}
-function showChangePwd(){openModal('modal-pwd')}
+
 function changePwd(){
-  const p1=document.getElementById('new-pwd1').value;
-  const p2=document.getElementById('new-pwd2').value;
-  const err=document.getElementById('pwd-err');
-  if(p1.length<4){err.textContent='Нууц үг хамгийн багадаа 4 тэмдэгт байна.';err.style.display='block';return}
-  if(p1!==p2){err.textContent='Нууц үг таарахгүй байна.';err.style.display='block';return}
+  var p1=document.getElementById('np1').value;
+  var p2=document.getElementById('np2').value;
+  var err=document.getElementById('pwd-err');
+  if(p1.length<4){err.textContent='Хамгийн багадаа 4 тэмдэгт.';err.style.display='block';return}
+  if(p1!==p2){err.textContent='Нууц үг таарахгүй.';err.style.display='block';return}
   setPwd(p1);err.style.display='none';
-  closeModal('modal-pwd');
-  document.getElementById('new-pwd1').value='';document.getElementById('new-pwd2').value='';
+  closeOv('ov-pwd');
+  document.getElementById('np1').value='';document.getElementById('np2').value='';
   alert('Нууц үг амжилттай өөрчлөгдлөө!');
 }
 
-// ═══════════════════════════════════════════
+// ══════════════════════════════════════════
 // TEACHER DASHBOARD
-// ═══════════════════════════════════════════
-let tClassFilter='all';
-let tView='exams';
+// ══════════════════════════════════════════
+var tFilter='all';
+var tTab='exams';
 
 function renderTeacher(){
   renderTSummary();
   renderClassTabs();
-  showTView(tView);
+  showTV(tTab);
+}
+
+function getFiltered(){
+  var all=getResults();
+  return tFilter==='all'?all:all.filter(function(r){return r.studentClass===tFilter});
 }
 
 function renderTSummary(){
-  const results=getFilteredResults();
-  const exams=getExams();
-  const n=results.length;
-  const avg=n?(results.reduce((a,r)=>a+r.score,0)/n).toFixed(1):'—';
-  const pass=results.filter(r=>r.pct>=60).length;
+  var data=getFiltered();
+  var exams=getExams();
+  var n=data.length;
+  var avg=n?(data.reduce(function(a,r){return a+r.score},0)/n).toFixed(1):'—';
+  var pass=data.filter(function(r){return r.pct>=60}).length;
   document.getElementById('t-summary').innerHTML=
-    `<div class="sc"><div class="sc-label">Нийт шалгалт</div><div class="sc-val">${exams.length}</div></div>`+
-    `<div class="sc"><div class="sc-label">Нийт дүн</div><div class="sc-val">${n}</div></div>`+
-    `<div class="sc"><div class="sc-label">Дундаж оноо</div><div class="sc-val">${avg}</div></div>`+
-    `<div class="sc"><div class="sc-label">Тэнцсэн</div><div class="sc-val">${pass}/${n}</div></div>`;
+    '<div class="sc"><div class="sc-label">Шалгалт</div><div class="sc-val">'+exams.length+'</div></div>'+
+    '<div class="sc"><div class="sc-label">Нийт дүн</div><div class="sc-val">'+n+'</div></div>'+
+    '<div class="sc"><div class="sc-label">Дундаж</div><div class="sc-val">'+avg+'</div></div>'+
+    '<div class="sc"><div class="sc-label">Тэнцсэн</div><div class="sc-val">'+pass+'/'+n+'</div></div>';
 }
 
 function renderClassTabs(){
-  const all=['all',...CLASSES];
-  document.getElementById('t-class-tabs').innerHTML=all.map(c=>
-    `<button class="tab${c===tClassFilter?' on':''}" onclick="setClassFilter('${c}')">${c==='all'?'Бүгд':c}</button>`).join('');
+  var all=['all'].concat(CLASSES);
+  document.getElementById('t-class-tabs').innerHTML=all.map(function(c){
+    return '<button class="tab'+(c===tFilter?' on':'')+'" onclick="setFilter(\''+c+'\')">'+(c==='all'?'Бүгд':c)+'</button>';
+  }).join('');
 }
 
-function setClassFilter(c){tClassFilter=c;renderTeacher()}
+function setFilter(c){tFilter=c;renderTeacher()}
 
-function getFilteredResults(){
-  const all=getResults();
-  return tClassFilter==='all'?all:all.filter(r=>r.studentClass===tClassFilter);
+function showTV(v){
+  tTab=v;
+  ['exams','results','analysis'].forEach(function(id){
+    document.getElementById('tv-'+id).style.display=id===v?'':'none';
+  });
+  if(v==='exams')renderExamListTeacher();
+  else if(v==='results')renderResultsTable();
+  else renderAnalysis();
 }
 
-function showTView(v){
-  tView=v;
-  ['exams','results','analysis'].forEach(i
+function renderExamListTeacher(){
+  var exams=getExams();
+  var el=document.getElementById('tv-exams');
+  if(!exams.length){el.innerHTML='<div class="empty">Шалгалт байхгүй. + товч дарж нэмнэ үү.</div>';return}
+  el.innerHTML='<div class="tbl" style="padding:0">'+exams.map(function(e){
+    return '<div class="exam-item"><div><div class="exam-name">'+e.name+' <span class="badge '+(e.active?'bg':'ba')+'">'+(e.active?'Идэвхтэй':'Хаалттай')+'</span></div><div class="exam-meta">'+e.questions.length+' асуулт · ⏱ '+e.time+' мин · '+e.created+'</div></div><div style="display:flex;gap:6px"><button class="btn btn-outline btn-sm" onclick="toggleExam(\''+e.id+'\')">'+(e.active?'Хаах':'Нээх')+'</button><button class="btn btn-outline btn-sm" onclick="editExam(\''+e.id+'\')">✏️</button><button class="btn btn-red btn-sm" onclick="deleteExam(\''+e.id+'\')">🗑</button></div></div>';
+  }).join('')+'</div>';
+}
+
+function toggleExam(id){
+  var exams=getExams();
+  var e=exams.find(function(x){return x.id===id});
+  if(e){e.active=!e.active;setExams(exams);renderExamListTeacher()}
+}
+
+var delId=null;
+function deleteExam(id){delId=id;openOv('ov-delete')}
+function confirmDelete(){
+  if(!delId)return;
+  setExams(getExams().filter(function(e){return e.id!==delId}));
+  setResults(getResults().filter(function(r){return r.examId!==delId}));
+  delId=null;closeOv('ov-delete');renderTeacher();
+}
+
+function renderResultsTable(){
+  var data=getFiltered();
+  var el=document.getElementById('tv-results');
+  if(!data.length){el.innerHTML='<div class="empty">Дүн алга байна.</div>';return}
+  var gc={A:'bg',B:'bb',C:'ba',D:'br'};
+  el.innerHTML='<div class="tbl"><div class="tbl-head" style="grid-template-columns:2fr 0.8fr 0.8fr 0.8fr 1fr"><div>Сурагч</div><div>Оноо</div><div>%</div><div>Үнэлгээ</div><div>Шалгалт</div></div>'+
+    data.map(function(r){
+      return '<div class="tbl-row" style="grid-template-columns:2fr 0.8fr 0.8fr 0.8fr 1fr"><div><div style="font-weight:500">'+r.studentName+'</div><div style="font-size:11px;color:#6a6a66">'+r.studentClass+' · '+r.time+'</div></div><div style="font-weight:600">'+r.score+'/'+r.total+'</div><div>'+r.pct+'%</div><div><span class="badge '+(gc[r.grade]||'ba')+'">'+r.grade+'</span></div><div style="font-size:12px;color:#6a6a66">'+r.examName.substring(0,20)+'</div></div>';
+    }).join('')+'</div>';
+}
+
+function renderAnalysis(){
+  var data=getFiltered();
+  var el=document.getElementById('tv-analysis');
+  if(!data.length){el.innerHTML='<div class="empty">Дүн алга байна.</div>';return}
+  var n=data.length;
+  var avg=(data.reduce(function(a,r){return a+r.score},0)/n).toFixed(1);
+  var avgP=Math.round(data.reduce(function(a,r){return a+r.pct},0)/n);
+  var pass=data.filter(function(r){return r.pct>=60}).length;
+  var top=data.reduce(function(a,r){return r.score>a?r.score:a},0);
+  var catAgg={};
+  data.forEach(function(r){
+    if(!r.catScores)return;
+    Object.entries(r.catScores).forEach(function(e){
+      if(!catAgg[e[0]])catAgg[e[0]]={correct:0,total:0};
+      catAgg[e[0]].correct+=e[1].correct;catAgg[e[0]].total+=e[1].total;
+    });
+  });
+  var colors={grammar:'#378add',tense:'#639922',error:'#ef9f27',vocab:'#7f77dd'};
+  var weak=[];
+  var bars=Object.entries(catAgg).map(function(e){
+    var p=Math.round(e[1].correct/e[1].total*100);
+    if(p<70)weak.push(CATS[e[0]]||e[0]);
+    return '<div class="bar-row"><div class="bar-name">'+(CATS[e[0]]||e[0])+'</div><div class="bar-track"><div class="bar-fill" style="width:'+p+'%;background:'+(colors[e[0]]||'#888')+'"></div></div><div class="bar-pct">'+p+'%</div></div>';
+  }).join('');
+  var grades={A:0,B:0,C:0,D:0};
+  data.forEach(function(r){if(grades[r.grade]!==undefined)grades[r.grade]++});
+  var gc={A:'bg',B:'bb',C:'ba',D:'br'};
+  el.innerHTML=
+    '<div class="g4" style="margin-bottom:1rem">'+
+    '<div class="sc"><div class="sc-label">Нийт дүн</div><div class="sc-val">'+n+'</div></div>'+
+    '<div class="sc"><div class="sc-label">Дундаж %</div><div class="sc-val">'+avgP+'%</div></div>'+
+    '<div class="sc"><div class="sc-label">Тэнцсэн</div><div class="sc-val">'+pass+'/'+n+'</div></div>'+
+    '<div class="sc"><div class="sc-label">Хамгийн өндөр</div><div class="sc-val">'+top+'</div></div></div>'+
+    '<div class="card"><h2>Ангилал тус бүрийн дундаж</h2>'+bars+'</div>'+
+    '<div class="card"><h2>Үнэлгээний тархалт</h2><div class="g4">'+
+    Object.entries(grades).map(function(e){return '<div class="sc" style="text-align:center"><div class="sc-label"><span class="badge '+gc[e[0]]+'">'+e[0]+'</span></div><div class="sc-val">'+e[1]+'</div></div>'}).join('')+'</div></div>'+
+    (weak.length?'<div class="alert alert-warn">⚠ Сайжруулах шаардлагатай: '+weak.join(', ')+'</div>':'<div class="alert alert-ok">✓ Бүх ангилалд 70%+ — сайн үзүүлэлт!</div>');
+}
+
+// ══════════════════════════════════════════
+// EXAM BUILDER
+// ══════════════════════════════════════════
+var bId=null;
+var bQs=[];
+
+function openBuilder(){
+  bId=null;
+  bQs=[{text:'',opts:['','','',''],ans:0,cat:'grammar',exp:''}];
+  document.getElementById('b-name').value='';
+  document.getElementById('b-time').value=30;
+  document.getElementById('builder-title').textContent='Шинэ шалгалт үүсгэх';
+  renderQB();
+  openOv('ov-builder');
+}
+
+function editExam(id){
+  var exam=getExams().find(function(e){return e.id===id});
+  if(!exam)return;
+  bId=id;
+  bQs=exam.questions.map(function(q){return Object.assign({},q,{opts:q.opts.slice()})});
+  document.getElementById('b-name').value=exam.name;
+  document.getElementById('b-time').value=exam.time;
+  document.getElementById('builder-title').textContent='Шалгалт засах';
+  renderQB();
+  openOv('ov-builder');
+}
+
+function addQ(){
+  bQs.push({text:'',opts:['','','',''],ans:0,cat:'grammar',exp:''});
+  renderQB();
+}
+
+function removeQ(i){
+  if(bQs.length<=1){alert('Хамгийн багадаа 1 асуулт байна.');return}
+  bQs.splice(i,1);renderQB();
+}
+
+function renderQB(){
+  document.getElementById('qbuilder').innerHTML=bQs.map(function(q,i){
+    return '<div class="qb" id="qb-'+i+'">'
+      +'<div class="qb-head"><div style="font-size:12px;font-weight:600;color:#6a6a66">Асуулт '+(i+1)+'</div>'
+      +'<div style="display:flex;gap:6px;align-items:center">'
+      +'<select style="font-size:12px;padding:4px 8px;border:1px solid #e0dfd8;border-radius:6px;background:#fff" onchange="qbSet('+i+',\'cat\',this.value)">'
+      +Object.entries(CATS).map(function(e){return '<option value="'+e[0]+'"'+(q.cat===e[0]?' selected':'')+'>'+e[1]+'</option>'}).join('')
+      +'</select>'
+      +'<button class="btn btn-red btn-sm" style="padding:4px 10px" onclick="removeQ('+i+')">×</button>'
+      +'</div></div>'
+      +'<input type="text" placeholder="Асуултын текст..." value="'+esc(q.text)+'" oninput="qbSet('+i+',\'text\',this.value)" style="margin-bottom:.5rem" />'
+      +'<div class="opt-grid">'+q.opts.map(function(o,j){
+        return '<div class="opt-wrap">'
+          +'<input type="radio" name="ans-'+i+'" value="'+j+'"'+(q.ans===j?' checked':'')+' onchange="qbSet('+i+',\'ans\','+j+')" style="flex-shrink:0">'
+          +'<input type="text" placeholder="'+LETTERS[j]+'" value="'+esc(o)+'" oninput="qbOpt('+i+','+j+',this.value)" style="font-size:13px;padding:6px 9px;margin-bottom:0">'
+          +'</div>';
+      }).join('')+'</div>'
+      +'<input type="text" placeholder="Тайлбар (заавал биш)..." value="'+esc(q.exp||'')+'" oninput="qbSet('+i+',\'exp\',this.value)" style="font-size:13px;padding:7px 10px" />'
+      +'</div>';
+  }).join('');
+}
+
+function esc(s){return(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;')}
+function qbSet(i,f,v){bQs[i][f]=f==='ans'?parseInt(v):v}
+function qbOpt(i,j,v){bQs[i].opts[j]=v}
+
+function saveExam(){
+  var name=document.getElementById('b-name').value.trim();
+  var time=parseInt(document.getElementById('b-time').value)||30;
+  if(!name){alert('Шалгалтын нэр оруулна уу.');return}
+  if(bQs.some(function(q){return !q.text.trim()})){alert('Бүх асуултын текст бөглөнө үү.');return}
+  if(bQs.some(function(q){return q.opts.some(function(o){return !o.trim()})})){alert('Бүх хариултын хувилбар бөглөнө үү.');return}
+  var exams=getExams();
+  if(bId){
+    var idx=exams.findIndex(function(e){return e.id===bId});
+    if(idx>=0){exams[idx]=Object.assign({},exams[idx],{name:name,time:time,questions:bQs.map(function(q){return Object.assign({},q,{opts:q.opts.slice()})})});setExams(exams)}
+  }else{
+    exams.push({id:'exam_'+Date.now(),name:name,subject:'Англи хэл',time:time,active:true,
+      created:new Date().toLocaleDateString('mn-MN'),
+      questions:bQs.map(function(q){return Object.assign({},q,{opts:q.opts.slice()})})});
+    setExams(exams);
+  }
+  closeOv('ov-builder');
+  renderTeacher();
+}
+</script>
+</body>
+</html>
