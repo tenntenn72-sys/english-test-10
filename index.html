@@ -272,7 +272,7 @@ canvas{max-width:100%}
       <span class="chip">📝 Олон шалгалт</span>
       <span class="chip">⏱ Таймертай</span>
       <span class="chip">📊 Анализ</span>
-      <span class="chip">🏫 10А–10Ё</span>
+      <span class="chip">🏫 8В, 10А–10Ё</span>
     </div>
     <div class="g2" style="margin-bottom:.75rem">
       <button class="btn btn-primary btn-full" onclick="showScr('scr-student-login')" style="font-size:15px;padding:13px">
@@ -302,6 +302,7 @@ canvas{max-width:100%}
       <label class="lbl">Анги</label>
       <select id="s-class">
         <option value="">— Анги сонгох —</option>
+        <option>8В</option>
         <option>10А</option><option>10Б</option><option>10В</option>
         <option>10Г</option><option>10Д</option><option>10Е</option><option>10Ё</option>
       </select>
@@ -477,7 +478,7 @@ canvas{max-width:100%}
 // ═══════════════════════════════════════════
 // DATA
 // ═══════════════════════════════════════════
-const CLASSES = ['10А','10Б','10В','10Г','10Д','10Е','10Ё'];
+const CLASSES = ['8В','10А','10Б','10В','10Г','10Д','10Е','10Ё'];
 const LETTERS = ['A','B','C','D'];
 const CAT_LABELS = {grammar:'Grammar',tense:'Tenses',error:'Error ID',vocab:'Vocabulary'};
 const CAT_CSS = {grammar:'cat-grammar',tense:'cat-tense',error:'cat-error',vocab:'cat-vocab'};
@@ -494,8 +495,8 @@ function setPwd(v){setData('sq_pwd',v)}
 
 // Default exam
 (function initDefault(){
-  if(getData('sq_inited',false)) return;
-  setData('sq_inited',true);
+  var inited = getData('sq_inited2',false); if(inited) return;
+  setData('sq_inited2',true);
   const exam = {
     id:'exam_default',
     name:'Англи хэл — B1/B2 Нэгж тест',
@@ -526,7 +527,69 @@ function setPwd(v){setData('sq_pwd',v)}
       {text:'Find the error: "I look forward to hear from you soon."',opts:['I look','forward to','hear','from you'],ans:2,cat:'error',exp:'"hear" → "hearing" ("look forward to" + gerund)'}
     ]
   };
-  setExams([exam]);
+
+  const exam2 = {
+    id:'exam_unit2',
+    name:'Өдөр тутмын амьдрал — B1/B2 Test',
+    subject:'Англи хэл',
+    time:30,
+    created:new Date().toLocaleDateString('mn-MN'),
+    active:true,
+    questions:[
+      {cat:'tense',text:'By the time Sarah ___ to the airport, her flight had already departed.',opts:['arrived','had arrived','was arriving','arrives'],ans:0,exp:'Past Simple + Past Perfect: "by the time" clause uses Past Simple.'},
+      {cat:'tense',text:'I ___ for this company for ten years next June.',opts:['will work','will be working','will have been working','have worked'],ans:2,exp:'Future Perfect Continuous: duration up to a future point.'},
+      {cat:'tense',text:'She ___ her phone when she realized she had left it at home.',opts:['was reaching for','reached for','has reached for','reaches for'],ans:0,exp:'Past Continuous: ongoing action interrupted by Past Simple event.'},
+      {cat:'tense',text:'The scientists announced that they ___ a cure for the disease.',opts:['discovered','have discovered','had discovered','discover'],ans:2,exp:'Reported speech: Past Perfect is used when reporting a past discovery.'},
+      {cat:'tense',text:'These days, more and more people ___ to work from home.',opts:['choose','are choosing','have chosen','chose'],ans:1,exp:'Present Continuous: changing trends with "these days / more and more".'},
+      {cat:'tense',text:'I ___ her since we were at school together.',opts:['know','knew','have known','had known'],ans:2,exp:'Present Perfect: ongoing state from past to now, used with "since".'},
+      {cat:'tense',text:'He ___ his homework before dinner every day when he was a child.',opts:['does','did','would do','has done'],ans:2,exp:'"Would + infinitive" = habitual past action or routine.'},
+      {cat:'grammar',text:'Not only ___ late, but she also forgot to bring the report.',opts:['she arrived','did she arrive','she did arrive','arrived she'],ans:1,exp:'Inversion after "Not only": Not only + auxiliary + subject + verb.'},
+      {cat:'grammar',text:'The manager ___ us that we would receive our bonuses by Friday.',opts:['told','said','spoke','talked'],ans:0,exp:'"Tell" takes an indirect object (told us). "Say" does not take one directly.'},
+      {cat:'grammar',text:"I'd rather you ___ smoke inside the restaurant.",opts:["don't","didn't","won't","not"],ans:1,exp:'"I'd rather + subject + past simple" expresses preference about others' actions.'},
+      {cat:'grammar',text:"It's no use ___ about the past. Focus on what you can change.",opts:['worry','to worry','worrying','worried'],ans:2,exp:'"It's no use" is always followed by a gerund (-ing form).'},
+      {cat:'grammar',text:'The new bridge, ___ was completed last year, has reduced traffic significantly.',opts:['that','which','who','what'],ans:1,exp:'Non-defining relative clause: use "which" (not "that") with commas.'},
+      {cat:'grammar',text:'She is used to ___ early, so mornings are never a problem for her.',opts:['wake up','waking up','wake','having woken'],ans:1,exp:'"Be used to" + gerund (-ing). Compare: "used to + infinitive" for past habits.'},
+      {cat:'error',text:'Find the error: "Despite of the heavy rain, the match continued as planned."',opts:['Despite of','the heavy rain','the match continued','as planned'],ans:0,exp:'"Despite of" → "Despite". Use "in spite of" if you need "of".'},
+      {cat:'error',text:'Find the error: "The number of students who use social media are increasing every year."',opts:['The number of','students who','use social media','are increasing'],ans:3,exp:'"are" → "is". "The number of" takes a singular verb.'},
+      {cat:'error',text:'Find the error: "I wish I would have more time to spend with my family."',opts:['I wish','I would have','more time','to spend with my family'],ans:1,exp:'"would have" → "had". "I wish" + past simple for present unreal wishes.'},
+      {cat:'error',text:'Find the error: "She explained me the situation very clearly and patiently."',opts:['She explained','me the situation','very clearly','and patiently'],ans:1,exp:'"explained me" → "explained to me". "Explain" needs "to" before the indirect object.'},
+      {cat:'error',text:'Find the error: "The police has arrested three suspects in connection with the robbery."',opts:['The police','has arrested','three suspects','in connection with'],ans:1,exp:'"has" → "have". "Police" is always treated as plural.'},
+      {cat:'error',text:'Find the error: "He suggested to go to the new Italian restaurant near the park."',opts:['He suggested','to go','to the new Italian restaurant','near the park'],ans:1,exp:'"to go" → "going". "Suggest" is always followed by a gerund, never a to-infinitive.'},
+      {cat:'error',text:'Find the error: "If I would have known about the meeting, I would have attended it."',opts:['If I would have known','about the meeting','I would have attended','it'],ans:0,exp:'"would have known" → "had known". 3rd conditional: If + Past Perfect, would have + past participle.'}
+    ]
+  };
+
+  const exam3 = {
+    id:'exam_a2b1',
+    name:'Англи хэл — A2/B1 Нэгж тест (8В)',
+    subject:'Англи хэл',
+    time:30,
+    created:new Date().toLocaleDateString('mn-MN'),
+    active:true,
+    questions:[
+      {cat:'grammar',text:'She ___ TV when her phone rang.',opts:['watched','was watching','has watched','watches'],ans:1,exp:'Past Continuous: ongoing action interrupted by Past Simple.'},
+      {cat:'grammar',text:'You ___ smoke here. It is not allowed.',opts:['must','mustn\'t','don\'t have to','should'],ans:1,exp:'"mustn\'t" = prohibition (not allowed). "Don\'t have to" = no obligation.'},
+      {cat:'grammar',text:'___ you ever ___ sushi before?',opts:['Did / eat','Have / eaten','Do / eat','Are / eating'],ans:1,exp:'Present Perfect: experience up to now. Have + subject + past participle.'},
+      {cat:'grammar',text:'This is the best film ___ I have ever seen.',opts:['who','where','that','what'],ans:2,exp:'Defining relative clause: use "that" or "which" for things.'},
+      {cat:'grammar',text:'If it ___ tomorrow, we will cancel the picnic.',opts:['rains','will rain','rained','is raining'],ans:0,exp:'1st conditional: If + Present Simple, will + infinitive.'},
+      {cat:'tense',text:'I ___ my homework yet. Can I do it after dinner?',opts:['didn\'t finish','haven\'t finished','don\'t finish','wasn\'t finishing'],ans:1,exp:'Present Perfect with "yet": unfinished action up to now.'},
+      {cat:'tense',text:'She ___ in London for two years before she moved to Paris.',opts:['lived','has lived','had lived','was living'],ans:2,exp:'Past Perfect: action completed before another past action.'},
+      {cat:'tense',text:'We ___ dinner at 7 pm tonight. Would you like to join us?',opts:['have','are having','will have','had'],ans:1,exp:'Present Continuous for future arrangements already planned.'},
+      {cat:'tense',text:'By the time you arrive, I ___ cooking.',opts:['finish','will finish','will have finished','finished'],ans:2,exp:'Future Perfect: action completed before a future moment.'},
+      {cat:'tense',text:'He ___ to school by bus every morning when he was young.',opts:['goes','went','has gone','was going'],ans:1,exp:'Past Simple: regular past habit or routine.'},
+      {cat:'vocab',text:'Choose the correct word: "The weather was ___, so we stayed inside all day."',opts:['windy','window','wind','winding'],ans:0,exp:'"Windy" = adjective describing weather. "Wind" is a noun.'},
+      {cat:'vocab',text:'What does "exhausted" mean?',opts:['very hungry','very tired','very happy','very cold'],ans:1,exp:'"Exhausted" = extremely tired. E.g. After the marathon, she was exhausted.'},
+      {cat:'vocab',text:'Choose the correct word: "Can you ___ me how to get to the station?"',opts:['say','tell','speak','talk'],ans:1,exp:'"Tell" + person + information. "Say" does not take a person as direct object.'},
+      {cat:'vocab',text:'"She made a ___ and bought the wrong ticket." Choose the correct word.',opts:['fault','mistake','error','problem'],ans:1,exp:'"Make a mistake" is the correct collocation. "Do/make an error" is less natural.'},
+      {cat:'vocab',text:'Choose the correct word: "I need to ___ some money from the bank before the trip."',opts:['withdraw','deposit','lend','borrow'],ans:0,exp:'"Withdraw" = take money out. "Deposit" = put money in.'},
+      {cat:'error',text:'Find the error: "She don\'t like coffee in the morning."',opts:['She','don\'t like','coffee','in the morning'],ans:1,exp:'"don\'t" → "doesn\'t". 3rd person singular: She/He/It + doesn\'t.'},
+      {cat:'error',text:'Find the error: "I am agree with your idea completely."',opts:['I am','agree with','your idea','completely'],ans:0,exp:'"I am agree" → "I agree". "Agree" is not used with "be" as a linking verb.'},
+      {cat:'error',text:'Find the error: "He has went to the market an hour ago."',opts:['He has','went','to the market','an hour ago'],ans:0,exp:'"has went" → "went". With "ago" use Past Simple, not Present Perfect.'},
+      {cat:'error',text:'Find the error: "My brother is more taller than me."',opts:['My brother','is more taller','than','me'],ans:1,exp:'"more taller" → "taller". Never use "more" with -er comparative adjectives.'},
+      {cat:'error',text:'Find the error: "She asked me where do I live."',opts:['She asked me','where do I live','(no error)','asked'],ans:1,exp:'"where do I live" → "where I lived/live". Indirect questions use statement word order.'}
+    ]
+  };
+  setExams([exam, exam2, exam3]);
 })();
 
 // ═══════════════════════════════════════════
@@ -733,7 +796,8 @@ function sendToSheets(res,catScores){
     grade:res.grade,
     catGrammar:catScores.grammar?catScores.grammar.correct+'/'+catScores.grammar.total:'',
     catTense:catScores.tense?catScores.tense.correct+'/'+catScores.tense.total:'',
-    catError:catScores.error?catScores.error.correct+'/'+catScores.error.total:''
+    catError:catScores.error?catScores.error.correct+'/'+catScores.error.total:'',
+    catVocab:catScores.vocab?catScores.vocab.correct+'/'+catScores.vocab.total:''
   };
   const encoded=encodeURIComponent(JSON.stringify(payload));
   const img=new Image();
@@ -805,204 +869,4 @@ function getFilteredResults(){
 
 function showTView(v){
   tView=v;
-  ['exams','results','analysis'].forEach(id=>{
-    const el=document.getElementById('tv-'+id);
-    if(el)el.style.display=id===v?'':'none';
-  });
-  if(v==='exams')renderExamListTeacher();
-  else if(v==='results')renderResultsTable();
-  else if(v==='analysis')renderAnalysis();
-}
-
-function renderExamListTeacher(){
-  const exams=getExams();
-  const el=document.getElementById('exam-list-teacher');
-  if(!exams.length){el.innerHTML='<div class="empty">Шалгалт байхгүй байна. + товч дарж нэмнэ үү.</div>';return}
-  el.innerHTML=exams.map(e=>`
-    <div class="exam-item">
-      <div>
-        <div class="exam-name">${e.name} <span class="badge ${e.active?'badge-green':'badge-amber'}">${e.active?'Идэвхтэй':'Хаалттай'}</span></div>
-        <div class="exam-meta">${e.questions.length} асуулт · ⏱ ${e.time} мин · ${e.created}</div>
-      </div>
-      <div class="exam-actions">
-        <button class="btn btn-outline btn-sm" onclick="toggleExam('${e.id}')">${e.active?'Хаах':'Нээх'}</button>
-        <button class="btn btn-outline btn-sm" onclick="editExam('${e.id}')">✏️</button>
-        <button class="btn btn-danger btn-sm" onclick="deleteExam('${e.id}')">🗑</button>
-      </div>
-    </div>`).join('');
-}
-
-function toggleExam(id){
-  const exams=getExams();
-  const e=exams.find(x=>x.id===id);
-  if(e){e.active=!e.active;setExams(exams);renderExamListTeacher();}
-}
-
-let deleteTargetId=null;
-function deleteExam(id){deleteTargetId=id;openModal('modal-delete')}
-function confirmDelete(){
-  if(!deleteTargetId)return;
-  setExams(getExams().filter(e=>e.id!==deleteTargetId));
-  const res=getResults().filter(r=>r.examId!==deleteTargetId);setResults(res);
-  deleteTargetId=null;closeModal('modal-delete');renderTeacher();
-}
-
-function renderResultsTable(){
-  const results=getFilteredResults();
-  const el=document.getElementById('results-table-body');
-  if(!results.length){el.innerHTML='<div class="empty">Дүн алга байна.</div>';return}
-  const gradeClass={A:'badge-green',B:'badge-blue',C:'badge-amber',D:'badge-red'};
-  el.innerHTML=results.map(r=>`
-    <div class="tbl-row" style="grid-template-columns:2fr 0.8fr 0.8fr 0.8fr 1fr">
-      <div><div style="font-weight:500">${r.studentName}</div><div style="font-size:11px;color:var(--muted)">${r.studentClass} · ${r.time}</div></div>
-      <div style="font-weight:600">${r.score}/${r.total}</div>
-      <div>${r.pct}%</div>
-      <div><span class="badge ${gradeClass[r.grade]||'badge-amber'}">${r.grade}</span></div>
-      <div style="font-size:12px;color:var(--muted)">${r.examName.substring(0,20)}${r.examName.length>20?'…':''}</div>
-    </div>`).join('');
-}
-
-function renderAnalysis(){
-  const results=getFilteredResults();
-  const n=results.length;
-  if(!n){
-    document.getElementById('an-summary').innerHTML='';
-    document.getElementById('an-bars').innerHTML='<div class="empty">Дүн алга байна.</div>';
-    document.getElementById('an-grades').innerHTML='';
-    document.getElementById('an-alert').innerHTML='';
-    return;
-  }
-  const avg=(results.reduce((a,r)=>a+r.score,0)/n).toFixed(1);
-  const avgP=Math.round(results.reduce((a,r)=>a+r.pct,0)/n);
-  const pass=results.filter(r=>r.pct>=60).length;
-  const top=results.reduce((a,r)=>r.score>a?r.score:a,0);
-  document.getElementById('an-summary').innerHTML=
-    `<div class="sc"><div class="sc-label">Нийт дүн</div><div class="sc-val">${n}</div></div>`+
-    `<div class="sc"><div class="sc-label">Дундаж %</div><div class="sc-val">${avgP}%</div></div>`+
-    `<div class="sc"><div class="sc-label">Тэнцсэн</div><div class="sc-val">${pass}/${n}</div></div>`+
-    `<div class="sc"><div class="sc-label">Хамгийн өндөр</div><div class="sc-val">${top}</div></div>`;
-
-  // gather cat data
-  const catAgg={};
-  results.forEach(r=>{
-    if(!r.catScores)return;
-    Object.entries(r.catScores).forEach(([c,v])=>{
-      if(!catAgg[c])catAgg[c]={correct:0,total:0};
-      catAgg[c].correct+=v.correct;catAgg[c].total+=v.total;
-    });
-  });
-  const barColors={grammar:'#378add',tense:'#639922',error:'#ef9f27',vocab:'#7f77dd'};
-  const weak=[];
-  document.getElementById('an-bars').innerHTML=Object.entries(catAgg).map(([c,v])=>{
-    const p=Math.round(v.correct/v.total*100);
-    if(p<70)weak.push(CAT_LABELS[c]||c);
-    return`<div class="bar-row">
-      <div class="bar-name">${CAT_LABELS[c]||c} (${v.total} асуулт)</div>
-      <div class="bar-track"><div class="bar-fill" style="width:${p}%;background:${barColors[c]||'#888'}"></div></div>
-      <div class="bar-pct">${p}%</div></div>`;
-  }).join('')||'<div class="empty">Ангилал мэдээлэл алга.</div>';
-
-  // grade dist
-  const grades={A:0,B:0,C:0,D:0};
-  results.forEach(r=>{if(grades[r.grade]!==undefined)grades[r.grade]++});
-  const gc={A:'badge-green',B:'badge-blue',C:'badge-amber',D:'badge-red'};
-  document.getElementById('an-grades').innerHTML=Object.entries(grades).map(([g,cnt])=>
-    `<div class="sc" style="text-align:center"><div class="sc-label"><span class="badge ${gc[g]}">${g}</span></div><div class="sc-val">${cnt}</div></div>`).join('');
-
-  // alert
-  document.getElementById('an-alert').innerHTML=weak.length
-    ?`<div class="alert alert-warn"><strong>⚠ Сайжруулах шаардлагатай:</strong> ${weak.map(w=>`<span style="background:#fac775;color:#412402;padding:2px 8px;border-radius:20px;font-size:11px;margin:2px;display:inline-block;font-weight:600">${w}</span>`).join('')}</div>`
-    :`<div class="alert alert-ok">✓ Бүх ангилалд дундаж 70%+ — сайн үзүүлэлт!</div>`;
-}
-
-// ═══════════════════════════════════════════
-// EXAM BUILDER
-// ═══════════════════════════════════════════
-let builderExamId=null;
-let builderQuestions=[];
-
-function openBuilder(){
-  builderExamId=null;
-  builderQuestions=[{text:'',opts:['','','',''],ans:0,cat:'grammar',exp:''}];
-  document.getElementById('b-name').value='';
-  document.getElementById('b-time').value=30;
-  document.getElementById('builder-title').textContent='Шинэ шалгалт үүсгэх';
-  renderQBuilder();
-  openModal('modal-builder');
-}
-
-function editExam(id){
-  const exam=getExams().find(e=>e.id===id);
-  if(!exam)return;
-  builderExamId=id;
-  builderQuestions=exam.questions.map(q=>({...q,opts:[...q.opts]}));
-  document.getElementById('b-name').value=exam.name;
-  document.getElementById('b-time').value=exam.time;
-  document.getElementById('builder-title').textContent='Шалгалт засах';
-  renderQBuilder();
-  openModal('modal-builder');
-}
-
-function addQuestion(){
-  builderQuestions.push({text:'',opts:['','','',''],ans:0,cat:'grammar',exp:''});
-  renderQBuilder();
-}
-
-function removeQuestion(i){
-  if(builderQuestions.length<=1){alert('Хамгийн багадаа 1 асуулт байна.');return}
-  builderQuestions.splice(i,1);renderQBuilder();
-}
-
-function renderQBuilder(){
-  const cats={grammar:'Grammar',tense:'Tenses',error:'Error ID',vocab:'Vocabulary'};
-  document.getElementById('questions-builder').innerHTML=builderQuestions.map((q,i)=>`
-    <div class="qb-item" id="qbi-${i}">
-      <div class="qb-header">
-        <div class="qb-num">Асуулт ${i+1}</div>
-        <div style="display:flex;gap:6px;align-items:center">
-          <select style="width:130px;font-size:12px;padding:4px 8px" onchange="qbChange(${i},'cat',this.value)">
-            ${Object.entries(cats).map(([k,v])=>`<option value="${k}"${q.cat===k?' selected':''}>${v}</option>`).join('')}
-          </select>
-          <button class="btn btn-danger btn-icon btn-sm" onclick="removeQuestion(${i})">×</button>
-        </div>
-      </div>
-      <div class="fg" style="margin-bottom:.5rem">
-        <input type="text" placeholder="Асуултын текст..." value="${escHtml(q.text)}" oninput="qbChange(${i},'text',this.value)" />
-      </div>
-      <div class="opt-inputs">
-        ${q.opts.map((o,j)=>`
-          <div class="opt-inp-wrap">
-            <input type="radio" class="opt-radio" name="ans-${i}" value="${j}" ${q.ans===j?'checked':''} onchange="qbChange(${i},'ans',${j})" />
-            <input type="text" placeholder="${LETTERS[j]} хариулт" value="${escHtml(o)}" oninput="qbOptChange(${i},${j},this.value)" style="flex:1;font-size:13px;padding:7px 10px" />
-          </div>`).join('')}
-      </div>
-      <div style="font-size:11px;color:var(--green);margin-bottom:.4rem">● Радио товчийг дарж зөв хариултыг тэмдэглэнэ</div>
-      <input type="text" placeholder="Тайлбар (заавал биш)..." value="${escHtml(q.exp||'')}" oninput="qbChange(${i},'exp',this.value)" style="font-size:13px;padding:7px 10px" />
-    </div>`).join('');
-}
-
-function escHtml(s){return(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;')}
-
-function qbChange(i,field,val){builderQuestions[i][field]=field==='ans'?parseInt(val):val}
-function qbOptChange(i,j,val){builderQuestions[i].opts[j]=val}
-
-function saveExam(){
-  const name=document.getElementById('b-name').value.trim();
-  const time=parseInt(document.getElementById('b-time').value)||30;
-  if(!name){alert('Шалгалтын нэр оруулна уу.');return}
-  if(builderQuestions.some(q=>!q.text.trim())){alert('Бүх асуултын текст бөглөнө үү.');return}
-  if(builderQuestions.some(q=>q.opts.some(o=>!o.trim()))){alert('Бүх хариултын хувилбар бөглөнө үү.');return}
-  const exams=getExams();
-  if(builderExamId){
-    const idx=exams.findIndex(e=>e.id===builderExamId);
-    if(idx>=0){exams[idx]={...exams[idx],name,time,questions:builderQuestions.map(q=>({...q,opts:[...q.opts]}))};setExams(exams);}
-  }else{
-    exams.push({id:'exam_'+Date.now(),name,subject:'Англи хэл',time,active:true,created:new Date().toLocaleDateString('mn-MN'),questions:builderQuestions.map(q=>({...q,opts:[...q.opts]}))});
-    setExams(exams);
-  }
-  closeModal('modal-builder');
-  renderTeacher();
-}
-</script>
-</body>
-</html>
+  ['exams','results','analysis'].forEach(i
