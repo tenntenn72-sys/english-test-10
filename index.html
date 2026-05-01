@@ -720,7 +720,7 @@ function showResult(){
 // ═══════════════════════════════════════════
 // GOOGLE SHEETS ХОЛБОЛТ
 // ═══════════════════════════════════════════
-const SHEETS_URL='https://script.google.com/macros/s/AKfycbwNxBUW7GGYtA2auNWk-6UE2IZ8OfUWmr6qKu6svls0YSAiBmgpLGfePe_-9YzOysDr/exec';
+const SHEETS_URL='https://script.google.com/macros/s/AKfycbzkOxtDj_jP7pVfHabdqJjGl7SvORwpw10OLVJYFBfZwG0h57xngM1CEz5eKX1lZw48/exec';
 
 function sendToSheets(res,catScores){
   const payload={
@@ -735,12 +735,9 @@ function sendToSheets(res,catScores){
     catTense:catScores.tense?catScores.tense.correct+'/'+catScores.tense.total:'',
     catError:catScores.error?catScores.error.correct+'/'+catScores.error.total:''
   };
-  fetch(SHEETS_URL,{
-    method:'POST',
-    mode:'no-cors',
-    headers:{'Content-Type':'application/json'},
-    body:JSON.stringify(payload)
-  }).catch(()=>{});
+  const encoded=encodeURIComponent(JSON.stringify(payload));
+  const img=new Image();
+  img.src=SHEETS_URL+'?data='+encoded;
 }
 
 function teacherLogin(){
