@@ -708,6 +708,8 @@ function showResult(){
     };
     const all=getResults();all.push(res);setResults(all);
     qState.submitted=true;
+    // Google Sheets руу илгээх
+    sendToSheets(res,catScores);
   }
   showScr('scr-result');
 }
@@ -715,6 +717,32 @@ function showResult(){
 // ═══════════════════════════════════════════
 // TEACHER AUTH
 // ═══════════════════════════════════════════
+// ═══════════════════════════════════════════
+// GOOGLE SHEETS ХОЛБОЛТ
+// ═══════════════════════════════════════════
+const SHEETS_URL='https://script.google.com/macros/s/AKfycbwNxBUW7GGYtA2auNWk-6UE2IZ8OfUWmr6qKu6svls0YSAiBmgpLGfePe_-9YzOysDr/exec';
+
+function sendToSheets(res,catScores){
+  const payload={
+    studentName:res.studentName,
+    studentClass:res.studentClass,
+    examName:res.examName,
+    score:res.score,
+    total:res.total,
+    pct:res.pct,
+    grade:res.grade,
+    catGrammar:catScores.grammar?catScores.grammar.correct+'/'+catScores.grammar.total:'',
+    catTense:catScores.tense?catScores.tense.correct+'/'+catScores.tense.total:'',
+    catError:catScores.error?catScores.error.correct+'/'+catScores.error.total:''
+  };
+  fetch(SHEETS_URL,{
+    method:'POST',
+    mode:'no-cors',
+    headers:{'Content-Type':'application/json'},
+    body:JSON.stringify(payload)
+  }).catch(()=>{});
+}
+
 function teacherLogin(){
   const pwd=document.getElementById('t-pwd').value;
   if(pwd===getPwd()){
