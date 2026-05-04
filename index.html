@@ -1,1 +1,700 @@
+<!DOCTYPE html>
+<html lang="mn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Англи хэлний шалгалт</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:#f2f1ee;min-height:100vh;color:#1a1a18}
+.page{display:none;min-height:100vh;padding:1.5rem 1rem 3rem}.page.show{display:block}
+.wrap{max-width:680px;margin:0 auto}
+.card{background:#fff;border:1px solid #e0dfd8;border-radius:12px;padding:1.5rem;margin-bottom:1rem}
+h2{font-size:18px;font-weight:600;margin-bottom:1rem}
+.sub{font-size:14px;color:#6a6a66;margin-bottom:1rem}
+label{display:block;font-size:12px;color:#6a6a66;font-weight:600;text-transform:uppercase;letter-spacing:.05em;margin-bottom:5px}
+input,select{width:100%;padding:10px 13px;border:1px solid #e0dfd8;border-radius:8px;font-size:15px;background:#fff;color:#1a1a18;outline:none;font-family:inherit;margin-bottom:.9rem}
+input:focus,select:focus{border-color:#888}
+.btn{display:block;width:100%;padding:12px;border:none;border-radius:8px;font-size:15px;font-weight:600;cursor:pointer;text-align:center}
+.btn:hover{opacity:.85}
+.btn-dark{background:#1a1a18;color:#fff}
+.btn-outline{background:#fff;color:#1a1a18;border:1px solid #e0dfd8;margin-top:8px}
+.btn-outline:hover{background:#f2f1ee}
+.btn-sm{width:auto;padding:6px 14px;font-size:13px;display:inline-block}
+.btn-green{background:#e8f5eb;color:#2d7a3a;border:1px solid #6abf77}
+.btn-red{background:#fceaea;color:#a32d2d;border:1px solid #e24b4a}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:9px}
+.g4{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+@media(max-width:480px){.g4{grid-template-columns:repeat(2,1fr)}}
+.sc{background:#fff;border:1px solid #e0dfd8;border-radius:8px;padding:.75rem 1rem}
+.sc-label{font-size:10px;color:#6a6a66;text-transform:uppercase;letter-spacing:.05em;margin-bottom:4px}
+.sc-val{font-size:22px;font-weight:700}
+.topnav{display:flex;align-items:center;justify-content:space-between;background:#fff;border:1px solid #e0dfd8;border-radius:12px;padding:.9rem 1.2rem;margin-bottom:1rem}
+.topnav-title{font-size:17px;font-weight:600}
+.topnav-sub{font-size:12px;color:#6a6a66;margin-top:2px}
+.tabs{display:flex;gap:6px;margin-bottom:1rem;flex-wrap:wrap}
+.tab{padding:6px 14px;border:1px solid #e0dfd8;border-radius:20px;font-size:13px;cursor:pointer;background:#fff;color:#6a6a66}
+.tab.on{background:#1a1a18;color:#fff;border-color:#1a1a18}
+.badge{display:inline-block;padding:2px 9px;border-radius:20px;font-size:11px;font-weight:600}
+.bg{background:#e8f5eb;color:#2d7a3a}.bb{background:#e6f1fb;color:#0c447c}
+.ba{background:#faeeda;color:#633806}.br{background:#fceaea;color:#a32d2d}
+.timer-wrap{display:flex;align-items:center;background:#fff;border:1px solid #e0dfd8;border-radius:8px;padding:10px 14px;margin-bottom:10px;gap:12px}
+.timer-track{flex:1;height:5px;background:#f2f1ee;border-radius:3px;overflow:hidden}
+.timer-fill{height:100%;background:#1a1a18;border-radius:3px;transition:width 1s linear,background .3s}
+.timer-num{font-size:20px;font-weight:700;letter-spacing:.04em;font-variant-numeric:tabular-nums}
+.timer-num.warn{color:#ba7517}.timer-num.danger{color:#a32d2d}
+.prog-track{height:3px;background:#e0dfd8;border-radius:2px;margin-bottom:10px}
+.prog-fill{height:100%;background:#1a1a18;border-radius:2px;transition:width .4s}
+.cat-tag{display:inline-block;padding:3px 10px;border-radius:20px;font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.05em;margin-bottom:8px}
+.c-grammar{background:#e6f1fb;color:#0c447c}.c-tense{background:#e8f5eb;color:#2d7a3a}
+.c-error{background:#faeeda;color:#633806}.c-vocab{background:#eeedfe;color:#3c3489}
+.c-reading{background:#fce8fb;color:#6b0c7c}
+.passage-box{background:#f8f7f4;border:1px solid #e0dfd8;border-left:3px solid #1a1a18;border-radius:8px;padding:12px 14px;margin-bottom:14px;font-size:13px;line-height:1.75;color:#333}
+.passage-title{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:#6a6a66;margin-bottom:8px}
+.q-text{font-size:16px;font-weight:500;line-height:1.65;margin-bottom:1.1rem}
+.opts{display:flex;flex-direction:column;gap:8px}
+.opt{display:flex;align-items:center;gap:10px;padding:11px 13px;border:1px solid #e0dfd8;border-radius:8px;background:#fff;cursor:pointer;font-size:14px;text-align:left;color:#1a1a18}
+.opt:hover{background:#f2f1ee;border-color:#bbb}
+.opt.chosen{border-color:#378add;background:#e6f1fb;color:#0c447c}
+.opt.correct{border-color:#6abf77;background:#e8f5eb;color:#2d7a3a}
+.opt.wrong{border-color:#e24b4a;background:#fceaea;color:#a32d2d}
+.opt.locked{cursor:default}
+.opt-letter{width:26px;height:26px;border-radius:50%;border:1.5px solid currentColor;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:600;flex-shrink:0}
+.fb{margin-top:10px;padding:10px 13px;border-radius:8px;font-size:13px;line-height:1.55;display:none}
+.fb.ok{background:#e8f5eb;color:#2d7a3a;border:1px solid #6abf77}
+.fb.no{background:#fceaea;color:#a32d2d;border:1px solid #e24b4a}
+.nav-row{display:flex;gap:8px;margin-top:10px}
+.nav-btn{flex:1;padding:11px;border-radius:8px;font-size:14px;font-weight:500;cursor:pointer;border:1px solid #e0dfd8;background:#fff;color:#1a1a18}
+.nav-btn:hover{background:#f2f1ee}
+.nav-btn.primary{background:#1a1a18;color:#fff;border-color:#1a1a18}
+.score-ring{width:110px;height:110px;border-radius:50%;border:3px solid #e0dfd8;display:flex;flex-direction:column;align-items:center;justify-content:center;margin:0 auto 1rem}
+.score-big{font-size:32px;font-weight:700}.score-sm{font-size:13px;color:#6a6a66}
+.tbl{background:#fff;border:1px solid #e0dfd8;border-radius:12px;overflow:hidden;margin-bottom:1rem}
+.tbl-head{display:grid;padding:9px 14px;background:#f2f1ee;font-size:11px;color:#6a6a66;font-weight:600;text-transform:uppercase;letter-spacing:.04em}
+.tbl-row{display:grid;padding:9px 14px;border-top:1px solid #e0dfd8;font-size:13px;align-items:center}
+.tbl-row:hover{background:#f2f1ee}
+.rv{padding:10px 13px;border-radius:8px;margin-bottom:7px;font-size:13px;border:1px solid #e0dfd8}
+.rv.ok{border-left:3px solid #6abf77}.rv.no{border-left:3px solid #e24b4a}
+.rv-q{font-weight:500;margin-bottom:3px}.rv-d{font-size:12px;color:#6a6a66}
+.bar-row{display:flex;align-items:center;gap:10px;margin-bottom:10px}
+.bar-name{font-size:13px;color:#6a6a66;width:140px;flex-shrink:0}
+.bar-track{flex:1;height:9px;background:#f2f1ee;border-radius:5px;overflow:hidden}
+.bar-fill{height:100%;border-radius:5px;transition:width .6s}
+.bar-pct{font-size:12px;font-weight:600;width:36px;text-align:right}
+.alert{border-radius:8px;padding:.75rem 1rem;font-size:13px;margin-top:.75rem}
+.alert-ok{background:#e8f5eb;color:#2d7a3a;border:1px solid #6abf77}
+.alert-warn{background:#faeeda;color:#633806;border:1px solid #ef9f27}
+.exam-item{display:flex;align-items:center;justify-content:space-between;padding:.9rem 1.1rem;border-top:1px solid #e0dfd8}
+.exam-item:first-child{border-top:none}
+.exam-name{font-weight:500;font-size:14px}.exam-meta{font-size:12px;color:#6a6a66;margin-top:2px}
+.overlay{position:fixed;inset:0;background:rgba(0,0,0,.55);display:none;align-items:center;justify-content:center;z-index:999;padding:1rem}
+.overlay.show{display:flex}
+.modal{background:#fff;border-radius:12px;padding:1.75rem;max-width:480px;width:100%;max-height:90vh;overflow-y:auto}
+.modal h2{margin-bottom:1rem}
+.modal-footer{display:flex;gap:8px;justify-content:flex-end;margin-top:1.25rem}
+.divider{border:none;border-top:1px solid #e0dfd8;margin:1rem 0}
+.empty{text-align:center;padding:3rem 1rem;color:#6a6a66;font-size:14px}
+.qb{background:#f2f1ee;border:1px solid #e0dfd8;border-radius:8px;padding:1rem;margin-bottom:.75rem}
+.opt-grid{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-bottom:.5rem}
+.opt-wrap{display:flex;align-items:center;gap:6px}
+/* HOME */
+.home-wrap{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:2rem 1rem}
+.home-card{background:#fff;border:1px solid #e0dfd8;border-radius:16px;padding:2.5rem 2rem;max-width:380px;width:100%;text-align:center}
+.home-icon{font-size:52px;margin-bottom:1rem}
+.home-title{font-size:24px;font-weight:700;margin-bottom:.4rem}
+.home-sub{font-size:14px;color:#6a6a66;margin-bottom:2rem}
+.home-btns{display:flex;flex-direction:column;gap:12px}
+.hbtn{display:flex;align-items:center;gap:14px;padding:15px 18px;border-radius:12px;cursor:pointer;border:1px solid #e0dfd8;background:#fff;text-align:left;width:100%}
+.hbtn:hover{background:#f2f1ee}
+.hbtn-icon{font-size:24px;width:44px;height:44px;border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.hbtn-dark .hbtn-icon{background:#1a1a18}
+.hbtn-light .hbtn-icon{background:#f2f1ee}
+.hbtn-title{font-size:15px;font-weight:600;color:#1a1a18}
+.hbtn-sub{font-size:12px;color:#6a6a66;margin-top:2px}
+</style>
+</head>
+<body>
 
+<div class="overlay" id="ov-timeout">
+  <div class="modal" style="max-width:300px;text-align:center">
+    <div style="font-size:44px;margin-bottom:.75rem">&#9200;</div>
+    <h2>&#1061;&#1091;&#1075;&#1072;&#1094;&#1072;&#1072; &#1076;&#1091;&#1091;&#1089;&#1083;&#1072;&#1072;!</h2>
+    <p class="sub">&#1058;&#1072;&#1085;&#1099; &#1093;&#1072;&#1088;&#1080;&#1091;&#1083;&#1090;&#1091;&#1091;&#1076; &#1072;&#1074;&#1090;&#1086;&#1084;&#1072;&#1090;&#1072;&#1072;&#1088; &#1093;&#1072;&#1076;&#1075;&#1072;&#1083;&#1072;&#1075;&#1076;&#1083;&#1072;&#1072;.</p>
+    <button class="btn btn-dark" id="btn-timeout">&#1044;&#1199;&#1085; &#1093;&#1072;&#1088;&#1072;&#1093; &#8594;</button>
+  </div>
+</div>
+
+<div class="overlay" id="ov-delete">
+  <div class="modal" style="max-width:320px;text-align:center">
+    <div style="font-size:36px;margin-bottom:.75rem">&#128465;</div>
+    <h2>&#1064;&#1072;&#1083;&#1075;&#1072;&#1083;&#1090; &#1091;&#1089;&#1090;&#1075;&#1072;&#1093; &#1091;&#1091;?</h2>
+    <p class="sub">&#1069;&#1085;&#1101; &#1199;&#1081;&#1076;&#1083;&#1080;&#1081;&#1075; &#1073;&#1091;&#1094;&#1072;&#1072;&#1078; &#1073;&#1086;&#1083;&#1086;&#1093;&#1075;&#1199;&#1081;.</p>
+    <div style="display:flex;gap:8px;justify-content:center">
+      <button class="btn btn-outline btn-sm" id="btn-del-no">&#1041;&#1086;&#1083;&#1080;&#1093;</button>
+      <button class="btn btn-red btn-sm" id="btn-del-yes">&#1059;&#1089;&#1090;&#1075;&#1072;&#1093;</button>
+    </div>
+  </div>
+</div>
+
+<div class="overlay" id="ov-pwd">
+  <div class="modal" style="max-width:340px">
+    <h2>&#1053;&#1091;&#1091;&#1094; &#1199;&#1075; &#1257;&#1257;&#1088;&#1095;&#1083;&#1254;&#1093;</h2>
+    <label>&#1064;&#1080;&#1085;&#1101; &#1085;&#1091;&#1091;&#1094; &#1199;&#1075;</label>
+    <input type="password" id="np1" placeholder="Шинэ нууц үг" />
+    <label>&#1044;&#1072;&#1093;&#1080;&#1085; &#1086;&#1088;&#1091;&#1091;&#1083;&#1072;&#1093;</label>
+    <input type="password" id="np2" placeholder="Баталгаажуулах" />
+    <div id="pwd-err" style="color:#a32d2d;font-size:13px;display:none;margin-bottom:8px"></div>
+    <div class="modal-footer">
+      <button class="btn btn-outline btn-sm" id="btn-pwd-no">&#1041;&#1086;&#1083;&#1080;&#1093;</button>
+      <button class="btn btn-dark btn-sm" id="btn-pwd-yes">&#1061;&#1072;&#1076;&#1075;&#1072;&#1083;&#1072;&#1093;</button>
+    </div>
+  </div>
+</div>
+
+<div class="overlay" id="ov-builder">
+  <div class="modal">
+    <h2 id="bld-title">&#1064;&#1080;&#1085;&#1101; &#1096;&#1072;&#1083;&#1075;&#1072;&#1083;&#1090;</h2>
+    <label>&#1053;&#1101;&#1088;</label>
+    <input type="text" id="b-name" placeholder="Шалгалтын нэр" />
+    <div class="g2">
+      <div><label>&#1061;&#1091;&#1075;&#1072;&#1094;&#1072;&#1072; (&#1084;&#1080;&#1085;)</label><input type="number" id="b-time" value="30" min="5" max="120" /></div>
+    </div>
+    <hr class="divider">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:.75rem">
+      <strong>&#1040;&#1089;&#1091;&#1091;&#1083;&#1090;&#1091;&#1091;&#1076;</strong>
+      <button class="btn btn-green btn-sm" id="btn-add-q">+ &#1053;&#1101;&#1084;&#1101;&#1093;</button>
+    </div>
+    <div id="qbuilder"></div>
+    <div class="modal-footer">
+      <button class="btn btn-outline btn-sm" id="btn-bld-no">&#1041;&#1086;&#1083;&#1080;&#1093;</button>
+      <button class="btn btn-dark btn-sm" id="btn-bld-yes">&#1061;&#1072;&#1076;&#1075;&#1072;&#1083;&#1072;&#1093;</button>
+    </div>
+  </div>
+</div>
+
+<!-- HOME -->
+<div class="page show" id="pg-home">
+  <div class="home-wrap">
+    <div class="home-card">
+      <div class="home-icon">&#128218;</div>
+      <div class="home-title">&#1040;&#1085;&#1075;&#1083;&#1080; &#1093;&#1101;&#1083;&#1085;&#1080;&#1081; &#1096;&#1072;&#1083;&#1075;&#1072;&#1083;&#1090;</div>
+      <div class="home-sub">8&#1042; &middot; 10&#1040;&ndash;10&#1025; &#1072;&#1085;&#1075;&#1080;</div>
+      <div class="home-btns">
+        <button class="hbtn hbtn-dark" id="go-student">
+          <div class="hbtn-icon">&#127891;</div>
+          <div><div class="hbtn-title">&#1057;&#1091;&#1088;&#1072;&#1075;&#1095;</div><div class="hbtn-sub">&#1064;&#1072;&#1083;&#1075;&#1072;&#1083;&#1090; &#1257;&#1075;&#1254;&#1093;</div></div>
+        </button>
+        <button class="hbtn hbtn-light" id="go-teacher">
+          <div class="hbtn-icon">&#128104;&#8205;&#127979;</div>
+          <div><div class="hbtn-title">&#1041;&#1072;&#1075;&#1096;</div><div class="hbtn-sub">&#1044;&#1072;&#1096;&#1073;&#1086;&#1072;&#1088;&#1076; &middot; &#1044;&#1199;&#1085; &middot; &#1040;&#1085;&#1072;&#1083;&#1080;&#1079;</div></div>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- STUDENT -->
+<div class="page" id="pg-student">
+  <div class="wrap">
+    <div class="topnav">
+      <div><div class="topnav-title">&#1057;&#1091;&#1088;&#1072;&#1075;&#1095; &#1085;&#1101;&#1074;&#1090;&#1088;&#1101;&#1093;</div></div>
+      <button class="btn btn-outline btn-sm" id="back-student">&larr; &#1041;&#1091;&#1094;&#1072;&#1093;</button>
+    </div>
+    <div class="card">
+      <label>&#1053;&#1101;&#1088;, &#1086;&#1074;&#1086;&#1075;</label>
+      <input type="text" id="s-name" placeholder="Жишээ: Болд Баатар" />
+      <label>&#1040;&#1085;&#1075;&#1080;</label>
+      <select id="s-class">
+        <option value="">&#8212; &#1040;&#1085;&#1075;&#1080; &#1089;&#1086;&#1085;&#1075;&#1086;&#1093; &#8212;</option>
+        <option>8&#1042;</option>
+        <option>10&#1040;</option><option>10&#1041;</option><option>10&#1042;</option>
+        <option>10&#1043;</option><option>10&#1044;</option><option>10&#1045;</option><option>10&#1025;</option>
+      </select>
+      <button class="btn btn-dark" id="btn-slogin">&#1059;&#1088;&#1075;&#1101;&#1083;&#1078;&#1199;&#1091;&#1083;&#1101;&#1093; &rarr;</button>
+    </div>
+  </div>
+</div>
+
+<!-- EXAMS -->
+<div class="page" id="pg-exams">
+  <div class="wrap">
+    <div class="topnav">
+      <div>
+        <div class="topnav-title" id="es-hi">Сайн байна уу!</div>
+        <div class="topnav-sub" id="es-cls"></div>
+      </div>
+      <button class="btn btn-outline btn-sm" id="back-exams">&larr; &#1041;&#1091;&#1094;&#1072;&#1093;</button>
+    </div>
+    <div class="card" style="padding:0">
+      <div style="padding:.9rem 1.1rem;border-bottom:1px solid #e0dfd8;font-weight:600">&#1048;&#1076;&#1101;&#1074;&#1093;&#1090;&#1101;&#1081; &#1096;&#1072;&#1083;&#1075;&#1072;&#1083;&#1090;&#1091;&#1091;&#1076;</div>
+      <div id="exam-list"></div>
+    </div>
+  </div>
+</div>
+
+<!-- QUIZ -->
+<div class="page" id="pg-quiz">
+  <div class="wrap">
+    <div class="timer-wrap">
+      <div style="font-size:12px;color:#6a6a66">&#1059;&#1083;&#1076;&#1089;&#1101;&#1085;</div>
+      <div class="timer-track"><div class="timer-fill" id="t-fill"></div></div>
+      <div class="timer-num" id="t-num">30:00</div>
+    </div>
+    <div style="display:flex;justify-content:space-between;margin-bottom:6px;font-size:13px;color:#6a6a66">
+      <span>&#1040;&#1089;&#1091;&#1091;&#1083;&#1090; <strong id="q-cur">1</strong>/<strong id="q-tot">20</strong></span>
+      <span id="q-cat-h"></span>
+      <span>&#1054;&#1085;&#1086;&#1086;: <strong id="q-scr">0</strong></span>
+    </div>
+    <div class="prog-track"><div class="prog-fill" id="q-prog"></div></div>
+    <div class="card" style="padding:1.5rem">
+      <div id="q-tag"></div>
+      <div style="font-size:12px;color:#a0a09b;margin-bottom:5px" id="q-lbl"></div>
+      <div id="q-passage"></div>
+      <div class="q-text" id="q-text"></div>
+      <div class="opts" id="q-opts"></div>
+      <div class="fb" id="q-fb"></div>
+    </div>
+    <div class="nav-row">
+      <button class="nav-btn" id="btn-prev" style="display:none">&larr; &#1054;&#1084;&#1085;&#1086;&#1093;</button>
+      <button class="nav-btn primary" id="btn-next">&#1044;&#1072;&#1088;&#1072;&#1072;&#1093; &rarr;</button>
+    </div>
+  </div>
+</div>
+
+<!-- RESULT -->
+<div class="page" id="pg-result">
+  <div class="wrap">
+    <div class="card" style="text-align:center">
+      <div class="score-ring">
+        <div class="score-big" id="r-scr">0</div>
+        <div class="score-sm" id="r-den">/ 20</div>
+      </div>
+      <div style="font-size:20px;font-weight:600;margin-bottom:.25rem" id="r-grade"></div>
+      <div style="font-size:14px;color:#6a6a66;margin-bottom:1.25rem" id="r-msg"></div>
+      <div id="r-cats" class="g3" style="margin-bottom:1.25rem"></div>
+      <div style="display:flex;gap:8px">
+        <button class="nav-btn" style="flex:1" id="btn-r-back">&#8634; &#1041;&#1091;&#1094;&#1072;&#1093;</button>
+        <button class="nav-btn primary" style="flex:1" id="btn-r-home">&#127968; &#1053;&#1199;&#1199;&#1088;</button>
+      </div>
+    </div>
+    <div id="r-review"></div>
+  </div>
+</div>
+
+<!-- TEACHER LOGIN -->
+<div class="page" id="pg-tlogin">
+  <div class="wrap">
+    <div class="topnav">
+      <div><div class="topnav-title">&#1041;&#1072;&#1075;&#1096; &#1085;&#1101;&#1074;&#1090;&#1088;&#1101;&#1093;</div></div>
+      <button class="btn btn-outline btn-sm" id="back-tlogin">&larr; &#1041;&#1091;&#1094;&#1072;&#1093;</button>
+    </div>
+    <div class="card">
+      <label>&#1053;&#1091;&#1091;&#1094; &#1199;&#1075;</label>
+      <input type="password" id="t-pwd" placeholder="Нууц үгээ оруулна уу" />
+      <div style="font-size:12px;color:#6a6a66;margin-bottom:1rem">&#1040;&#1085;&#1093;&#1085;&#1099; &#1085;&#1091;&#1091;&#1094; &#1199;&#1075;: <strong>teacher123</strong></div>
+      <button class="btn btn-dark" id="btn-tlogin">&#1053;&#1101;&#1074;&#1090;&#1088;&#1101;&#1093; &rarr;</button>
+      <div id="t-err" style="color:#a32d2d;font-size:13px;margin-top:.5rem;display:none">&#1053;&#1091;&#1091;&#1094; &#1199;&#1075; &#1073;&#1091;&#1088;&#1091;&#1091; &#1073;&#1072;&#1081;&#1085;&#1072;.</div>
+    </div>
+  </div>
+</div>
+
+<!-- TEACHER DASH -->
+<div class="page" id="pg-teacher">
+  <div class="wrap">
+    <div class="topnav">
+      <div>
+        <div class="topnav-title">&#1041;&#1072;&#1075;&#1096;&#1080;&#1081;&#1085; &#1076;&#1072;&#1096;&#1073;&#1086;&#1072;&#1088;&#1076;</div>
+        <div class="topnav-sub">&#1040;&#1085;&#1075;&#1083;&#1080; &#1093;&#1101;&#1083;&#1085;&#1080;&#1081; &#1096;&#1072;&#1083;&#1075;&#1072;&#1083;&#1090;</div>
+      </div>
+      <div style="display:flex;gap:6px">
+        <button class="btn btn-outline btn-sm" id="btn-opwd">&#128273;</button>
+        <button class="btn btn-outline btn-sm" id="btn-tout">&#1043;&#1072;&#1088;&#1072;&#1093;</button>
+      </div>
+    </div>
+    <div class="g4" id="t-sum" style="margin-bottom:1rem"></div>
+    <div class="tabs" id="t-tabs"></div>
+    <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:1rem">
+      <button class="btn btn-dark btn-sm" id="btn-nexam">+ &#1064;&#1072;&#1083;&#1075;&#1072;&#1083;&#1090;</button>
+      <button class="btn btn-outline btn-sm" id="tv-exams-btn">&#128203; &#1064;&#1072;&#1083;&#1075;&#1072;&#1083;&#1090;&#1091;&#1091;&#1076;</button>
+      <button class="btn btn-outline btn-sm" id="tv-results-btn">&#128202; &#1044;&#1199;&#1085;&#1075;&#1199;&#1091;&#1076;</button>
+      <button class="btn btn-outline btn-sm" id="tv-analysis-btn">&#128200; &#1040;&#1085;&#1072;&#1083;&#1080;&#1079;</button>
+    </div>
+    <div id="tv-exams"></div>
+    <div id="tv-results" style="display:none"></div>
+    <div id="tv-analysis" style="display:none"></div>
+  </div>
+</div>
+
+<script>
+
+var E1={"id": "exam_b1b2", "name": "Англи хэл — B1/B2 Нэгж тест", "subject": "Англи хэл", "time": 30, "active": true, "questions": [{"cat": "grammar", "text": "She ___ to school every day by bus.", "opts": ["go", "goes", "going", "gone"], "ans": 1, "exp": "Present Simple: 3rd person singular uses verb+s"}, {"cat": "tense", "text": "By the time we arrived, they ___ already ___ dinner.", "opts": ["have / eat", "had / eaten", "were / eating", "will / eat"], "ans": 1, "exp": "Past Perfect: had + past participle"}, {"cat": "error", "text": "Find the error: He dont know the answer.", "opts": ["He", "dont", "know", "answer"], "ans": 1, "exp": "dont should be doesnt (3rd person singular)"}, {"cat": "grammar", "text": "If I ___ you, I would apologize immediately.", "opts": ["am", "was", "were", "had been"], "ans": 2, "exp": "2nd conditional: If I were you (subjunctive mood)"}, {"cat": "tense", "text": "They ___ for three hours when it started to rain.", "opts": ["walked", "have been walking", "had been walking", "were walking"], "ans": 2, "exp": "Past Perfect Continuous: duration before a past event"}, {"cat": "error", "text": "Find the error: She is more smarter than her sister.", "opts": ["She is", "more smarter", "than", "her sister"], "ans": 1, "exp": "more smarter should be smarter - double comparative error"}, {"cat": "grammar", "text": "The report must ___ by Friday.", "opts": ["submit", "be submitted", "submitted", "submitting"], "ans": 1, "exp": "Modal passive: must + be + past participle"}, {"cat": "tense", "text": "I ___ in this city since 2018.", "opts": ["live", "lived", "have lived", "had lived"], "ans": 2, "exp": "Present Perfect with since for ongoing situations"}, {"cat": "error", "text": "Find the error: Neither the students nor the teacher were happy.", "opts": ["Neither", "the students", "nor the teacher", "were happy"], "ans": 3, "exp": "were should be was - verb agrees with nearest subject"}, {"cat": "grammar", "text": "She suggested ___ the meeting until next week.", "opts": ["postpone", "to postpone", "postponing", "postponed"], "ans": 2, "exp": "suggest is followed by a gerund -ing form"}, {"cat": "tense", "text": "The sun ___ when we left the party.", "opts": ["rises", "was rising", "has risen", "had risen"], "ans": 1, "exp": "Past Continuous: action ongoing at a specific past time"}, {"cat": "error", "text": "Find the error: He has been working here since five years.", "opts": ["He has been", "working here", "since", "five years"], "ans": 2, "exp": "since should be for - use for with a period of time"}, {"cat": "grammar", "text": "Despite ___ hard, she failed the exam.", "opts": ["study", "studied", "studying", "to study"], "ans": 2, "exp": "Despite is a preposition followed by a gerund"}, {"cat": "tense", "text": "By next year, she ___ her degree.", "opts": ["finishes", "will finish", "will have finished", "has finished"], "ans": 2, "exp": "Future Perfect: action completed before a future time"}, {"cat": "grammar", "text": "He asked me ___ the window.", "opts": ["close", "to close", "closing", "closed"], "ans": 1, "exp": "ask + object + to-infinitive"}, {"cat": "tense", "text": "When I was young, I ___ swim for hours.", "opts": ["can", "could", "was able", "would"], "ans": 1, "exp": "could expresses past general ability"}, {"cat": "error", "text": "Find the error: The informations you gave me was very useful.", "opts": ["The", "informations", "was", "very useful"], "ans": 1, "exp": "informations should be information - uncountable noun"}, {"cat": "grammar", "text": "It is high time you ___ your driving test.", "opts": ["take", "took", "had taken", "have taken"], "ans": 1, "exp": "It is high time + past simple"}, {"cat": "tense", "text": "She ___ the email before the meeting started.", "opts": ["sent", "had sent", "has sent", "was sending"], "ans": 1, "exp": "Past Perfect: action completed before another past event"}, {"cat": "error", "text": "Find the error: I look forward to hear from you soon.", "opts": ["I look", "forward to", "hear", "from you"], "ans": 2, "exp": "hear should be hearing - look forward to + gerund"}]};
+var E2={"id": "exam_a2b1", "name": "Англи хэл — A2/B1 Нэгж тест (8В)", "subject": "Англи хэл", "time": 30, "active": true, "questions": [{"cat": "grammar", "text": "She ___ TV when her phone rang.", "opts": ["watched", "was watching", "has watched", "watches"], "ans": 1, "exp": "Past Continuous: ongoing action interrupted by Past Simple"}, {"cat": "grammar", "text": "You ___ smoke here. It is not allowed.", "opts": ["must", "must not", "do not have to", "should"], "ans": 1, "exp": "must not = prohibition not allowed"}, {"cat": "grammar", "text": "Have you ever eaten sushi before?", "opts": ["Did / eat", "Have / eaten", "Do / eat", "Are / eating"], "ans": 1, "exp": "Present Perfect: experience up to now"}, {"cat": "grammar", "text": "This is the best film ___ I have ever seen.", "opts": ["who", "where", "that", "what"], "ans": 2, "exp": "Defining relative clause: use that for things"}, {"cat": "grammar", "text": "If it ___ tomorrow, we will cancel the picnic.", "opts": ["rains", "will rain", "rained", "is raining"], "ans": 0, "exp": "1st conditional: If + Present Simple, will + infinitive"}, {"cat": "tense", "text": "I ___ my homework yet. Can I do it after dinner?", "opts": ["did not finish", "have not finished", "do not finish", "was not finishing"], "ans": 1, "exp": "Present Perfect with yet"}, {"cat": "tense", "text": "She ___ in London for two years before she moved to Paris.", "opts": ["lived", "has lived", "had lived", "was living"], "ans": 2, "exp": "Past Perfect: completed before another past action"}, {"cat": "tense", "text": "We ___ dinner at 7 pm tonight. Would you like to join us?", "opts": ["have", "are having", "will have", "had"], "ans": 1, "exp": "Present Continuous for arranged future plans"}, {"cat": "tense", "text": "By the time you arrive, I ___ cooking.", "opts": ["finish", "will finish", "will have finished", "finished"], "ans": 2, "exp": "Future Perfect: completed before a future moment"}, {"cat": "tense", "text": "He ___ to school by bus every morning when he was young.", "opts": ["goes", "went", "has gone", "was going"], "ans": 1, "exp": "Past Simple: regular past habit"}, {"cat": "vocab", "text": "Choose the correct word: The weather was ___, so we stayed inside all day.", "opts": ["windy", "window", "wind", "winding"], "ans": 0, "exp": "Windy = adjective describing weather with wind"}, {"cat": "vocab", "text": "What does exhausted mean?", "opts": ["very hungry", "very tired", "very happy", "very cold"], "ans": 1, "exp": "Exhausted = extremely tired"}, {"cat": "vocab", "text": "Choose the correct word: Can you ___ me how to get to the station?", "opts": ["say", "tell", "speak", "talk"], "ans": 1, "exp": "Tell + person + information is the correct structure"}, {"cat": "vocab", "text": "She made a ___ and bought the wrong ticket.", "opts": ["fault", "mistake", "error", "problem"], "ans": 1, "exp": "Make a mistake is the correct collocation"}, {"cat": "vocab", "text": "I need to ___ some money from the bank.", "opts": ["withdraw", "deposit", "lend", "borrow"], "ans": 0, "exp": "Withdraw = take money out of the bank"}, {"cat": "error", "text": "Find the error: She do not like coffee in the morning.", "opts": ["She", "do not like", "coffee", "in the morning"], "ans": 1, "exp": "do not should be does not - 3rd person singular"}, {"cat": "error", "text": "Find the error: I am agree with your idea completely.", "opts": ["I am", "agree with", "your idea", "completely"], "ans": 0, "exp": "I am agree should be I agree"}, {"cat": "error", "text": "Find the error: He has went to the market an hour ago.", "opts": ["He has", "went", "to the market", "an hour ago"], "ans": 0, "exp": "has went should be went - use Past Simple with ago"}, {"cat": "error", "text": "Find the error: My brother is more taller than me.", "opts": ["My brother", "is more taller", "than", "me"], "ans": 1, "exp": "more taller should be taller - never use more with -er"}, {"cat": "error", "text": "Find the error: She asked me where do I live.", "opts": ["She asked me", "where do I live", "no error", "asked"], "ans": 1, "exp": "where do I live should be where I live - indirect question word order"}]};
+var E3={"id": "exam_10b", "name": "Англи хэл 10-р анги — Хувилбар В (30 асуулт)", "subject": "Англи хэл", "time": 45, "active": true, "questions": [{"cat": "grammar", "text": "You do go to school, _____", "opts": ["do you?", "are not you?", "do not you?", "go you?"], "ans": 2, "exp": "Question tag: positive sentence uses negative tag"}, {"cat": "grammar", "text": "How long has it been _____ you visited your grandparents?", "opts": ["on", "since", "in", "for"], "ans": 1, "exp": "How long has it been since - since marks a point in time"}, {"cat": "grammar", "text": "I have a lot of books and _______ of them are in English.", "opts": ["half", "both", "no", "all of us"], "ans": 0, "exp": "Half of them means half. Both is only for exactly two things"}, {"cat": "grammar", "text": "If she comes late again, she _____ her job.", "opts": ["lose", "loses", "will lose", "would lose"], "ans": 2, "exp": "1st conditional: If + Present Simple, will + infinitive"}, {"cat": "grammar", "text": "Workers usually come ___ with good suggestions.", "opts": ["on", "in", "down", "up"], "ans": 3, "exp": "Come up with = to think of or suggest an idea (phrasal verb)"}, {"cat": "error", "text": "Choose the CORRECT sentence from these words: Why / John / want / drive / to / instead / of / taking / did / a bus", "opts": ["Why did John want drive taking to instead of a bus?", "Why did John want to drive instead of taking a bus?", "Why did John want of taking to drive instead a bus?", "Why did John want drive to instead of taking a bus?"], "ans": 1, "exp": "want to drive + instead of taking is the correct structure"}, {"cat": "grammar", "text": "Emily said: I am going to the store. Choose the correct reported speech.", "opts": ["she went to the store.", "she is going to the store.", "she goes to the store.", "she was going to the store."], "ans": 3, "exp": "Reported speech backshift: am going becomes was going"}, {"cat": "vocab", "text": "My aunt's daughter is my __________ .", "opts": ["nephew", "niece", "stepson", "cousin"], "ans": 3, "exp": "Cousin = relative through aunt or uncle"}, {"cat": "vocab", "text": "A ______ is a snowstorm with high winds.", "opts": ["breeze", "hail", "blizzard", "drizzling"], "ans": 2, "exp": "Blizzard = a severe snowstorm with strong winds"}, {"cat": "vocab", "text": "She looks cold and unfriendly. In fact, she is really ___ .", "opts": ["kind", "angry", "dangerous", "bad tempered"], "ans": 3, "exp": "Bad tempered = easily annoyed or angry"}, {"cat": "vocab", "text": "Choose the ODD word: lunch, chips, water, milk, bread, rice, potato", "opts": ["chips", "bread", "lunch", "rice"], "ans": 2, "exp": "Lunch = meal time. Others are food items"}, {"cat": "vocab", "text": "Choose the ODD word: personality, achievement, test scores, a school, grades, questions", "opts": ["personality", "a school", "grades", "test scores"], "ans": 1, "exp": "A school = institution. Others relate to academic performance"}, {"cat": "vocab", "text": "Choose the ODD word: preparing buuz, cleaning the house, greeting elders, wearing deel, dancing, making food", "opts": ["cleaning the house", "dancing", "wearing deel", "making food"], "ans": 1, "exp": "Dancing is not a traditional Tsagaan Sar custom"}, {"cat": "vocab", "text": "He is very joyful today. What does joyful mean?", "opts": ["happy", "sad", "angry", "tired"], "ans": 0, "exp": "Joyful = very happy and pleased"}, {"cat": "vocab", "text": "The drizzle was becoming a downpour. What does downpour mean?", "opts": ["heavy rain", "light rain", "light snow", "heavy snow"], "ans": 0, "exp": "Downpour = very heavy rain. Drizzle = light rain"}, {"cat": "grammar", "text": "Man: You usually go to work by car, do you not? Woman: ________", "opts": ["They belonged to me", "That is right. It is mine", "But my mother sometimes needs it.", "Sure, my dear."], "ans": 2, "exp": "The woman confirms but explains her mother sometimes needs the car"}, {"cat": "grammar", "text": "Man: I saw Helen at the party. Woman: Really? ______________", "opts": ["What was she wearing?", "How is she?", "How does she feel?", "What does she do?"], "ans": 0, "exp": "What was she wearing? is a natural follow-up about a past event"}, {"cat": "grammar", "text": "Choose the correct way to give advice.", "opts": ["Please put me through your secretary.", "You should bring warm clothes.", "The weather is always fine.", "Please fill in this table."], "ans": 1, "exp": "You should is the standard structure for giving advice"}, {"cat": "grammar", "text": "Woman: I will call you back after I meet my niece homeroom teacher. What will the woman do NEXT?", "opts": ["She will skip her lesson.", "She will go to the theatre.", "She will call her friends.", "She will meet the homeroom teacher"], "ans": 3, "exp": "The woman said she will meet the homeroom teacher first"}, {"cat": "grammar", "text": "Why did Mr. Richards write this message: Tomorrow please do not use the school car park as it is closed for cleaning?", "opts": ["to explain about a health problem", "to tell the school is closed tomorrow", "to say not to bring a car to school", "to claim parents to go on foot"], "ans": 2, "exp": "The main purpose is to inform students not to use cars tomorrow"}, {"cat": "reading", "text": "Why do visitors travel to New York?", "opts": ["to explore the most interesting urban area", "to visit the famous places", "to travel sightseeing place", "to watch the interesting places"], "ans": 1, "exp": "Visitors go to see famous landmarks: Times Square, Statue of Liberty, Brooklyn Bridge", "passage": "NY"}, {"cat": "reading", "text": "What do visitors explore in New York?", "opts": ["Landmarks in the USA.", "Some bridges in the USA.", "Only monuments in this city", "Statues in this place."], "ans": 0, "exp": "Landmarks = famous places. Times Square, Statue of Liberty, Brooklyn Bridge are all landmarks", "passage": "NY"}, {"cat": "reading", "text": "What does New York City consist of?", "opts": ["Brooklyn, Queens, the Bronx, and Staten Island", "only four districts", "an island and the four districts", "central island of Manhattan"], "ans": 2, "exp": "The central island of Manhattan AND four districts", "passage": "NY"}, {"cat": "reading", "text": "What area of the city do tourists tend to frequent most?", "opts": ["Brooklyn", "Queens", "Staten Island", "Manhattan"], "ans": 3, "exp": "Manhattan is where tourists prefer to spend most of their time", "passage": "NY"}, {"cat": "reading", "text": "What draws tourists to Manhattan specifically?", "opts": ["yellow cabs", "feature films", "the skyscrapers", "Statue of Liberty"], "ans": 2, "exp": "Manhattan also attracts people by its tall skyscrapers", "passage": "NY"}, {"cat": "reading", "text": "In the Rock-climbing text, participants means _____", "opts": ["winners", "attendees", "organizers", "judges"], "ans": 1, "exp": "Participants = people who take part. Synonym: attendees", "passage": "ROCK"}, {"cat": "reading", "text": "In the Rock-climbing text, reach means _____", "opts": ["leave", "get to", "fall", "climb"], "ans": 1, "exp": "Reach the top = get to the top", "passage": "ROCK"}, {"cat": "reading", "text": "In the Rock-climbing text, demanding means _____", "opts": ["easy", "difficult", "dangerous", "exciting"], "ans": 1, "exp": "Demanding = requires a lot of effort. Synonym: difficult", "passage": "ROCK"}, {"cat": "reading", "text": "In the Rock-climbing text, dangerous means _____", "opts": ["safe", "boring", "risky", "difficult"], "ans": 2, "exp": "Dangerous = could cause harm. Synonym: risky", "passage": "ROCK"}, {"cat": "reading", "text": "In the Rock-climbing text, recognized means _____", "opts": ["ignored", "rejected", "confirmed", "discovered"], "ans": 2, "exp": "Recognized by the IOC = officially confirmed or accepted", "passage": "ROCK"}]};
+var NY="Many visitors travel to New York to discover the most fascinating city in the world. They watch the lights on Times Square, explore the Statue of Liberty, Brooklyn Bridge or Empire State Building or just spend the day in Central Park. New York City consists of the central island of Manhattan and four districts: Brooklyn, Queens, the Bronx, and Staten Island. Manhattan is where tourists prefer to spend most of their time. Manhattan also attracts people by its tall skyscrapers such as the Empire State Building and Chrysler Building. The streets of New York City, especially 5th Avenue, attract both tourists and residents. New York City has world-class museums and theaters. Broadway is often the place where people go to see shows. New York City has the largest population in the United States. The New York yellow cabs are well-known in the world. More than 250 feature films are shot on location each year.";
+var ROCK="Rock-climbing is a sport in which participants climb up, down or across natural rocks or made-up rock walls. The goal is to reach the top of a formation without falling. Climbers use their hands to support their weight as well as to provide balance. It is a physically and mentally demanding sport, because it tests a climber's strength, patience, and balance. It can be a dangerous sport and climbers should have a good knowledge of correct climbing techniques. Climbers use special climbing equipment to do it safely. Rock-climbing has been divided into several different styles. It is recognized by the International Olympic Committee as a sport.";
+
+var SHEETS='https://script.google.com/macros/s/AKfycbzmMBBYjCyQHxGAutBrbHnol2F2eW9Y51K329uruBxwX_nbCbHMs8edyGieCZV077Z9/exec';
+var CLS=['8В','10А','10Б','10В','10Г','10Д','10Е','10Ё'];
+var LTR=['A','B','C','D'];
+var CATS={grammar:'Grammar',tense:'Tenses',error:'Error ID',vocab:'Vocabulary',reading:'Reading'};
+var CCSS={grammar:'c-grammar',tense:'c-tense',error:'c-error',vocab:'c-vocab',reading:'c-reading'};
+
+function gd(k,d){try{return JSON.parse(localStorage.getItem(k)||'null')||d}catch(e){return d}}
+function sd(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}
+function getX(){return gd('exams',[])}
+function setX(v){sd('exams',v)}
+function getR(){return gd('results',[])}
+function setR(v){sd('results',v)}
+function getPw(){return gd('pwd','teacher123')}
+function setPw(v){sd('pwd',v)}
+
+if(!gd('v9',false)){
+  sd('v9',true);
+  var today=new Date().toLocaleDateString('mn-MN');
+  E1.created=today;E2.created=today;E3.created=today;
+  setX([E1,E2,E3]);
+}
+
+function go(id){
+  document.querySelectorAll('.page').forEach(function(p){p.classList.remove('show')});
+  document.getElementById(id).classList.add('show');
+  window.scrollTo(0,0);
+}
+function ov(id){document.getElementById(id).classList.add('show')}
+function cv(id){document.getElementById(id).classList.remove('show')}
+
+// Bind all buttons
+document.getElementById('go-student').onclick=function(){go('pg-student')};
+document.getElementById('go-teacher').onclick=function(){go('pg-tlogin')};
+document.getElementById('back-student').onclick=function(){go('pg-home')};
+document.getElementById('btn-slogin').onclick=sLogin;
+document.getElementById('back-exams').onclick=function(){go('pg-student')};
+document.getElementById('btn-timeout').onclick=function(){cv('ov-timeout');showR()};
+document.getElementById('btn-del-no').onclick=function(){cv('ov-delete')};
+document.getElementById('btn-del-yes').onclick=delConfirm;
+document.getElementById('btn-pwd-no').onclick=function(){cv('ov-pwd')};
+document.getElementById('btn-pwd-yes').onclick=chgPwd;
+document.getElementById('btn-add-q').onclick=addQ;
+document.getElementById('btn-bld-no').onclick=function(){cv('ov-builder')};
+document.getElementById('btn-bld-yes').onclick=saveExam;
+document.getElementById('btn-prev').onclick=function(){qGo(-1)};
+document.getElementById('btn-next').onclick=function(){qGo(1)};
+document.getElementById('btn-r-back').onclick=function(){go('pg-exams')};
+document.getElementById('btn-r-home').onclick=function(){go('pg-home')};
+document.getElementById('back-tlogin').onclick=function(){go('pg-home')};
+document.getElementById('btn-tlogin').onclick=tLogin;
+document.getElementById('t-pwd').onkeydown=function(e){if(e.key==='Enter')tLogin()};
+document.getElementById('btn-opwd').onclick=function(){ov('ov-pwd')};
+document.getElementById('btn-tout').onclick=function(){go('pg-home')};
+document.getElementById('btn-nexam').onclick=openBld;
+document.getElementById('tv-exams-btn').onclick=function(){showTV('exams')};
+document.getElementById('tv-results-btn').onclick=function(){showTV('results')};
+document.getElementById('tv-analysis-btn').onclick=function(){showTV('analysis')};
+
+var stu={name:'',cls:''};
+function sLogin(){
+  var n=document.getElementById('s-name').value.trim();
+  var c=document.getElementById('s-class').value;
+  if(!n){alert('Нэрээ оруулна уу.');return}
+  if(!c){alert('Анги сонгоно уу.');return}
+  stu={name:n,cls:c};
+  document.getElementById('es-hi').textContent='Сайн байна уу, '+n+'!';
+  document.getElementById('es-cls').textContent=c+' анги';
+  renderEL();go('pg-exams');
+}
+
+function renderEL(){
+  var ex=getX().filter(function(e){return e.active});
+  var el=document.getElementById('exam-list');
+  if(!ex.length){el.innerHTML='<div class="empty">Идэвхтэй шалгалт байхгүй.</div>';return}
+  el.innerHTML='';
+  ex.forEach(function(e){
+    var d=document.createElement('div');d.className='exam-item';
+    d.innerHTML='<div><div class="exam-name">'+e.name+'</div><div class="exam-meta">&#9200; '+e.time+' мин &middot; '+e.questions.length+' асуулт</div></div>';
+    var b=document.createElement('button');b.className='btn btn-dark btn-sm';b.textContent='Эхлэх →';
+    b.onclick=(function(id){return function(){startE(id)}})(e.id);
+    d.appendChild(b);el.appendChild(d);
+  });
+}
+
+var qst={exam:null,i:0,ans:[],done:[],scr:0,sent:false,secs:0};
+var tInt=null;
+
+function startE(id){
+  var ex=getX().find(function(e){return e.id===id});
+  if(!ex)return;
+  qst={exam:ex,i:0,ans:new Array(ex.questions.length).fill(null),
+    done:new Array(ex.questions.length).fill(false),scr:0,sent:false,secs:ex.time*60};
+  go('pg-quiz');renderQ();startT();
+}
+
+function startT(){
+  clearInterval(tInt);
+  var tot=qst.secs;
+  updT(tot);
+  tInt=setInterval(function(){qst.secs--;updT(tot);if(qst.secs<=0){clearInterval(tInt);ov('ov-timeout')}},1000);
+}
+
+function updT(tot){
+  var m=Math.floor(qst.secs/60),s=qst.secs%60;
+  var n=document.getElementById('t-num'),f=document.getElementById('t-fill');
+  if(!n)return;
+  n.textContent=(m<10?'0':'')+m+':'+(s<10?'0':'')+s;
+  f.style.width=(qst.secs/tot*100)+'%';
+  n.className='timer-num';f.style.background='#1a1a18';
+  if(qst.secs<=300){n.classList.add('danger');f.style.background='#a32d2d'}
+  else if(qst.secs<=600){n.classList.add('warn');f.style.background='#ba7517'}
+}
+
+function renderQ(){
+  var qs=qst.exam.questions,q=qs[qst.i];
+  document.getElementById('q-cur').textContent=qst.i+1;
+  document.getElementById('q-tot').textContent=qs.length;
+  document.getElementById('q-scr').textContent=qst.scr;
+  document.getElementById('q-prog').style.width=((qst.i+1)/qs.length*100)+'%';
+  document.getElementById('q-cat-h').textContent=CATS[q.cat]||q.cat;
+  document.getElementById('q-tag').innerHTML=q.cat?('<span class="cat-tag '+(CCSS[q.cat]||'')+'">'+( CATS[q.cat]||q.cat)+'</span>'):'';
+  document.getElementById('q-lbl').textContent='Асуулт '+(qst.i+1)+' / '+qs.length;
+  var pe=document.getElementById('q-passage');
+  if(q.passage==='NY'){
+    pe.innerHTML='<div class="passage-box"><div class="passage-title">&#128214; Унших текст &#8212; New York</div>'+NY+'</div>';
+  } else if(q.passage==='ROCK'){
+    pe.innerHTML='<div class="passage-box"><div class="passage-title">&#128214; Унших текст &#8212; Rock-climbing</div>'+ROCK+'</div>';
+  } else {
+    pe.innerHTML='';
+  }
+  document.getElementById('q-text').textContent=q.text;
+  var done=qst.done[qst.i];
+  var el=document.getElementById('q-opts');el.innerHTML='';
+  q.opts.forEach(function(o,j){
+    var b=document.createElement('button');
+    var cls='opt';
+    if(done){cls+=' locked';if(j===q.ans)cls+=' correct';else if(j===qst.ans[qst.i])cls+=' wrong';}
+    else if(j===qst.ans[qst.i])cls+=' chosen';
+    b.className=cls;
+    b.innerHTML='<span class="opt-letter">'+LTR[j]+'</span>'+o;
+    b.onclick=(function(jj){return function(){pick(jj)}})(j);
+    el.appendChild(b);
+  });
+  var fb=document.getElementById('q-fb');
+  if(done){var ok=qst.ans[qst.i]===q.ans;fb.className='fb '+(ok?'ok':'no');fb.style.display='block';fb.textContent=(ok?'✓ Зөв! ':'✗ Буруу. ')+(q.exp||'')}
+  else{fb.style.display='none'}
+  document.getElementById('btn-prev').style.display=qst.i>0?'':'none';
+  document.getElementById('btn-next').textContent=qst.i===qs.length-1?'Дүн харах →':'Дараах →';
+}
+
+function pick(j){
+  if(qst.done[qst.i])return;
+  qst.ans[qst.i]=j;qst.done[qst.i]=true;
+  if(j===qst.exam.questions[qst.i].ans)qst.scr++;
+  renderQ();
+}
+
+function qGo(d){
+  if(d===1&&qst.i===qst.exam.questions.length-1){showR();return}
+  qst.i=Math.max(0,Math.min(qst.exam.questions.length-1,qst.i+d));renderQ();
+}
+
+function showR(){
+  clearInterval(tInt);
+  var qs=qst.exam.questions,n=qs.length,cats={};
+  qs.forEach(function(q,i){
+    if(!cats[q.cat])cats[q.cat]={c:0,t:0};
+    cats[q.cat].t++;
+    if(qst.ans[i]===q.ans)cats[q.cat].c++;
+  });
+  var pct=Math.round(qst.scr/n*100);
+  var g,m;
+  if(pct>=90){g='A — Excellent';m='Гайхалтай!'}
+  else if(pct>=75){g='B — Good';m='Сайн хийлээ!'}
+  else if(pct>=60){g='C — Satisfactory';m='Дунд зэрэг.'}
+  else{g='D — Needs Work';m='Дахин давтах хэрэгтэй.'}
+  document.getElementById('r-scr').textContent=qst.scr;
+  document.getElementById('r-den').textContent='/ '+n;
+  document.getElementById('r-grade').textContent=g;
+  document.getElementById('r-msg').textContent=m;
+  document.getElementById('r-cats').innerHTML=Object.entries(cats).map(function(e){
+    return '<div class="sc"><div class="sc-label">'+(CATS[e[0]]||e[0])+'</div><div class="sc-val">'+e[1].c+'/'+e[1].t+'</div></div>';
+  }).join('');
+  document.getElementById('r-review').innerHTML=qs.map(function(q,i){
+    var ok=qst.ans[i]===q.ans;
+    return '<div class="rv '+(ok?'ok':'no')+'"><div class="rv-q">'+(i+1)+'. '+q.text.substring(0,60)+(q.text.length>60?'…':'')+'</div><div class="rv-d">'+(ok?'✓ Зөв':'✗ Буруу — '+(q.exp||''))+'</div></div>';
+  }).join('');
+  if(!qst.sent){
+    var cs={};Object.entries(cats).forEach(function(e){cs[e[0]]={correct:e[1].c,total:e[1].t}});
+    var res={id:'r'+Date.now(),studentName:stu.name,studentClass:stu.cls,
+      examId:qst.exam.id,examName:qst.exam.name,score:qst.scr,total:n,pct:pct,
+      grade:g.split(' ')[0],catScores:cs,time:new Date().toLocaleString('mn-MN')};
+    var all=getR();all.push(res);setR(all);
+    send2sh(res,cs);qst.sent=true;
+  }
+  go('pg-result');
+}
+
+function send2sh(res,cs){
+  var p={studentName:res.studentName,studentClass:res.studentClass,examName:res.examName,
+    score:res.score,total:res.total,pct:res.pct,grade:res.grade,
+    catGrammar:cs.grammar?cs.grammar.correct+'/'+cs.grammar.total:'',
+    catTense:cs.tense?cs.tense.correct+'/'+cs.tense.total:'',
+    catError:cs.error?cs.error.correct+'/'+cs.error.total:'',
+    catVocab:cs.vocab?cs.vocab.correct+'/'+cs.vocab.total:'',
+    catReading:cs.reading?cs.reading.correct+'/'+cs.reading.total:''};
+  var img=new Image();
+  img.src=SHEETS+'?data='+encodeURIComponent(JSON.stringify(p));
+}
+
+function tLogin(){
+  var pw=document.getElementById('t-pwd').value;
+  if(pw===getPw()){
+    document.getElementById('t-pwd').value='';
+    document.getElementById('t-err').style.display='none';
+    go('pg-teacher');renderT();
+  }else{document.getElementById('t-err').style.display='block'}
+}
+
+function chgPwd(){
+  var p1=document.getElementById('np1').value,p2=document.getElementById('np2').value;
+  var err=document.getElementById('pwd-err');
+  if(p1.length<4){err.textContent='Хамгийн багадаа 4 тэмдэгт.';err.style.display='block';return}
+  if(p1!==p2){err.textContent='Нууц үг таарахгүй.';err.style.display='block';return}
+  setPw(p1);err.style.display='none';cv('ov-pwd');
+  document.getElementById('np1').value='';document.getElementById('np2').value='';
+  alert('Амжилттай өөрчлөгдлөө!');
+}
+
+var tf='all',tt='exams';
+function renderT(){rSum();rTabs();showTV(tt)}
+function getFilt(){var all=getR();return tf==='all'?all:all.filter(function(r){return r.studentClass===tf})}
+
+function rSum(){
+  var d=getFilt(),n=d.length;
+  var avg=n?(d.reduce(function(a,r){return a+r.score},0)/n).toFixed(1):'—';
+  var pass=d.filter(function(r){return r.pct>=60}).length;
+  document.getElementById('t-sum').innerHTML=
+    '<div class="sc"><div class="sc-label">Шалгалт</div><div class="sc-val">'+getX().length+'</div></div>'+
+    '<div class="sc"><div class="sc-label">Нийт дүн</div><div class="sc-val">'+n+'</div></div>'+
+    '<div class="sc"><div class="sc-label">Дундаж</div><div class="sc-val">'+avg+'</div></div>'+
+    '<div class="sc"><div class="sc-label">Тэнцсэн</div><div class="sc-val">'+pass+'/'+n+'</div></div>';
+}
+
+function rTabs(){
+  var el=document.getElementById('t-tabs');el.innerHTML='';
+  ['all'].concat(CLS).forEach(function(c){
+    var b=document.createElement('button');
+    b.className='tab'+(c===tf?' on':'');
+    b.textContent=c==='all'?'Бүгд':c;
+    b.onclick=(function(cc){return function(){tf=cc;renderT()}})(c);
+    el.appendChild(b);
+  });
+}
+
+function showTV(v){
+  tt=v;
+  ['exams','results','analysis'].forEach(function(id){document.getElementById('tv-'+id).style.display=id===v?'':'none'});
+  if(v==='exams')rExams();
+  else if(v==='results')rResults();
+  else rAnalysis();
+}
+
+function rExams(){
+  var ex=getX(),el=document.getElementById('tv-exams');
+  if(!ex.length){el.innerHTML='<div class="empty">Шалгалт байхгүй.</div>';return}
+  el.innerHTML='<div class="tbl" style="padding:0" id="exams-tbl"></div>';
+  var tbl=document.getElementById('exams-tbl');
+  ex.forEach(function(e){
+    var r=document.createElement('div');r.className='exam-item';
+    r.innerHTML='<div><div class="exam-name">'+e.name+' <span class="badge '+(e.active?'bg':'ba')+'">'+(e.active?'Идэвхтэй':'Хаалттай')+'</span></div><div class="exam-meta">'+e.questions.length+' асуулт &middot; '+e.time+' мин</div></div>';
+    var btns=document.createElement('div');btns.style.cssText='display:flex;gap:6px';
+    var b1=document.createElement('button');b1.className='btn btn-outline btn-sm';b1.textContent=e.active?'Хаах':'Нээх';
+    b1.onclick=(function(id){return function(){togE(id)}})(e.id);
+    var b2=document.createElement('button');b2.className='btn btn-outline btn-sm';b2.textContent='✏️';
+    b2.onclick=(function(id){return function(){editE(id)}})(e.id);
+    var b3=document.createElement('button');b3.className='btn btn-red btn-sm';b3.textContent='🗑';
+    b3.onclick=(function(id){return function(){delE(id)}})(e.id);
+    btns.appendChild(b1);btns.appendChild(b2);btns.appendChild(b3);
+    r.appendChild(btns);tbl.appendChild(r);
+  });
+}
+
+function togE(id){
+  var ex=getX(),e=ex.find(function(x){return x.id===id});
+  if(e){e.active=!e.active;setX(ex);rExams()}
+}
+
+var delId=null;
+function delE(id){delId=id;ov('ov-delete')}
+function delConfirm(){
+  if(!delId)return;
+  setX(getX().filter(function(e){return e.id!==delId}));
+  setR(getR().filter(function(r){return r.examId!==delId}));
+  delId=null;cv('ov-delete');renderT();
+}
+
+function rResults(){
+  var d=getFilt(),el=document.getElementById('tv-results');
+  if(!d.length){el.innerHTML='<div class="empty">Дүн алга байна.</div>';return}
+  var gc={A:'bg',B:'bb',C:'ba',D:'br'};
+  el.innerHTML='<div class="tbl"><div class="tbl-head" style="grid-template-columns:2fr 0.8fr 0.8fr 0.8fr 1fr"><div>Сурагч</div><div>Оноо</div><div>%</div><div>Үнэлгээ</div><div>Шалгалт</div></div>'+
+    d.map(function(r){return '<div class="tbl-row" style="grid-template-columns:2fr 0.8fr 0.8fr 0.8fr 1fr"><div><div style="font-weight:500">'+r.studentName+'</div><div style="font-size:11px;color:#6a6a66">'+r.studentClass+'</div></div><div style="font-weight:600">'+r.score+'/'+r.total+'</div><div>'+r.pct+'%</div><div><span class="badge '+(gc[r.grade]||'ba')+'">'+r.grade+'</span></div><div style="font-size:12px;color:#6a6a66">'+r.examName.substring(0,16)+'</div></div>'}).join('')+'</div>';
+}
+
+function rAnalysis(){
+  var d=getFilt(),el=document.getElementById('tv-analysis');
+  if(!d.length){el.innerHTML='<div class="empty">Дүн алга байна.</div>';return}
+  var n=d.length,avgP=Math.round(d.reduce(function(a,r){return a+r.pct},0)/n);
+  var pass=d.filter(function(r){return r.pct>=60}).length;
+  var top=d.reduce(function(a,r){return r.score>a?r.score:a},0);
+  var ca={};
+  d.forEach(function(r){if(!r.catScores)return;Object.entries(r.catScores).forEach(function(e){if(!ca[e[0]])ca[e[0]]={c:0,t:0};ca[e[0]].c+=e[1].correct;ca[e[0]].t+=e[1].total})});
+  var col={grammar:'#378add',tense:'#639922',error:'#ef9f27',vocab:'#7f77dd',reading:'#c056d4'};
+  var weak=[];
+  var bars=Object.entries(ca).map(function(e){var p=Math.round(e[1].c/e[1].t*100);if(p<70)weak.push(CATS[e[0]]||e[0]);return '<div class="bar-row"><div class="bar-name">'+(CATS[e[0]]||e[0])+'</div><div class="bar-track"><div class="bar-fill" style="width:'+p+'%;background:'+(col[e[0]]||'#888')+'"></div></div><div class="bar-pct">'+p+'%</div></div>'}).join('');
+  var gr={A:0,B:0,C:0,D:0};d.forEach(function(r){if(gr[r.grade]!==undefined)gr[r.grade]++});
+  var gc={A:'bg',B:'bb',C:'ba',D:'br'};
+  el.innerHTML='<div class="g4" style="margin-bottom:1rem"><div class="sc"><div class="sc-label">Нийт</div><div class="sc-val">'+n+'</div></div><div class="sc"><div class="sc-label">Дундаж %</div><div class="sc-val">'+avgP+'%</div></div><div class="sc"><div class="sc-label">Тэнцсэн</div><div class="sc-val">'+pass+'/'+n+'</div></div><div class="sc"><div class="sc-label">Дээд оноо</div><div class="sc-val">'+top+'</div></div></div>'
+    +'<div class="card"><h2>Ангилал тус бүрийн дундаж</h2>'+bars+'</div>'
+    +'<div class="card"><h2>Үнэлгээний тархалт</h2><div class="g4">'+Object.entries(gr).map(function(e){return '<div class="sc" style="text-align:center"><div class="sc-label"><span class="badge '+gc[e[0]]+'">'+e[0]+'</span></div><div class="sc-val">'+e[1]+'</div></div>'}).join('')+'</div></div>'
+    +(weak.length?'<div class="alert alert-warn">&#9888; Сайжруулах: '+weak.join(', ')+'</div>':'<div class="alert alert-ok">✓ Бүх ангилалд 70%+ — сайн!</div>');
+}
+
+var bId=null,bQs=[];
+function openBld(){bId=null;bQs=[{text:'',opts:['','','',''],ans:0,cat:'grammar',exp:''}];document.getElementById('b-name').value='';document.getElementById('b-time').value=30;document.getElementById('bld-title').textContent='Шинэ шалгалт';renderQB();ov('ov-builder')}
+function editE(id){var ex=getX().find(function(e){return e.id===id});if(!ex)return;bId=id;bQs=ex.questions.map(function(q){return Object.assign({},q,{opts:q.opts.slice()})});document.getElementById('b-name').value=ex.name;document.getElementById('b-time').value=ex.time;document.getElementById('bld-title').textContent='Засах';renderQB();ov('ov-builder')}
+function addQ(){bQs.push({text:'',opts:['','','',''],ans:0,cat:'grammar',exp:''});renderQB()}
+function remQ(i){if(bQs.length<=1)return;bQs.splice(i,1);renderQB()}
+function renderQB(){
+  var el=document.getElementById('qbuilder');el.innerHTML='';
+  bQs.forEach(function(q,i){
+    var d=document.createElement('div');d.className='qb';
+    d.innerHTML='<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:.5rem"><strong>Асуулт '+(i+1)+'</strong><div style="display:flex;gap:6px"><select data-qi="'+i+'" data-f="cat" style="font-size:12px;padding:3px 8px;border:1px solid #e0dfd8;border-radius:6px">'+Object.entries(CATS).map(function(e){return '<option value="'+e[0]+'"'+(q.cat===e[0]?' selected':'')+'>'+e[1]+'</option>'}).join('')+'</select><button class="btn btn-red btn-sm" style="padding:3px 8px" data-ri="'+i+'">x</button></div></div>';
+    var ti=document.createElement('input');ti.type='text';ti.placeholder='Асуулт...';ti.dataset.qi=i;ti.dataset.f='text';ti.style.marginBottom='.5rem';d.appendChild(ti);ti.value=q.text;
+    var og=document.createElement('div');og.className='opt-grid';
+    q.opts.forEach(function(o,j){
+      var ow=document.createElement('div');ow.className='opt-wrap';
+      var rb=document.createElement('input');rb.type='radio';rb.name='ans'+i;rb.value=j;rb.dataset.qi=i;rb.dataset.ai=j;rb.checked=(q.ans===j);
+      var oi=document.createElement('input');oi.type='text';oi.placeholder=LTR[j];oi.dataset.qi=i;oi.dataset.oi=j;oi.style.cssText='font-size:13px;padding:5px 8px;flex:1;border:1px solid #e0dfd8;border-radius:6px;margin-bottom:0';oi.value=o;
+      ow.appendChild(rb);ow.appendChild(oi);og.appendChild(ow);
+    });
+    d.appendChild(og);
+    var ei=document.createElement('input');ei.type='text';ei.placeholder='Тайлбар...';ei.dataset.qi=i;ei.dataset.f='exp';ei.style.cssText='font-size:13px;padding:6px 10px;border:1px solid #e0dfd8;border-radius:6px;margin-bottom:0';ei.value=q.exp||'';d.appendChild(ei);
+    el.appendChild(d);
+    d.querySelectorAll('[data-f]').forEach(function(inp){inp.oninput=function(){bQs[+this.dataset.qi][this.dataset.f]=this.value}});
+    d.querySelectorAll('[data-oi]').forEach(function(inp){inp.oninput=function(){bQs[+this.dataset.qi].opts[+this.dataset.oi]=this.value}});
+    d.querySelectorAll('[data-ai]').forEach(function(inp){inp.onchange=function(){bQs[+this.dataset.qi].ans=+this.dataset.ai}});
+    d.querySelector('[data-ri]').onclick=function(){remQ(+this.dataset.ri)};
+  });
+}
+
+function saveExam(){
+  var name=document.getElementById('b-name').value.trim(),time=+document.getElementById('b-time').value||30;
+  if(!name){alert('Нэр оруулна уу.');return}
+  if(bQs.some(function(q){return !q.text.trim()})){alert('Бүх асуулт бөглөнө үү.');return}
+  var ex=getX();
+  if(bId){var idx=ex.findIndex(function(e){return e.id===bId});if(idx>=0){ex[idx]=Object.assign({},ex[idx],{name:name,time:time,questions:bQs.map(function(q){return Object.assign({},q,{opts:q.opts.slice()})})});setX(ex)}}
+  else{ex.push({id:'e'+Date.now(),name:name,subject:'Англи хэл',time:time,active:true,created:new Date().toLocaleDateString('mn-MN'),questions:bQs.map(function(q){return Object.assign({},q,{opts:q.opts.slice()})})});setX(ex)}
+  cv('ov-builder');renderT();
+}
+</script>
+</body>
+</html>
