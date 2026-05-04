@@ -46,24 +46,23 @@ textarea{resize:vertical;min-height:70px}
 .ba{background:#faeeda;color:#633806}
 .br{background:#fceaea;color:#a32d2d}
 .bp{background:#eeedfe;color:#3c3489}
-/* TIMER */
 .timer-wrap{display:flex;align-items:center;background:#fff;border:1px solid #e0dfd8;border-radius:8px;padding:10px 14px;margin-bottom:10px;gap:12px}
 .timer-track{flex:1;height:5px;background:#f2f1ee;border-radius:3px;overflow:hidden}
 .timer-fill{height:100%;background:#1a1a18;border-radius:3px;transition:width 1s linear,background .3s}
 .timer-num{font-size:20px;font-weight:700;letter-spacing:.04em;font-variant-numeric:tabular-nums}
 .timer-num.warn{color:#ba7517}
 .timer-num.danger{color:#a32d2d}
-/* PROGRESS */
 .prog-track{height:3px;background:#e0dfd8;border-radius:2px;margin-bottom:10px}
 .prog-fill{height:100%;background:#1a1a18;border-radius:2px;transition:width .4s}
-/* CAT TAGS */
 .cat-tag{display:inline-block;padding:3px 10px;border-radius:20px;font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.05em;margin-bottom:8px}
 .c-grammar{background:#e6f1fb;color:#0c447c}
 .c-tense{background:#e8f5eb;color:#2d7a3a}
 .c-error{background:#faeeda;color:#633806}
 .c-vocab{background:#eeedfe;color:#3c3489}
-/* OPTIONS */
+.c-reading{background:#fceaea;color:#a32d2d}
+.c-comm{background:#f0f0f0;color:#444}
 .q-text{font-size:16px;font-weight:500;line-height:1.65;margin-bottom:1.1rem}
+.q-subtext{font-size:13px;color:#6a6a66;background:#f8f7f5;border-left:3px solid #ccc;padding:10px 13px;border-radius:0 8px 8px 0;margin-bottom:1rem;line-height:1.6;white-space:pre-line}
 .opts{display:flex;flex-direction:column;gap:8px}
 .opt{display:flex;align-items:center;gap:10px;padding:11px 13px;border:1px solid #e0dfd8;border-radius:8px;background:#fff;cursor:pointer;font-size:14px;text-align:left;transition:all .12s;color:#1a1a18}
 .opt:hover{background:#f2f1ee;border-color:#bbb}
@@ -75,49 +74,40 @@ textarea{resize:vertical;min-height:70px}
 .fb{margin-top:10px;padding:10px 13px;border-radius:8px;font-size:13px;line-height:1.55;display:none}
 .fb.ok{background:#e8f5eb;color:#2d7a3a;border:1px solid #6abf77}
 .fb.no{background:#fceaea;color:#a32d2d;border:1px solid #e24b4a}
-/* NAV */
 .nav-row{display:flex;gap:8px;margin-top:10px}
 .nav-btn{flex:1;padding:11px;border-radius:8px;font-size:14px;font-weight:500;cursor:pointer;border:1px solid #e0dfd8;background:#fff;color:#1a1a18;transition:opacity .12s}
 .nav-btn:hover{background:#f2f1ee}
 .nav-btn.primary{background:#1a1a18;color:#fff;border-color:#1a1a18}
 .nav-btn.primary:hover{opacity:.85}
-/* RESULT */
 .score-ring{width:110px;height:110px;border-radius:50%;border:3px solid #e0dfd8;display:flex;flex-direction:column;align-items:center;justify-content:center;margin:0 auto 1rem}
 .score-big{font-size:32px;font-weight:700}
 .score-sm{font-size:13px;color:#6a6a66}
 .g3{display:grid;grid-template-columns:repeat(3,1fr);gap:9px}
-/* TABLE */
 .tbl{background:#fff;border:1px solid #e0dfd8;border-radius:12px;overflow:hidden;margin-bottom:1rem}
 .tbl-head{display:grid;padding:9px 14px;background:#f2f1ee;font-size:11px;color:#6a6a66;font-weight:600;text-transform:uppercase;letter-spacing:.04em}
 .tbl-row{display:grid;padding:9px 14px;border-top:1px solid #e0dfd8;font-size:13px;align-items:center}
 .tbl-row:hover{background:#f2f1ee}
-/* REVIEW */
 .rv{padding:10px 13px;border-radius:8px;margin-bottom:7px;font-size:13px;border:1px solid #e0dfd8}
 .rv.ok{border-left:3px solid #6abf77}
 .rv.no{border-left:3px solid #e24b4a}
 .rv-q{font-weight:500;margin-bottom:3px}
 .rv-d{font-size:12px;color:#6a6a66}
-/* BAR */
 .bar-row{display:flex;align-items:center;gap:10px;margin-bottom:10px}
 .bar-name{font-size:13px;color:#6a6a66;width:140px;flex-shrink:0}
 .bar-track{flex:1;height:9px;background:#f2f1ee;border-radius:5px;overflow:hidden}
 .bar-fill{height:100%;border-radius:5px;transition:width .6s}
 .bar-pct{font-size:12px;font-weight:600;width:36px;text-align:right}
-/* ALERT */
 .alert{border-radius:8px;padding:.75rem 1rem;font-size:13px;margin-top:.75rem}
 .alert-ok{background:#e8f5eb;color:#2d7a3a;border:1px solid #6abf77}
 .alert-warn{background:#faeeda;color:#633806;border:1px solid #ef9f27}
-/* EXAM ITEM */
 .exam-item{display:flex;align-items:center;justify-content:space-between;padding:.9rem 1.1rem;border-top:1px solid #e0dfd8}
 .exam-item:first-child{border-top:none}
 .exam-name{font-weight:500;font-size:14px}
 .exam-meta{font-size:12px;color:#6a6a66;margin-top:2px}
-/* BUILDER */
 .qb{background:#f2f1ee;border:1px solid #e0dfd8;border-radius:8px;padding:1rem;margin-bottom:.75rem}
 .qb-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:.75rem}
 .opt-grid{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-bottom:.5rem}
 .opt-wrap{display:flex;align-items:center;gap:6px}
-/* OVERLAY */
 .overlay{position:fixed;inset:0;background:rgba(0,0,0,.55);display:none;align-items:center;justify-content:center;z-index:999;padding:1rem}
 .overlay.show{display:flex}
 .modal{background:#fff;border-radius:12px;padding:1.75rem;max-width:560px;width:100%;max-height:90vh;overflow-y:auto}
@@ -125,7 +115,6 @@ textarea{resize:vertical;min-height:70px}
 .modal-footer{display:flex;gap:8px;justify-content:flex-end;margin-top:1.25rem}
 .divider{border:none;border-top:1px solid #e0dfd8;margin:1rem 0}
 .empty{text-align:center;padding:3rem 1rem;color:#6a6a66;font-size:14px}
-/* HERO */
 .hero{text-align:center;padding:1rem 0 .5rem}
 .hero-icon{font-size:52px;margin-bottom:.75rem}
 </style>
@@ -282,6 +271,7 @@ textarea{resize:vertical;min-height:70px}
       <div id="q-cat-tag"></div>
       <div style="font-size:12px;color:#a0a09b;margin-bottom:5px" id="q-num-lbl"></div>
       <div class="q-text" id="q-text"></div>
+      <div class="q-subtext" id="q-subtext" style="display:none"></div>
       <div class="opts" id="q-opts"></div>
       <div class="fb" id="q-fb"></div>
     </div>
@@ -358,32 +348,34 @@ textarea{resize:vertical;min-height:70px}
 
 <script>
 // ══════════════════════════════════════════
-// CONFIG
+// CONFIG  (all functions assigned to window for inline onclick compatibility)
 // ══════════════════════════════════════════
 var SHEETS_URL='https://script.google.com/macros/s/AKfycbzmMBBYjCyQHxGAutBrbHnol2F2eW9Y51K329uruBxwX_nbCbHMs8edyGieCZV077Z9/exec';
 var CLASSES=['8В','10А','10Б','10В','10Г','10Д','10Е','10Ё'];
 var LETTERS=['A','B','C','D'];
-var CATS={grammar:'Grammar',tense:'Tenses',error:'Error ID',vocab:'Vocabulary'};
-var CAT_CSS={grammar:'c-grammar',tense:'c-tense',error:'c-error',vocab:'c-vocab'};
+var CATS={grammar:'Grammar',tense:'Tenses',error:'Error ID',vocab:'Vocabulary',reading:'Reading',comm:'Communication'};
+var CAT_CSS={grammar:'c-grammar',tense:'c-tense',error:'c-error',vocab:'c-vocab',reading:'c-reading',comm:'c-comm'};
 
 // ══════════════════════════════════════════
 // STORAGE
 // ══════════════════════════════════════════
-function gd(k,d){try{return JSON.parse(localStorage.getItem(k)||'null')||d}catch(e){return d}}
-function sd(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}
-function getExams(){return gd('sq_exams',[])}
-function setExams(v){sd('sq_exams',v)}
-function getResults(){return gd('sq_results',[])}
-function setResults(v){sd('sq_results',v)}
-function getPwd(){return gd('sq_pwd','teacher123')}
-function setPwd(v){sd('sq_pwd',v)}
+window.gd = function(k,d){try{return JSON.parse(localStorage.getItem(k)||'null')||d}catch(e){return d}}
+window.sd = function(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}
+window.getExams = function(){return gd('sq_exams',[])}
+window.setExams = function(v){sd('sq_exams',v)}
+window.getResults = function(){return gd('sq_results',[])}
+window.setResults = function(v){sd('sq_results',v)}
+window.getPwd = function(){return gd('sq_pwd','teacher123')}
+window.setPwd = function(v){sd('sq_pwd',v)}
 
 // ══════════════════════════════════════════
 // DEFAULT DATA
 // ══════════════════════════════════════════
 (function init(){
-  if(gd('sq_v3',false))return;
-  sd('sq_v3',true);
+  if(gd('sq_v4',false))return;
+  sd('sq_v4',true);
+
+  // --- Exam 1: B1/B2 ---
   var e1={
     id:'exam_b1b2',name:'Англи хэл — B1/B2 Нэгж тест',subject:'Англи хэл',time:30,
     created:new Date().toLocaleDateString('mn-MN'),active:true,
@@ -410,6 +402,8 @@ function setPwd(v){sd('sq_pwd',v)}
       {cat:'error',text:'Find the error: "I look forward to hear from you soon."',opts:['I look','forward to','hear','from you'],ans:2,exp:'"hear" → "hearing" ("look forward to" + gerund)'}
     ]
   };
+
+  // --- Exam 2: A2/B1 ---
   var e2={
     id:'exam_a2b1',name:'Англи хэл — A2/B1 Нэгж тест (8В)',subject:'Англи хэл',time:30,
     created:new Date().toLocaleDateString('mn-MN'),active:true,
@@ -436,26 +430,63 @@ function setPwd(v){sd('sq_pwd',v)}
       {cat:'error',text:'Find the error: "She asked me where do I live."',opts:['She asked me','where do I live','(no error)','asked'],ans:1,exp:'"where do I live" → "where I live". Indirect question word order'}
     ]
   };
-  setExams([e1,e2]);
+
+  // --- Exam 3: NEW — 10-р анги Хувилбар В ---
+  var e3={
+    id:'exam_10b_varB',name:'10-р анги — Хувилбар В (Section 1–4)',subject:'Англи хэл',time:40,
+    created:new Date().toLocaleDateString('mn-MN'),active:true,
+    questions:[
+      // SECTION 1: USE OF ENGLISH
+      {cat:'grammar',text:'You do go to school, _____',opts:['do you?','aren\'t you?','don\'t you?','go you?'],ans:2,exp:'Tag question: positive sentence → negative tag. "do" → "don\'t you?"'},
+      {cat:'grammar',text:'How long has it been _____ you visited your grandparents?',opts:['on','since','in','for'],ans:1,exp:'"How long has it been since..." — "since" refers to a specific point in time'},
+      {cat:'grammar',text:'I have a lot of books in my library and _______ of them are in English.',opts:['half','both','no','all of us'],ans:0,exp:'"half of them" — зөвхөн "half" нь "a lot of books"-тэй логикийн хувьд зөв'},
+      {cat:'tense',text:'If she ______ late again, she _____ her job.',opts:['come/\'ll lose','comes/loses','comes/\'ll lose','will come/will lose'],ans:2,exp:'1st conditional: If + Present Simple → will + infinitive'},
+      {cat:'grammar',text:'Workers usually come ___ with good suggestions.',opts:['on','in','down','up'],ans:3,exp:'"Come up with" = санал дэвшүүлэх (phrasal verb)'},
+      {cat:'error',text:'Зөв өгүүлбэр сонгоно уу:\nWhy/John/want/drive/to/instead/of/taking/did/a bus/?',opts:['Why did John want drive taking to instead of a bus?','Why did John want to drive instead of taking a bus?','Why did John want of taking to drive instead a bus?','Why did John want drive to instead of taking a bus?'],ans:1,exp:'"want to drive" + "instead of taking" — зөв бүтэц'},
+      {cat:'grammar',text:'"I\'m going to the store," Emily said ________________',opts:['she went to the store.','she is going to the store.','she goes to the store.','she was going to the store.'],ans:3,exp:'Reported speech: Present Continuous → Past Continuous ("was going")'},
+      // SECTION 2: VOCABULARY
+      {cat:'vocab',text:'My aunt\'s daughter is my __________ .',opts:['nephew','niece','stepson','cousin'],ans:3,exp:'Эгчийн/дүүгийн хүүхэд = cousin (үеэл)'},
+      {cat:'vocab',text:'A ______ is a snowstorm with high winds.',opts:['breeze','hail','blizzard','drizzling'],ans:2,exp:'"Blizzard" = their wind+snow storm'},
+      {cat:'vocab',text:'She looks cold and unfriendly. In fact, she is really ___ .',opts:['kind','angry','dangerous','bad tempered'],ans:3,exp:'"Bad tempered" = хүмүүнлэг бус, уурлаг байдал'},
+      {cat:'vocab',text:'Odd word out: lunch, chips, water, milk, bread, rice, potato',opts:['chips','bread','lunch','Rice'],ans:2,exp:'"Lunch" бол хоолны төрөл биш, харин хоол идэх цаг юм'},
+      {cat:'vocab',text:'Odd word out: personality, achievement, test scores, a school, grades, questions',opts:['personality','a school','grades','test scores'],ans:1,exp:'"A school" бол байгууллага; бусад нь хувийн чанар эсвэл үнэлгээтэй холбоотой'},
+      {cat:'vocab',text:'Odd word out: preparing buuz, cleaning the house, greeting elders, wearing deel, dancing, making food',opts:['cleaning the house','dancing','wearing deel','making food'],ans:1,exp:'"Dancing" нь Цагаан сарын уламжлалт ёс биш'},
+      {cat:'vocab',text:'He is very joyful today. — "joyful" гэдгийн утга:',opts:['happy','sad','angry','tired'],ans:0,exp:'"Joyful" = баяртай, хөгжилтэй (happy)'},
+      {cat:'vocab',text:'"The drizzle was becoming a downpour and Henry\'s hair was plastered to his head." — "downpour" гэдгийн утга:',opts:['heavy rain','light rain','light snow','heavy snow'],ans:0,exp:'"Downpour" = хүчтэй бороо (heavy rain)'},
+      // SECTION 3: COMMUNICATION
+      {cat:'comm',text:'Man: You usually go to work by car, don\'t you?\nWoman: ________ .',opts:['They belonged to me','That\'s right. It is mine','But my mother sometimes needs it.','Sure, my dear.'],ans:2,exp:'Tag question-д зохистой хариулт: тийм гэвч нэмэлт мэдээлэл өгч байна'},
+      {cat:'comm',text:'Man: I saw Helen at the party.\nWoman: Really? ______________',opts:['What was she wearing?','How is she?','How does she feel?','What does she do?'],ans:0,exp:'Нам тааралдсан хүний тухай ярихад — тэр тэнд юу өмссөн байсан бэ? гэж асуух нь хамгийн байгалийн'},
+      {cat:'comm',text:'Зөвлөгөө өгөх илэрхийлэл сонгоно уу:',opts:['Please, put me through your secretary.','You should bring warm clothes.','The weather is always fine.','Please, fill in this table.'],ans:1,exp:'"You should..." = зөвлөгөө өгөх загвар'},
+      {cat:'comm',text:'Man: Are you coming to the theatre?\nWoman: I will call you back after I meet my niece\'s homeroom teacher. Her teacher told me that she skipped her lesson today.\n\nЭмэгтэй дараа нь юу хийх вэ?',opts:['She will skip her lesson.','She will go to the theatre.','She will call her friends.','She will meet her niece\'s teacher'],ans:3,exp:'Эмэгтэй ангийн багштай уулзана гэж хэлсэн'],
+      // SECTION 4: READING
+      {cat:'reading',text:'Уншлагын текст:\n"Many visitors travel to New York to discover the most fascinating city in the world. They watch the lights on Times Square, explore the Statue of Liberty, Brooklyn Bridge or Empire State Building or just spend the day away in Central Park..."\n\nWhy do visitors travel to New York?',opts:['to explore the most interesting urban area','to visit the famous places','to travel sightseeing place','to watch the interesting places'],ans:0,exp:'"to discover the most fascinating city" → most interesting urban area'},
+      {cat:'reading',text:'New York City consists of:',opts:['Brooklyn, Queens, the Bronx, and Staten Island','only four districts','an island and the four districts','central island of Manhattan'],ans:2,exp:'"New York City consists of the central island of Manhattan and the four districts"'},
+      {cat:'reading',text:'What area of the city do tourists tend to frequent?',opts:['Brooklyn','Queens','Staten Island','Manhattan'],ans:3,exp:'"Manhattan is where tourists prefer to spend most of their time"'},
+      {cat:'reading',text:'What draws tourists to Manhattan specifically?',opts:['yellow cabs','feature films','the skyscrapers','Statue of Liberty'],ans:2,exp:'"Manhattan also attracts people by its tall skyscrapers"'},
+      {cat:'reading',text:'Mr. Richards-ийн мэдэгдлийн зорилго:\n"Tomorrow, please don\'t use the school car park as it is closed for one day for cleaning. Please come on foot or cycle to school as it is good for your health. You can use a bus too. — Mr. Richards, Headmaster"\n\nYaagaad энэ мэдэгдлийг бичсэн бэ?',opts:['to explain about a health problem at school','to tell the school is closed tomorrow.','to say not to bring a car to school.','to claim parents to go on foot.'],ans:2,exp:'Машины зогсоол хаалттай тул машин авчрахгүй байхыг хүсэж байна'}
+    ]
+  };
+
+  setExams([e1,e2,e3]);
 })();
 
 // ══════════════════════════════════════════
 // NAVIGATION
 // ══════════════════════════════════════════
-function goPage(id){
+window.goPage = function(id){
   document.querySelectorAll('.page').forEach(function(p){p.classList.remove('show')});
   document.getElementById(id).classList.add('show');
   window.scrollTo(0,0);
 }
-function openOv(id){document.getElementById(id).classList.add('show')}
-function closeOv(id){document.getElementById(id).classList.remove('show')}
+window.openOv = function(id){document.getElementById(id).classList.add('show')}
+window.closeOv = function(id){document.getElementById(id).classList.remove('show')}
 
 // ══════════════════════════════════════════
 // STUDENT
 // ══════════════════════════════════════════
 var student={name:'',cls:''};
 
-function studentLogin(){
+window.studentLogin = function(){
   var name=document.getElementById('s-name').value.trim();
   var cls=document.getElementById('s-class').value;
   if(!name){alert('Нэрээ оруулна уу.');return}
@@ -467,7 +498,7 @@ function studentLogin(){
   goPage('pg-exams');
 }
 
-function renderExamList(){
+window.renderExamList = function(){
   var exams=getExams().filter(function(e){return e.active});
   var el=document.getElementById('exam-list');
   if(!exams.length){el.innerHTML='<div class="empty">Одоогоор идэвхтэй шалгалт байхгүй байна.</div>';return}
@@ -482,7 +513,7 @@ function renderExamList(){
 var qst={exam:null,idx:0,ans:[],done:[],score:0,submitted:false,secs:0};
 var timerInt=null;
 
-function startExam(id){
+window.startExam = function(id){
   var exam=getExams().find(function(e){return e.id===id});
   if(!exam){alert('Шалгалт олдсонгүй.');return}
   qst={exam:exam,idx:0,ans:new Array(exam.questions.length).fill(null),
@@ -492,7 +523,7 @@ function startExam(id){
   startTimer();
 }
 
-function startTimer(){
+window.startTimer = function(){
   clearInterval(timerInt);
   var total=qst.secs;
   updateTimerUI(total);
@@ -503,7 +534,7 @@ function startTimer(){
   },1000);
 }
 
-function updateTimerUI(total){
+window.updateTimerUI = function(total){
   var m=Math.floor(qst.secs/60),s=qst.secs%60;
   var num=document.getElementById('t-num');
   var fill=document.getElementById('t-fill');
@@ -516,12 +547,12 @@ function updateTimerUI(total){
   else if(qst.secs<=600){num.classList.add('warn');fill.style.background='#ba7517'}
 }
 
-function forceSubmit(){
+window.forceSubmit = function(){
   closeOv('ov-timeout');
   showResult();
 }
 
-function renderQ(){
+window.renderQ = function(){
   var qs=qst.exam.questions;
   var q=qs[qst.idx];
   document.getElementById('q-cur').textContent=qst.idx+1;
@@ -531,7 +562,16 @@ function renderQ(){
   document.getElementById('q-cat-hdr').textContent=CATS[q.cat]||q.cat;
   document.getElementById('q-cat-tag').innerHTML=q.cat?('<span class="cat-tag '+(CAT_CSS[q.cat]||'')+'">'+( CATS[q.cat]||q.cat)+'</span>'):'';
   document.getElementById('q-num-lbl').textContent='Асуулт '+(qst.idx+1)+' / '+qs.length;
-  document.getElementById('q-text').textContent=q.text;
+
+  // Split subtext if newline present
+  var parts=q.text.split('\n');
+  var mainText=parts[0];
+  var subText=parts.slice(1).join('\n').trim();
+  document.getElementById('q-text').textContent=mainText;
+  var stEl=document.getElementById('q-subtext');
+  if(subText){stEl.textContent=subText;stEl.style.display='block'}
+  else{stEl.style.display='none'}
+
   var done=qst.done[qst.idx];
   document.getElementById('q-opts').innerHTML=q.opts.map(function(o,i){
     var cls='opt';
@@ -550,7 +590,7 @@ function renderQ(){
   document.getElementById('btn-next').textContent=qst.idx===qs.length-1?'Дүн харах →':'Дараах →';
 }
 
-function pickOpt(i){
+window.pickOpt = function(i){
   if(qst.done[qst.idx])return;
   qst.ans[qst.idx]=i;
   qst.done[qst.idx]=true;
@@ -558,13 +598,13 @@ function pickOpt(i){
   renderQ();
 }
 
-function qGo(dir){
+window.qGo = function(dir){
   if(dir===1&&qst.idx===qst.exam.questions.length-1){showResult();return}
   qst.idx=Math.max(0,Math.min(qst.exam.questions.length-1,qst.idx+dir));
   renderQ();
 }
 
-function showResult(){
+window.showResult = function(){
   clearInterval(timerInt);
   var qs=qst.exam.questions;
   var n=qs.length;
@@ -589,7 +629,8 @@ function showResult(){
   }).join('');
   document.getElementById('r-review').innerHTML=qs.map(function(q,i){
     var ok=qst.ans[i]===q.ans;
-    return '<div class="rv '+(ok?'ok':'no')+'"><div class="rv-q">'+(i+1)+'. '+q.text.substring(0,70)+(q.text.length>70?'…':'')+'</div><div class="rv-d">'+(ok?'✓ Зөв':'✗ Буруу'+(q.exp?' — '+q.exp:''))+'</div></div>';
+    var txt=q.text.split('\n')[0];
+    return '<div class="rv '+(ok?'ok':'no')+'"><div class="rv-q">'+(i+1)+'. '+txt.substring(0,70)+(txt.length>70?'…':'')+'</div><div class="rv-d">'+(ok?'✓ Зөв':'✗ Буруу'+(q.exp?' — '+q.exp:''))+'</div></div>';
   }).join('');
   if(!qst.submitted){
     var catScores={};
@@ -604,14 +645,16 @@ function showResult(){
   goPage('pg-result');
 }
 
-function sendToSheets(res,catScores){
+window.sendToSheets = function(res,catScores){
   var payload={
     studentName:res.studentName,studentClass:res.studentClass,examName:res.examName,
     score:res.score,total:res.total,pct:res.pct,grade:res.grade,
     catGrammar:catScores.grammar?catScores.grammar.correct+'/'+catScores.grammar.total:'',
     catTense:catScores.tense?catScores.tense.correct+'/'+catScores.tense.total:'',
     catError:catScores.error?catScores.error.correct+'/'+catScores.error.total:'',
-    catVocab:catScores.vocab?catScores.vocab.correct+'/'+catScores.vocab.total:''
+    catVocab:catScores.vocab?catScores.vocab.correct+'/'+catScores.vocab.total:'',
+    catReading:catScores.reading?catScores.reading.correct+'/'+catScores.reading.total:'',
+    catComm:catScores.comm?catScores.comm.correct+'/'+catScores.comm.total:''
   };
   var img=new Image();
   img.src=SHEETS_URL+'?data='+encodeURIComponent(JSON.stringify(payload));
@@ -620,7 +663,7 @@ function sendToSheets(res,catScores){
 // ══════════════════════════════════════════
 // TEACHER AUTH
 // ══════════════════════════════════════════
-function teacherLogin(){
+window.teacherLogin = function(){
   var pwd=document.getElementById('t-pwd').value;
   if(pwd===getPwd()){
     document.getElementById('t-pwd').value='';
@@ -632,7 +675,7 @@ function teacherLogin(){
   }
 }
 
-function changePwd(){
+window.changePwd = function(){
   var p1=document.getElementById('np1').value;
   var p2=document.getElementById('np2').value;
   var err=document.getElementById('pwd-err');
@@ -650,18 +693,18 @@ function changePwd(){
 var tFilter='all';
 var tTab='exams';
 
-function renderTeacher(){
+window.renderTeacher = function(){
   renderTSummary();
   renderClassTabs();
   showTV(tTab);
 }
 
-function getFiltered(){
+window.getFiltered = function(){
   var all=getResults();
   return tFilter==='all'?all:all.filter(function(r){return r.studentClass===tFilter});
 }
 
-function renderTSummary(){
+window.renderTSummary = function(){
   var data=getFiltered();
   var exams=getExams();
   var n=data.length;
@@ -674,16 +717,16 @@ function renderTSummary(){
     '<div class="sc"><div class="sc-label">Тэнцсэн</div><div class="sc-val">'+pass+'/'+n+'</div></div>';
 }
 
-function renderClassTabs(){
+window.renderClassTabs = function(){
   var all=['all'].concat(CLASSES);
   document.getElementById('t-class-tabs').innerHTML=all.map(function(c){
     return '<button class="tab'+(c===tFilter?' on':'')+'" onclick="setFilter(\''+c+'\')">'+(c==='all'?'Бүгд':c)+'</button>';
   }).join('');
 }
 
-function setFilter(c){tFilter=c;renderTeacher()}
+window.setFilter = function(c){tFilter=c;renderTeacher()}
 
-function showTV(v){
+window.showTV = function(v){
   tTab=v;
   ['exams','results','analysis'].forEach(function(id){
     document.getElementById('tv-'+id).style.display=id===v?'':'none';
@@ -693,7 +736,7 @@ function showTV(v){
   else renderAnalysis();
 }
 
-function renderExamListTeacher(){
+window.renderExamListTeacher = function(){
   var exams=getExams();
   var el=document.getElementById('tv-exams');
   if(!exams.length){el.innerHTML='<div class="empty">Шалгалт байхгүй. + товч дарж нэмнэ үү.</div>';return}
@@ -702,22 +745,22 @@ function renderExamListTeacher(){
   }).join('')+'</div>';
 }
 
-function toggleExam(id){
+window.toggleExam = function(id){
   var exams=getExams();
   var e=exams.find(function(x){return x.id===id});
   if(e){e.active=!e.active;setExams(exams);renderExamListTeacher()}
 }
 
 var delId=null;
-function deleteExam(id){delId=id;openOv('ov-delete')}
-function confirmDelete(){
+window.deleteExam = function(id){delId=id;openOv('ov-delete')}
+window.confirmDelete = function(){
   if(!delId)return;
   setExams(getExams().filter(function(e){return e.id!==delId}));
   setResults(getResults().filter(function(r){return r.examId!==delId}));
   delId=null;closeOv('ov-delete');renderTeacher();
 }
 
-function renderResultsTable(){
+window.renderResultsTable = function(){
   var data=getFiltered();
   var el=document.getElementById('tv-results');
   if(!data.length){el.innerHTML='<div class="empty">Дүн алга байна.</div>';return}
@@ -728,7 +771,7 @@ function renderResultsTable(){
     }).join('')+'</div>';
 }
 
-function renderAnalysis(){
+window.renderAnalysis = function(){
   var data=getFiltered();
   var el=document.getElementById('tv-analysis');
   if(!data.length){el.innerHTML='<div class="empty">Дүн алга байна.</div>';return}
@@ -745,7 +788,7 @@ function renderAnalysis(){
       catAgg[e[0]].correct+=e[1].correct;catAgg[e[0]].total+=e[1].total;
     });
   });
-  var colors={grammar:'#378add',tense:'#639922',error:'#ef9f27',vocab:'#7f77dd'};
+  var colors={grammar:'#378add',tense:'#639922',error:'#ef9f27',vocab:'#7f77dd',reading:'#e24b4a',comm:'#888'};
   var weak=[];
   var bars=Object.entries(catAgg).map(function(e){
     var p=Math.round(e[1].correct/e[1].total*100);
@@ -773,7 +816,7 @@ function renderAnalysis(){
 var bId=null;
 var bQs=[];
 
-function openBuilder(){
+window.openBuilder = function(){
   bId=null;
   bQs=[{text:'',opts:['','','',''],ans:0,cat:'grammar',exp:''}];
   document.getElementById('b-name').value='';
@@ -783,7 +826,7 @@ function openBuilder(){
   openOv('ov-builder');
 }
 
-function editExam(id){
+window.editExam = function(id){
   var exam=getExams().find(function(e){return e.id===id});
   if(!exam)return;
   bId=id;
@@ -795,17 +838,17 @@ function editExam(id){
   openOv('ov-builder');
 }
 
-function addQ(){
+window.addQ = function(){
   bQs.push({text:'',opts:['','','',''],ans:0,cat:'grammar',exp:''});
   renderQB();
 }
 
-function removeQ(i){
+window.removeQ = function(i){
   if(bQs.length<=1){alert('Хамгийн багадаа 1 асуулт байна.');return}
   bQs.splice(i,1);renderQB();
 }
 
-function renderQB(){
+window.renderQB = function(){
   document.getElementById('qbuilder').innerHTML=bQs.map(function(q,i){
     return '<div class="qb" id="qb-'+i+'">'
       +'<div class="qb-head"><div style="font-size:12px;font-weight:600;color:#6a6a66">Асуулт '+(i+1)+'</div>'
@@ -827,11 +870,11 @@ function renderQB(){
   }).join('');
 }
 
-function esc(s){return(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;')}
-function qbSet(i,f,v){bQs[i][f]=f==='ans'?parseInt(v):v}
-function qbOpt(i,j,v){bQs[i].opts[j]=v}
+window.esc = function(s){return(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;')}
+window.qbSet = function(i,f,v){bQs[i][f]=f==='ans'?parseInt(v):v}
+window.qbOpt = function(i,j,v){bQs[i].opts[j]=v}
 
-function saveExam(){
+window.saveExam = function(){
   var name=document.getElementById('b-name').value.trim();
   var time=parseInt(document.getElementById('b-time').value)||30;
   if(!name){alert('Шалгалтын нэр оруулна уу.');return}
